@@ -1,0 +1,7 @@
+pywinauto
+pyautogui
+chromadb
+cryptography
+pydantic
+requests
+llama-cpp-python
