@@ -153,6 +153,8 @@ def execute_pipeline(user_prompt: str):
         risk_level = evaluate_risk(tool_name, params)
         print(f"[*] Policy Engine Risk Assessment: {risk_level}")
         
+        action_status = "APPROVED_BY_POLICY"
+        
         if risk_level == "HIGH":
             # Mandatory HITL
             authorized = authorize_high_risk_action({
@@ -163,7 +165,15 @@ def execute_pipeline(user_prompt: str):
             if not authorized:
                 print("[!] Execution blocked by user.")
                 final_result = "Failed: Blocked by user"
+                action_status = "DENIED_BY_HITL"
+                if memory:
+                    memory.log_audit_trail(tool_name, risk_level, params, action_status)
                 break
+            else:
+                action_status = "APPROVED_BY_HITL"
+                
+        if memory and risk_level in ["HIGH", "MEDIUM"]:
+            memory.log_audit_trail(tool_name, risk_level, params, action_status)
         
         # 5. Execute Tool (Milestone 2.4)
         print(f"[*] Executing {tool_name} via {active_agent}...")

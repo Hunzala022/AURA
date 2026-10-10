@@ -54,9 +54,16 @@ def evaluate_risk(tool_name: str, parameters: Dict[str, Any]) -> str:
     # -------------------------------------------------------
     if tool_name in ["read_file", "write_file", "list_directory",
                      "move_file", "copy_file", "create_folder"]:
+        import os
         path = (parameters.get("path") or parameters.get("source")
                 or parameters.get("destination") or "")
-        path = str(path).lower()
+        path = str(path).replace("/", "\\").lower()
+        
+        try:
+            path = os.path.normpath(path)
+        except:
+            pass
+
         high_risk_paths = ["c:\\windows", "system32", ".ssh",
                            "id_rsa", "password", "secret", "c:\\"]
         for hr_path in high_risk_paths:

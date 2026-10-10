@@ -57,6 +57,16 @@ class MemoryManager:
                 encrypted_result TEXT
             )
         ''')
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS audit_logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                tool_name TEXT,
+                risk_level TEXT,
+                encrypted_params TEXT,
+                action_status TEXT
+            )
+        ''')
         conn.commit()
         conn.close()
 
@@ -67,6 +77,18 @@ class MemoryManager:
         c.execute(
             "INSERT INTO session_logs (agent_type, encrypted_task, encrypted_result) VALUES (?, ?, ?)",
             (agent_type, self._encrypt(task), self._encrypt(result))
+        )
+        conn.commit()
+        conn.close()
+        
+    def log_audit_trail(self, tool_name: str, risk_level: str, params: Dict[str, Any], action_status: str):
+        """Milestone 4.5 - Audit trail for high-risk actions."""
+        conn = sqlite3.connect(self.db_path)
+        c = conn.cursor()
+        enc_params = self._encrypt(json.dumps(params))
+        c.execute(
+            "INSERT INTO audit_logs (tool_name, risk_level, encrypted_params, action_status) VALUES (?, ?, ?, ?)",
+            (tool_name, risk_level, enc_params, action_status)
         )
         conn.commit()
         conn.close()
