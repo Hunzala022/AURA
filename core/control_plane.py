@@ -8,16 +8,18 @@ from core.policy import evaluate_risk, authorize_high_risk_action
 from agents.os_agent import TOOL_REGISTRY as OS_TOOLS
 from agents.browser_agent import TOOL_REGISTRY as BROWSER_TOOLS
 from agents.comm_agent import TOOL_REGISTRY as COMM_TOOLS
+from agents.research_agent import TOOL_REGISTRY as RESEARCH_TOOLS
+from agents.vision_agent import TOOL_REGISTRY as VISION_TOOLS
 
-# Milestone 3.1 - Multi-Agent Registry
-RESEARCH_TOOLS = {}
-SECURITY_TOOLS = {}
+# Milestone 3.1 - All 5 Agents Registered
+SECURITY_TOOLS = {}  # Security agent is the regression checker, no runtime tools
 
 AGENT_REGISTRY = {
     "os_agent": OS_TOOLS,
     "browser_agent": BROWSER_TOOLS,
     "comm_agent": COMM_TOOLS,
     "research_agent": RESEARCH_TOOLS,
+    "vision_agent": VISION_TOOLS,
     "security_agent": SECURITY_TOOLS
 }
 

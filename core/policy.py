@@ -33,27 +33,59 @@ def authorize_high_risk_action(action_details: Dict[str, Any]) -> bool:
 
 def evaluate_risk(tool_name: str, parameters: Dict[str, Any]) -> str:
     """
-    Milestone 2.2 - Risk / Policy Engine.
-    Hardcoded deterministic risk classification.
+    Milestone 2.2 / 3.9 - Risk / Policy Engine (updated for all Stage 3 agents).
+    Hardcoded deterministic risk classification. No LLM involved here.
     """
-    # 1. Inherently High Risk Tools
-    if tool_name in ["delete_file", "ssh_deploy", "modify_content", "type_text"]:
+    # -------------------------------------------------------
+    # 1. Inherently HIGH Risk Tools (any parameters)
+    # -------------------------------------------------------
+    HIGH_RISK_TOOLS = [
+        "delete_file",
+        "ssh_deploy",
+        "modify_content",
+        "type_text",
+        "send_message",            # Comm Agent — sends data externally
+    ]
+    if tool_name in HIGH_RISK_TOOLS:
         return "HIGH"
-        
-    # 2. Parameter-based Risk Analysis
-    if tool_name in ["read_file", "write_file", "list_directory", "move_file", "copy_file", "create_folder"]:
-        path = parameters.get("path") or parameters.get("source") or parameters.get("destination") or ""
+
+    # -------------------------------------------------------
+    # 2. Parameter-based Risk (OS tools)
+    # -------------------------------------------------------
+    if tool_name in ["read_file", "write_file", "list_directory",
+                     "move_file", "copy_file", "create_folder"]:
+        path = (parameters.get("path") or parameters.get("source")
+                or parameters.get("destination") or "")
         path = str(path).lower()
-        
-        # Accessing system folders or sensitive files is HIGH risk
-        high_risk_paths = ["c:\\windows", "system32", ".ssh", "id_rsa", "password", "secret", "c:\\"]
+        high_risk_paths = ["c:\\windows", "system32", ".ssh",
+                           "id_rsa", "password", "secret", "c:\\"]
         for hr_path in high_risk_paths:
             if hr_path in path:
                 return "HIGH"
-                
-    # 3. Inherently Low Risk Tools (assuming parameters passed checks)
-    if tool_name in ["get_system_info", "list_processes"]:
+
+    # -------------------------------------------------------
+    # 3. Research Agent — content search for sensitive keywords = HIGH
+    # -------------------------------------------------------
+    if tool_name == "search_files_by_content":
+        query = str(parameters.get("query", "")).lower()
+        sensitive_terms = ["password", "secret", "token", "api_key", "id_rsa", "credential"]
+        for term in sensitive_terms:
+            if term in query:
+                return "HIGH"
+
+    # -------------------------------------------------------
+    # 4. Inherently LOW Risk Tools
+    # -------------------------------------------------------
+    LOW_RISK_TOOLS = [
+        "get_system_info",
+        "list_processes",
+        "read_latest_message",     # Comm Agent — read only
+        "capture_screenshot",      # Vision Agent — read only
+    ]
+    if tool_name in LOW_RISK_TOOLS:
         return "LOW"
-        
-    # Default fallback: Treat unknown things as MEDIUM to force review but not hard block
+
+    # -------------------------------------------------------
+    # 5. Default: MEDIUM (requires logging but no HITL)
+    # -------------------------------------------------------
     return "MEDIUM"
