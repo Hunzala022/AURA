@@ -4,3 +4,10 @@ __pycache__/
 .env
 *.log
 benchmark_results/
+
+# Local encryption material, containment backups, and private runtime memory.
+/.keys/
+/.aura-private/
+/aura_memory.db
+/aura_memory.db-*
+/aura_chroma/

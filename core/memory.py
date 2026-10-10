@@ -5,30 +5,17 @@ from typing import List, Dict, Any
 from cryptography.fernet import Fernet
 import chromadb
 from chromadb.config import Settings
+from core.key_management import KEY_FILE, get_or_create_key
 
 # ---------------------------------------------------------
 # Milestone 3.8: Encryption Key Management
 # ---------------------------------------------------------
-KEY_FILE = os.path.join(os.path.dirname(__file__), "..", ".keys", "aura_aes.key")
-
-def get_or_create_key() -> bytes:
-    """Gets the existing AES key or creates a new one. Key never leaves device."""
-    os.makedirs(os.path.dirname(KEY_FILE), exist_ok=True)
-    if not os.path.exists(KEY_FILE):
-        key = Fernet.generate_key()
-        with open(KEY_FILE, "wb") as f:
-            f.write(key)
-    else:
-        with open(KEY_FILE, "rb") as f:
-            key = f.read()
-    return key
-
 # ---------------------------------------------------------
 # Milestone 3.5 & 3.8: Encrypted Long-Term Memory
 # ---------------------------------------------------------
 class MemoryManager:
     def __init__(self, db_path: str = "aura_memory.db", chroma_path: str = "aura_chroma"):
-        self.key = get_or_create_key()
+        self.key = get_or_create_key(data_paths=(db_path, chroma_path))
         self.fernet = Fernet(self.key)
         
         # SQLite for structured state/session logging
