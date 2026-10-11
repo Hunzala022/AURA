@@ -1,3 +1,5 @@
+> HISTORICAL DOCUMENT — superseded by FYP1_STATUS.md, MODEL_RUNTIME.md and REQUIREMENT_TRACEABILITY.md. Completion/security claims below are retained as historical evidence, not current sign-off.
+
 # A.U.R.A - FYP-2 Handoff & Technical Spec
 
 ## 1. Current State (End of FYP-1 / Stage 4)

@@ -1,0 +1,17 @@
+{
+  "runtime": "Ollama 0.34.3",
+  "model": "aura-qwen:latest",
+  "digest": "2d63c4c0739303b6d6d57eb6b3ab869eec156a703a3422100c21cc64b3e35e4f",
+  "quantization": "Q8_0",
+  "capabilities": [
+    "tools",
+    "thinking",
+    "completion"
+  ],
+  "test": "synthetic 64x64 red PNG",
+  "http_status": 500,
+  "response": {
+    "error": "{\"error\":{\"code\":500,\"message\":\"image input is not supported - hint: if this is unexpected, you may need to provide the mmproj\",\"type\":\"server_error\"}}"
+  },
+  "elapsed_seconds": 8.889546099992003
+}

@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -8,7 +9,7 @@ from core.control_plane import execute_pipeline
 
 def main():
     print("="*60)
-    print(" A.U.R.A. (Air-Gapped Unified Responsive Agent) - Stage 2")
+    print(" A.U.R.A. - FYP-1 local inference, permission-gated tools")
     print("="*60)
     print("Type a command to test the end-to-end execution pipeline.")
     print("Examples:")
@@ -27,7 +28,8 @@ def main():
             if not prompt.strip():
                 continue
                 
-            execute_pipeline(prompt)
+            result = execute_pipeline(prompt)
+            print(json.dumps(result, indent=2, ensure_ascii=True))
             
         except KeyboardInterrupt:
             print("\nShutting down...")

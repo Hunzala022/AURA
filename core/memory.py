@@ -6,6 +6,7 @@ from cryptography.fernet import Fernet
 import chromadb
 from chromadb.config import Settings
 from core.key_management import KEY_FILE, get_or_create_key
+from pathlib import Path
 
 # ---------------------------------------------------------
 # Milestone 3.8: Encryption Key Management
@@ -14,12 +15,17 @@ from core.key_management import KEY_FILE, get_or_create_key
 # Milestone 3.5 & 3.8: Encrypted Long-Term Memory
 # ---------------------------------------------------------
 class MemoryManager:
-    def __init__(self, db_path: str = "aura_memory.db", chroma_path: str = "aura_chroma"):
-        self.key = get_or_create_key(data_paths=(db_path, chroma_path))
+    def __init__(self, db_path=None, chroma_path=None, key_file=None, embedding_function=None):
+        root = Path(__file__).resolve().parent.parent
+        db_path = str(db_path or root / 'aura_memory.db')
+        chroma_path = str(chroma_path or root / 'aura_chroma')
+        self.key = get_or_create_key(key_file=key_file, data_paths=(db_path, chroma_path))
+        self.embedding_function = embedding_function
         self.fernet = Fernet(self.key)
         
         # SQLite for structured state/session logging
         self.db_path = db_path
+        Path(db_path).parent.mkdir(parents=True, exist_ok=True)
         self._init_sqlite()
         
         # ChromaDB for vector-based memory
@@ -82,6 +88,8 @@ class MemoryManager:
 
     # ---- Vector Memory (ChromaDB) ----
     def _get_embedding(self, text: str) -> List[float]:
+        if self.embedding_function is not None:
+            return self.embedding_function(text)
         from chromadb.utils import embedding_functions
         default_ef = embedding_functions.DefaultEmbeddingFunction()
         return default_ef([text])[0]
@@ -99,6 +107,8 @@ class MemoryManager:
         )
 
     def retrieve_memory(self, query: str, n_results: int = 2) -> List[str]:
+        if self.collection.count() == 0:
+            return []
         """Retrieves memories by semantic search, then decrypts them."""
         query_emb = self._get_embedding(query)
         

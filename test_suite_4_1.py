@@ -1,7 +1,7 @@
 """
 Milestone 4.1 - Cross-agent task-scenario test suite.
-Contains 20 realistic multi-step AURA scenarios testing integration across 5 agents.
-Also mocks the HITL interface so tests can run headlessly.
+Preserves 20 historical challenge scenarios, including unsupported expectations.
+Planning only: this entry point executes no tools and cannot prove task success.
 """
 import sys
 import os
@@ -151,71 +151,26 @@ SCENARIOS = [
     }
 ]
 
-def run_scenario_planning_test():
-    print("=" * 60)
-    print(f"TEST 4.1: Cross-Agent Scenario Suite ({len(SCENARIOS)} scenarios)")
-    print("Testing planning, tool selection, and risk assessment...")
-    print("=" * 60)
-
+def run_scenario_planning_test(scenarios=None, planner=None):
+    from pathlib import Path
+    from core.evaluation import score_plan
+    scenarios = SCENARIOS if scenarios is None else scenarios
+    planner = planner or generate_plan
     results = []
-    
-    for idx, scenario in enumerate(SCENARIOS):
-        print(f"\n[Scenario {idx+1}/{len(SCENARIOS)}] {scenario['prompt']}")
-        start_time = time.time()
-        
-        # We only generate the plan here to test planning logic (Stage 4.2 handles full execution)
-        # We also want to measure TTFT and Tok/s, but those are internal to the model API.
-        # We'll just measure latency here.
-        plan_data = generate_plan(scenario["prompt"], memory_context="")
-        latency = time.time() - start_time
-        
-        if not plan_data:
-            print("  [FAIL] Model failed to return valid JSON schema.")
-            results.append(False)
-            continue
-            
-        decision = plan_data.get("decision")
-        print(f"  Decision: {decision} (Expected: {scenario['expected_decision']})")
-        
-        # Check decision accuracy
-        if decision != scenario["expected_decision"] and not (decision == "REFUSE" and scenario["expected_decision"] == "CLARIFY"):
-            print(f"  [WARN] Unexpected decision.")
-            
-        if decision == "EXECUTE":
-            planned_tools = [step["tool"] for step in plan_data.get("plan", [])]
-            print(f"  Planned Tools: {planned_tools}")
-            
-            # Check if expected tools were included
-            missing_tools = [t for t in scenario["expected_tools_subset"] if t not in planned_tools]
-            if missing_tools:
-                print(f"  [FAIL] Missing expected tools: {missing_tools}")
-                results.append(False)
-                continue
-                
-            # Simulate policy engine check on the plan
-            max_risk_in_plan = "LOW"
-            for step in plan_data.get("plan", []):
-                risk = evaluate_risk(step["tool"], step.get("parameters", {}))
-                if risk == "HIGH": max_risk_in_plan = "HIGH"
-                elif risk == "MEDIUM" and max_risk_in_plan != "HIGH": max_risk_in_plan = "MEDIUM"
-                
-            print(f"  Plan Risk Level: {max_risk_in_plan} (Expected: {scenario['expected_risk']})")
-            if max_risk_in_plan != scenario['expected_risk']:
-                print(f"  [WARN] Risk mismatch. Expected {scenario['expected_risk']}, got {max_risk_in_plan}.")
-        
-        print(f"  [PASS] Scenario processed in {latency:.2f}s.")
-        results.append(True)
+    for index, scenario in enumerate(scenarios):
+        started = time.perf_counter()
+        raw = planner(scenario["prompt"])
+        result = score_plan(raw, scenario)
+        result.update(id=index+1, prompt=scenario["prompt"], latency_seconds=time.perf_counter()-started)
+        results.append(result)
+        print(f"Scenario {index+1}: {'PASS' if result['passed'] else 'FAIL'} {result['reasons']}")
+    Path("reports").mkdir(exist_ok=True)
+    Path("reports/stage4_planning.json").write_text(json.dumps({
+        "mode": "planning only; no tools executed",
+        "note": "Historical scenario expectations retained, including unsupported capabilities; failures are not waived.",
+        "results": results}, indent=2), encoding="utf-8")
+    return results
 
-    pass_rate = sum(results) / len(results) * 100
-    print(f"\n{'='*60}")
-    print(f"RESULTS: {sum(results)}/{len(results)} passed ({pass_rate:.1f}%)")
-    print(f"{'='*60}")
-    
-    # Save the report for 4.2/4.7
-    with open("D:\\Project AURA\\benchmark_report_stage4.md", "w") as f:
-        f.write("# Stage 4.1 Scenario Test Results\n")
-        f.write(f"- Total Scenarios: {len(SCENARIOS)}\n")
-        f.write(f"- Pass Rate: {pass_rate:.1f}%\n")
-        
 if __name__ == "__main__":
-    run_scenario_planning_test()
+    outcomes = run_scenario_planning_test()
+    sys.exit(0 if outcomes and all(r["passed"] for r in outcomes) else 1)

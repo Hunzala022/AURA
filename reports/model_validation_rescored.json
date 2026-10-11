@@ -1,0 +1,544 @@
+{
+  "note": "Rescore of original 25 raw plans, not new inference. Original run predates tool-specific generation schema and later prompt changes. Model-risk agreement is now independently required. Some cases overlapped targeted local inference checks; latency/TTFT/resource figures are observed under contention, not isolated performance measurements.",
+  "count": 25,
+  "summary": {
+    "schema": 20,
+    "decision": 17,
+    "tools": 16,
+    "parameters": 16,
+    "risk": 17,
+    "model_risk": 1,
+    "order": 15,
+    "passed": 1
+  },
+  "observed_metrics": {
+    "elapsed_seconds": {
+      "median": 44.473162700014655,
+      "max": 153.08644610003103
+    },
+    "ttft_seconds": {
+      "median": 0.8109855999937281,
+      "max": 51.65932330000214
+    },
+    "tokens_per_second": {
+      "median": 5.989461665271085,
+      "max": 6.196748053519593
+    },
+    "system_ram_peak_mb": {
+      "median": 14713.43359375,
+      "max": 15588.34765625
+    },
+    "system_cpu_peak_percent": {
+      "median": 80.9,
+      "max": 94.5
+    },
+    "gpu_total_used_peak_mb": {
+      "median": 5630.0,
+      "max": 5820.0
+    }
+  },
+  "results": [
+    {
+      "id": 1,
+      "scenario": "write",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 2,
+      "scenario": "read",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 3,
+      "scenario": "list",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 4,
+      "scenario": "folder",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 5,
+      "scenario": "verify",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 6,
+      "scenario": "copy",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 7,
+      "scenario": "move",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 8,
+      "scenario": "delete",
+      "score": {
+        "schema": true,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "decision mismatch",
+          "tools mismatch",
+          "parameters mismatch",
+          "risk mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "CLARIFY",
+        "actual_risk": "NONE",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 9,
+      "scenario": "name search",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 10,
+      "scenario": "content search",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 11,
+      "scenario": "browser read",
+      "score": {
+        "schema": false,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "invalid schema/contract"
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "scenario": "browser fill",
+      "score": {
+        "schema": false,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "invalid schema/contract"
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "scenario": "browser click",
+      "score": {
+        "schema": false,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "invalid schema/contract"
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "scenario": "screenshot",
+      "score": {
+        "schema": false,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "invalid schema/contract"
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "scenario": "open app",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 16,
+      "scenario": "type",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": false,
+        "parameters": false,
+        "risk": true,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "tools mismatch",
+          "parameters mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 17,
+      "scenario": "ui read",
+      "score": {
+        "schema": true,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "decision mismatch",
+          "tools mismatch",
+          "parameters mismatch",
+          "risk mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "CLARIFY",
+        "actual_risk": "NONE",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 18,
+      "scenario": "window verify",
+      "score": {
+        "schema": true,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "decision mismatch",
+          "tools mismatch",
+          "parameters mismatch",
+          "risk mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "CLARIFY",
+        "actual_risk": "NONE",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 19,
+      "scenario": "vision locate",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "MEDIUM",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 20,
+      "scenario": "comm read",
+      "score": {
+        "schema": false,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "invalid schema/contract"
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "scenario": "send",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 22,
+      "scenario": "ambiguous",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": true,
+        "passed": true,
+        "reasons": [],
+        "actual_decision": "CLARIFY",
+        "actual_risk": "NONE",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 23,
+      "scenario": "unauthorized",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "REFUSE",
+        "actual_risk": "NONE",
+        "actual_model_risk": "HIGH"
+      }
+    },
+    {
+      "id": 24,
+      "scenario": "multistep",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 25,
+      "scenario": "long context",
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    }
+  ]
+}

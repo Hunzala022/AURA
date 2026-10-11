@@ -108,11 +108,13 @@ def verify_file(parameters: Dict[str, Any]) -> Tuple[bool, str]:
         return False, f"Verification FAILED: {path} does NOT exist."
     
     expected_content = parameters.get("expected_content")
-    if expected_content and os.path.isfile(path):
+    if expected_content is not None and not os.path.isfile(path):
+        return False, 'Verification FAILED: expected file content but path is not a file.'
+    if expected_content is not None and os.path.isfile(path):
         try:
             with open(path, 'r', encoding='utf-8') as f:
                 actual = f.read()
-            if expected_content in actual:
+            if expected_content == actual:
                 return True, f"Verification PASSED: {path} exists and contains expected content."
             else:
                 return False, f"Verification FAILED: {path} exists but does NOT contain expected content."
@@ -132,8 +134,8 @@ def open_application(parameters: Dict[str, Any]) -> Tuple[bool, str]:
         return False, "Missing app_name parameter"
     try:
         import subprocess
-        subprocess.Popen(app_name)
-        return True, f"Successfully launched: {app_name}"
+        subprocess.Popen([app_name], shell=False)
+        return verify_window({'window_title': parameters['window_title']})
     except Exception as e:
         return False, f"Failed to launch {app_name}: {e}"
 
@@ -151,7 +153,7 @@ def type_in_window(parameters: Dict[str, Any]) -> Tuple[bool, str]:
         time.sleep(1)  # Give the app a moment to be ready
         
         # Find the window by partial name
-        win = auto.WindowControl(searchDepth=1, RegexName=f".*{window_title}.*")
+        win = auto.WindowControl(searchDepth=1, Name=window_title)
         if not win.Exists(3, 1):
             return False, f"Window matching '{window_title}' not found."
             
@@ -168,13 +170,13 @@ def type_in_window(parameters: Dict[str, Any]) -> Tuple[bool, str]:
             # If it supports ValuePattern, set it directly, else SendKeys
             try:
                 target.GetValuePattern().SetValue(text)
-            except:
-                target.SendKeys(text)
+            except Exception:
+                return False, 'Control does not support safe literal text entry'
         else:
             # Fallback: just type into the window itself
-            win.SendKeys(text)
+            return False, 'No exact editable target found'
         
-        return True, f"Successfully typed into '{window_title}': '{text}'"
+        return verify_window({'window_title': window_title, 'expected_text': text})
     except Exception as e:
         return False, f"Failed to type into '{window_title}': {e}"
 
@@ -185,7 +187,7 @@ def read_ui_tree(parameters: Dict[str, Any]) -> Tuple[bool, str]:
         return False, "Missing window_title parameter"
     try:
         import uiautomation as auto
-        win = auto.WindowControl(searchDepth=1, RegexName=f".*{window_title}.*")
+        win = auto.WindowControl(searchDepth=1, Name=window_title)
         if not win.Exists(3, 1):
             return False, f"Window matching '{window_title}' not found."
         
@@ -211,14 +213,20 @@ def click_ui_element(parameters: Dict[str, Any]) -> Tuple[bool, str]:
         return False, "Missing element_name parameter"
     try:
         import uiautomation as auto
-        win = auto.WindowControl(searchDepth=1, RegexName=f".*{window_title}.*")
+        win = auto.WindowControl(searchDepth=1, Name=window_title)
         if not win.Exists(3, 1):
             return False, f"Window matching '{window_title}' not found."
             
         target = win.Control(Name=element_name)
         if target.Exists(3, 1):
+            expected = parameters.get('expected_element')
+            if not expected:
+                return False, 'Expected post-action element required'
+            post = win.Control(Name=expected)
+            if post.Exists(0, 0):
+                return False, 'Postcondition already true; cannot verify transition'
             target.Click()
-            return True, f"Successfully clicked '{element_name}' in '{window_title}'"
+            return (True, 'Expected UI transition observed') if post.Exists(3, 1) else (False, 'Action verification failed')
         else:
             return False, f"Element '{element_name}' not found in '{window_title}'"
     except Exception as e:
@@ -232,7 +240,7 @@ def verify_window(parameters: Dict[str, Any]) -> Tuple[bool, str]:
         return False, "Missing window_title parameter"
     try:
         import uiautomation as auto
-        win = auto.WindowControl(searchDepth=1, RegexName=f".*{window_title}.*")
+        win = auto.WindowControl(searchDepth=1, Name=window_title)
         if not win.Exists(3, 1):
             return False, f"Verification FAILED: Window '{window_title}' not found."
         

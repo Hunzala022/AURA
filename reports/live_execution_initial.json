@@ -1,0 +1,55 @@
+{
+  "mode": "live planner, real temporary file and encrypted audit stores; exact-action test guard and approval fixture",
+  "results": [
+    {
+      "scenario": "write and verify",
+      "expected_status": "COMPLETED",
+      "result": {
+        "decision": "EXECUTE",
+        "status": "FAILED",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "verify_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": false,
+            "status": "FAILED"
+          }
+        ],
+        "error": "Verification FAILED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpde235b35\\alpha.txt does NOT exist.",
+        "warnings": [],
+        "latency_seconds": 57.52512679999927
+      },
+      "postcondition_file_alpha": false,
+      "passed": false
+    },
+    {
+      "scenario": "denied deletion",
+      "expected_status": "BLOCKED",
+      "result": {
+        "decision": "EXECUTE",
+        "status": "BLOCKED",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "delete_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": false,
+            "verified": false,
+            "status": "BLOCKED"
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 34.92362109996611
+      },
+      "postcondition_file_alpha": false,
+      "passed": false
+    }
+  ]
+}

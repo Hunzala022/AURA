@@ -1,36 +1,34 @@
-from pydantic import BaseModel, Field
-from typing import Dict, Any, List, Optional, Literal
-
+from typing import Any, Literal
+from pydantic import BaseModel, ConfigDict, Field, model_validator
+from core.tools import TOOLS, validate_parameters
+ToolName = Literal[tuple(TOOLS)]
 class PlanStep(BaseModel):
-    step: int = Field(..., description="The step number in the plan (1-indexed).")
-    tool: str = Field(..., description="The exact name of the tool to execute.")
-    parameters: Dict[str, Any] = Field(default_factory=dict, description="Parameters required by the tool.")
-    reasoning: str = Field(..., description="Why this step is necessary.")
-
+    model_config = ConfigDict(extra='forbid', strict=True)
+    step: int = Field(ge=1)
+    tool: ToolName
+    parameters: dict[str, Any]
+    reasoning: str
+    agent: str | None = None
+    @model_validator(mode='after')
+    def check_contract(self):
+        owner = TOOLS[self.tool].agent
+        if self.agent is not None and self.agent != owner:
+            raise ValueError('Tool is outside requested agent permissions')
+        self.agent = owner
+        self.parameters = validate_parameters(self.tool, self.parameters)
+        return self
 class ToolCallSchema(BaseModel):
-    decision: Literal["EXECUTE", "CLARIFY", "REFUSE", "NO_ACTION"] = Field(
-        ..., 
-        description="Your decision on how to handle the prompt."
-    )
-    plan: List[PlanStep] = Field(
-        default_factory=list, 
-        description="A list of steps to execute. Must be empty if decision is CLARIFY, REFUSE, or NO_ACTION."
-    )
-    overall_reasoning: str = Field(
-        ..., 
-        description="Explanation of why this plan was chosen, or why clarification/refusal is needed."
-    )
-    risk: Literal["low", "medium", "high"] = Field(
-        ..., 
-        description="Risk level of the requested action."
-    )
-    risk_justification: str = Field(
-        ..., 
-        description="Why this risk level was assigned."
-    )
-    confidence: float = Field(
-        ..., 
-        ge=0.0, 
-        le=1.0, 
-        description="Confidence score between 0.0 and 1.0."
-    )
+    model_config = ConfigDict(extra='forbid', strict=True)
+    decision: Literal['EXECUTE','CLARIFY','REFUSE','NO_ACTION']
+    plan: list[PlanStep] = Field(default_factory=list,max_length=30)
+    overall_reasoning: str
+    risk: Literal['low','medium','high']
+    risk_justification: str
+    confidence: float = Field(ge=0,le=1)
+    @model_validator(mode='after')
+    def check_decision(self):
+        if (self.decision=='EXECUTE') != bool(self.plan):
+            raise ValueError('Decision and plan disagree')
+        if [s.step for s in self.plan] != list(range(1,len(self.plan)+1)):
+            raise ValueError('Steps must be consecutive and ordered')
+        return self

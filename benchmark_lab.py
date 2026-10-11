@@ -1,3 +1,5 @@
+# HISTORICAL HARNESS: retained for provenance, not current validation.
+# Current live inference evidence: validate_model.py. Do not use old scoring for sign-off.
 import os
 import time
 import json
@@ -15,15 +17,8 @@ from core.prompt import BASE_SYSTEM_PROMPT
 OLLAMA_API = "http://localhost:11434"
 MODEL_NAME = "aura-qwen:latest"
 
-ALLOWED_TOOLS = [
-    "list_directory", "read_file", "write_file", "modify_content", 
-    "move_file", "copy_file", "delete_file", "create_folder", "verify_file",
-    "open_url", "read_page", "click_element", "type_text", "extract_text_from_page",
-    "describe_image", "extract_text_from_vision",
-    "store_memory", "retrieve_memory",
-    "web_search", "retrieve_url",
-    "get_system_info", "list_processes"
-]
+from core.tools import TOOLS
+ALLOWED_TOOLS = list(TOOLS)
 
 TEST_SUITE = [
     # SIMPLE (5)

@@ -1,0 +1,229 @@
+{
+  "metadata": {
+    "model": "aura-qwen:latest",
+    "version": {
+      "version": "0.34.3"
+    },
+    "show": {
+      "parent_model": "Qwen_Qwen3.5-4B-Q8_0.gguf",
+      "format": "gguf",
+      "family": "qwen35",
+      "families": [
+        "qwen35"
+      ],
+      "parameter_size": "4.3B",
+      "quantization_level": "Q8_0"
+    },
+    "mode": "live model planning only; no tools executed",
+    "generation": {
+      "think": false,
+      "num_predict": 768,
+      "num_ctx": 4096
+    },
+    "resource_scope": "system/GPU totals, not isolated model memory",
+    "prompt_sha256": "9db4784dccc91674dc2e1936ac55d29619dfa67f96c8403614d6f90c7a17b160",
+    "schema_sha256": "681d760ea2695b5f5c5066c3389e7e9257c11976f5029e39c7db5c54d7a67451",
+    "temperature": 0
+  },
+  "results": [
+    {
+      "id": 8,
+      "scenario": "delete",
+      "expected": {
+        "name": "delete",
+        "prompt": "Delete my test file D:/AURA_validation_fixture/alpha.txt; request approval before executing.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "delete_file"
+        ],
+        "expected_tool_order": [
+          "delete_file"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "D:/AURA_validation_fixture/alpha.txt"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": true,
+        "passed": false,
+        "reasons": [
+          "decision mismatch",
+          "tools mismatch",
+          "parameters mismatch",
+          "risk mismatch",
+          "order mismatch"
+        ],
+        "actual_decision": "CLARIFY",
+        "actual_risk": "NONE",
+        "actual_model_risk": "HIGH"
+      },
+      "raw_plan": {
+        "confidence": 0.95,
+        "decision": "CLARIFY",
+        "overall_reasoning": "The user requested deletion of a file, which is a high-risk action requiring explicit approval. However, the path provided includes a drive letter 'D:', which may be outside the AURA workspace or contain sensitive runtime stores, necessitating clarification before proceeding.",
+        "risk": "high",
+        "risk_justification": "File deletion is inherently high risk; additionally, the path 'D:' suggests a location outside the typical AURA workspace or potentially containing private data, requiring verification.",
+        "plan": []
+      },
+      "error": null,
+      "elapsed_seconds": 80.73383870004909,
+      "ttft_seconds": 58.234398400003556,
+      "eval_count": 140,
+      "tokens_per_second": 6.224936294446602,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15357.44921875,
+      "system_cpu_peak_percent": 85.7,
+      "gpu_total_used_peak_mb": 5609.0
+    },
+    {
+      "id": 11,
+      "scenario": "browser read",
+      "expected": {
+        "name": "browser read",
+        "prompt": "Read https://example.com.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "navigate_and_read"
+        ],
+        "expected_tool_order": [
+          "navigate_and_read"
+        ],
+        "expected_parameters": {
+          "0": {
+            "url": "https://example.com"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "MEDIUM"
+      },
+      "raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "The user requested to read a URL, which is supported by the browser_agent tool.",
+        "risk": "medium",
+        "risk_justification": "Network access to an external URL.",
+        "plan": [
+          {
+            "parameters": {
+              "url": "https://example.com"
+            },
+            "reasoning": "Navigate to the specified URL to read its content.",
+            "step": 1,
+            "tool": "navigate_and_read"
+          }
+        ]
+      },
+      "error": null,
+      "elapsed_seconds": 153.93858179997187,
+      "ttft_seconds": 127.88060689996928,
+      "eval_count": 153,
+      "tokens_per_second": 5.8716316262658115,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15505.12890625,
+      "system_cpu_peak_percent": 90.9,
+      "gpu_total_used_peak_mb": 5637.0
+    },
+    {
+      "id": 12,
+      "scenario": "browser fill",
+      "expected": {
+        "name": "browser fill",
+        "prompt": "At https://example.com fill the unique #query input with alpha.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "browser_fill"
+        ],
+        "expected_tool_order": [
+          "browser_fill"
+        ],
+        "expected_parameters": {
+          "0": {
+            "url": "https://example.com",
+            "selector": "#query",
+            "text": "alpha"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": false,
+        "parameters": false,
+        "risk": true,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "tools mismatch",
+          "parameters mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "MEDIUM"
+      },
+      "raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "The user wants to interact with a specific input field on a URL. The browser_agent tools are available and sufficient for this task. No clarification is needed as the URL, selector pattern ('#query'), and text ('alpha') are provided. The action involves filling a form, which is a standard local interaction.",
+        "risk": "medium",
+        "risk_justification": "Browser interaction involves network access and UI mutation, but the target is a public example URL and the action is benign text entry.",
+        "plan": [
+          {
+            "parameters": {
+              "url": "https://example.com"
+            },
+            "reasoning": "Navigate to the specified URL to load the page.",
+            "step": 1,
+            "tool": "navigate_and_read"
+          },
+          {
+            "parameters": {
+              "selector": "#query",
+              "text": "alpha",
+              "url": "https://example.com"
+            },
+            "reasoning": "Fill the unique input field with the identifier 'query' and the text 'alpha'.",
+            "step": 2,
+            "tool": "browser_fill"
+          }
+        ]
+      },
+      "error": null,
+      "elapsed_seconds": 97.61974589998135,
+      "ttft_seconds": 47.728851399966516,
+      "eval_count": 299,
+      "tokens_per_second": 5.993188130344586,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15608.56640625,
+      "system_cpu_peak_percent": 87.2,
+      "gpu_total_used_peak_mb": 5695.0
+    }
+  ]
+}

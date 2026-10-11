@@ -1,4 +1,5 @@
 import os
+import fnmatch
 from typing import Dict, Any, Tuple
 
 def search_files_by_name(parameters: Dict[str, Any]) -> Tuple[bool, str]:
@@ -18,7 +19,7 @@ def search_files_by_name(parameters: Dict[str, Any]) -> Tuple[bool, str]:
         count = 0
         for dirpath, dirnames, filenames in os.walk(root_dir):
             for filename in filenames:
-                if pattern.lower() in filename.lower():
+                if fnmatch.fnmatchcase(filename.lower(), pattern.lower()):
                     matches.append(os.path.join(dirpath, filename))
                     count += 1
                 if count >= max_files:
@@ -40,6 +41,8 @@ def search_files_by_content(parameters: Dict[str, Any]) -> Tuple[bool, str]:
     
     if not query:
         return False, "Missing query parameter."
+    if not os.path.isdir(root_dir):
+        return False, 'Search directory does not exist'
         
     matches = []
     try:

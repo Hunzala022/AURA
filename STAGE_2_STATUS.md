@@ -1,3 +1,5 @@
+> HISTORICAL DOCUMENT — superseded by FYP1_STATUS.md, MODEL_RUNTIME.md and REQUIREMENT_TRACEABILITY.md. Completion/security claims below are retained as historical evidence, not current sign-off.
+
 # STAGE 2 STATUS REPORT
 
 ## Status: 100% Complete

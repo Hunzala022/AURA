@@ -1,0 +1,48 @@
+[
+  {
+    "expected_color": "red",
+    "http_status": 200,
+    "response": {
+      "model": "aura-qwen-vision-candidate",
+      "created_at": "2026-10-10T19:54:53.4715191Z",
+      "message": {
+        "role": "assistant",
+        "content": "Red"
+      },
+      "done": true,
+      "done_reason": "stop",
+      "total_duration": 25080366700,
+      "load_duration": 11232474300,
+      "prompt_eval_count": 36,
+      "prompt_eval_cached_count": 0,
+      "prompt_eval_duration": 13668846000,
+      "eval_count": 2,
+      "eval_duration": 162590000
+    },
+    "elapsed_seconds": 25.110936099954415,
+    "passed": true
+  },
+  {
+    "expected_color": "blue",
+    "http_status": 200,
+    "response": {
+      "model": "aura-qwen-vision-candidate",
+      "created_at": "2026-10-10T19:54:54.6673949Z",
+      "message": {
+        "role": "assistant",
+        "content": "blue"
+      },
+      "done": true,
+      "done_reason": "stop",
+      "total_duration": 1186087200,
+      "load_duration": 7968000,
+      "prompt_eval_count": 36,
+      "prompt_eval_cached_count": 0,
+      "prompt_eval_duration": 970360000,
+      "eval_count": 2,
+      "eval_duration": 158306000
+    },
+    "elapsed_seconds": 1.1906709999893792,
+    "passed": true
+  }
+]

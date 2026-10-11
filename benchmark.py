@@ -1,3 +1,5 @@
+# HISTORICAL HARNESS: retained for provenance, not current validation.
+# Current live inference evidence: validate_model.py. Do not use old scoring for sign-off.
 """
 A.U.R.A Stage 1 — Milestone 1.2: Model Acquisition & Raw Validation
 Uses Ollama API (localhost:11434) to benchmark the locally-imported Qwen 3.5 4B Q8 model.

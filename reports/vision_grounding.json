@@ -1,0 +1,12 @@
+{
+  "task": "synthetic green rectangle grounding",
+  "expected_bounds": [
+    100,
+    25,
+    180,
+    75
+  ],
+  "result": "Invalid image coordinates",
+  "passed": false,
+  "elapsed_seconds": 6.612642900028732
+}

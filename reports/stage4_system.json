@@ -1,0 +1,833 @@
+{
+  "mode": "deterministic integration, not live LLM benchmark",
+  "results": [
+    {
+      "id": 1,
+      "scenario": "Write and verify",
+      "expected_status": "COMPLETED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "write_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\1\\destination.txt"
+          },
+          {
+            "step": 2,
+            "tool": "verify_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\1\\destination.txt exists and contains expected content."
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 0.0023945000139065087
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "COMPLETED"
+      },
+      "elapsed_seconds": 0.002783200005069375,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 2,
+      "scenario": "Research name then copy",
+      "expected_status": "COMPLETED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "search_files_by_name",
+            "agent": "research_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Found files:\nC:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\2\\source.txt"
+          },
+          {
+            "step": 2,
+            "tool": "copy_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Successfully copied C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\2\\source.txt to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\2\\destination.txt"
+          },
+          {
+            "step": 3,
+            "tool": "verify_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\2\\destination.txt exists and contains expected content."
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 0.004265900002792478
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "COMPLETED"
+      },
+      "elapsed_seconds": 0.004660199978388846,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 3,
+      "scenario": "Research content then read",
+      "expected_status": "COMPLETED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "search_files_by_content",
+            "agent": "research_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Found string in files:\nC:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\3\\source.txt"
+          },
+          {
+            "step": 2,
+            "tool": "read_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "fixture data"
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 0.0014897999935783446
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "COMPLETED"
+      },
+      "elapsed_seconds": 0.0018487999914214015,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 4,
+      "scenario": "Move and verify",
+      "expected_status": "COMPLETED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "move_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Successfully moved C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\4\\source.txt to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\4\\destination.txt"
+          },
+          {
+            "step": 2,
+            "tool": "verify_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\4\\destination.txt exists and contains expected content."
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 0.0023197000264190137
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "COMPLETED"
+      },
+      "elapsed_seconds": 0.002781699993647635,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 5,
+      "scenario": "Create folder and file",
+      "expected_status": "COMPLETED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "create_folder",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Successfully created folder C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\5\\nested"
+          },
+          {
+            "step": 2,
+            "tool": "write_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\5\\destination.txt"
+          },
+          {
+            "step": 3,
+            "tool": "verify_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\5\\destination.txt exists and contains expected content."
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 0.003514599986374378
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "COMPLETED"
+      },
+      "elapsed_seconds": 0.003925100027117878,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 6,
+      "scenario": "Approved isolated deletion",
+      "expected_status": "COMPLETED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "delete_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Successfully deleted C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\6\\source.txt"
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 0.00030970002990216017
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "COMPLETED"
+      },
+      "elapsed_seconds": 0.0005998000269755721,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 7,
+      "scenario": "Denied deletion",
+      "expected_status": "BLOCKED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "BLOCKED",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "delete_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": false,
+            "verified": false,
+            "status": "BLOCKED"
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 7.830001413822174e-05
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "BLOCKED"
+      },
+      "elapsed_seconds": 0.00043569999979808927,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 8,
+      "scenario": "Missing file",
+      "expected_status": "FAILED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "FAILED",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "read_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": false,
+            "status": "FAILED"
+          }
+        ],
+        "error": "File does not exist: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\8\\missing",
+        "warnings": [],
+        "latency_seconds": 0.00042400002712383866
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "FAILED"
+      },
+      "elapsed_seconds": 0.0006999000324867666,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 9,
+      "scenario": "Ambiguous request",
+      "expected_status": "CLARIFY",
+      "actual": {
+        "decision": "CLARIFY",
+        "status": "CLARIFY",
+        "success": false,
+        "steps": [],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 3.659998765215278e-05
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "CLARIFY"
+      },
+      "elapsed_seconds": 0.0003550999681465328,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 10,
+      "scenario": "Refused request",
+      "expected_status": "REFUSE",
+      "actual": {
+        "decision": "REFUSE",
+        "status": "REFUSE",
+        "success": false,
+        "steps": [],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 3.550003748387098e-05
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "REFUSE"
+      },
+      "elapsed_seconds": 0.0003358999965712428,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 11,
+      "scenario": "Late unknown tool rejects whole plan",
+      "expected_status": "INVALID_PLAN",
+      "actual": {
+        "decision": null,
+        "status": "INVALID_PLAN",
+        "success": false,
+        "steps": [],
+        "error": "Plan failed contract or agent permission validation",
+        "warnings": [],
+        "latency_seconds": 6.379996193572879e-05
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "INVALID_PLAN"
+      },
+      "elapsed_seconds": 0.00038520002271980047,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 12,
+      "scenario": "Caller agent boundary",
+      "expected_status": "INVALID_PLAN",
+      "actual": {
+        "decision": null,
+        "status": "INVALID_PLAN",
+        "success": false,
+        "steps": [],
+        "error": "Plan failed contract or agent permission validation",
+        "warnings": [],
+        "latency_seconds": 5.6200020480901e-05
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "INVALID_PLAN"
+      },
+      "elapsed_seconds": 0.000361400016117841,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 13,
+      "scenario": "Read then denied message",
+      "expected_status": "BLOCKED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "BLOCKED",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "read_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": false,
+            "verified": false,
+            "status": "BLOCKED"
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 0.0003548000240698457
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "BLOCKED"
+      },
+      "elapsed_seconds": 0.0006667000125162303,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 14,
+      "scenario": "Sanitized browser fixture and write",
+      "expected_status": "COMPLETED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "navigate_and_read",
+            "agent": "browser_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "fixture data"
+          },
+          {
+            "step": 2,
+            "tool": "write_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\14\\destination.txt"
+          },
+          {
+            "step": 3,
+            "tool": "verify_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\14\\destination.txt exists and contains expected content."
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 0.0026720999740064144
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "COMPLETED"
+      },
+      "elapsed_seconds": 0.003099000023212284,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 15,
+      "scenario": "Read communication fixture then write",
+      "expected_status": "COMPLETED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "read_latest_message",
+            "agent": "comm_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "fixture data"
+          },
+          {
+            "step": 2,
+            "tool": "write_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\15\\destination.txt"
+          },
+          {
+            "step": 3,
+            "tool": "verify_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpxn5ycjev\\15\\destination.txt exists and contains expected content."
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 0.0024460000568069518
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "COMPLETED"
+      },
+      "elapsed_seconds": 0.002864199981559068,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 16,
+      "scenario": "Vision fixture failure stops write",
+      "expected_status": "FAILED",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "FAILED",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "vision_locate_element",
+            "agent": "vision_agent",
+            "risk": "MEDIUM",
+            "executed": true,
+            "verified": false,
+            "status": "FAILED"
+          }
+        ],
+        "error": "not found",
+        "warnings": [],
+        "latency_seconds": 7.579999510198832e-05
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "FAILED"
+      },
+      "elapsed_seconds": 0.00042949995258823037,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 17,
+      "scenario": "Exception stops remaining workflow",
+      "expected_status": "ERROR",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "ERROR",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "read_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": false,
+            "status": "ERROR"
+          }
+        ],
+        "error": "RuntimeError: execution or audit failed; inspect completed steps",
+        "warnings": [],
+        "latency_seconds": 0.0003476000274531543
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "ERROR"
+      },
+      "elapsed_seconds": 0.0006864000461064279,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 18,
+      "scenario": "False tool success rejected",
+      "expected_status": "ERROR",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "ERROR",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "write_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": false,
+            "status": "ERROR"
+          }
+        ],
+        "error": "FileNotFoundError: execution or audit failed; inspect completed steps",
+        "warnings": [],
+        "latency_seconds": 0.0004248999757692218
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "ERROR"
+      },
+      "elapsed_seconds": 0.0007746000192128122,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 19,
+      "scenario": "Audit failure prevents side effects",
+      "expected_status": "ERROR",
+      "actual": {
+        "decision": "EXECUTE",
+        "status": "ERROR",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "write_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": false,
+            "verified": false,
+            "status": "ERROR"
+          }
+        ],
+        "error": "OSError: execution or audit failed; inspect completed steps",
+        "warnings": [],
+        "latency_seconds": 0.00038059998769313097
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "ERROR"
+      },
+      "elapsed_seconds": 0.0006598999607376754,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    },
+    {
+      "id": 20,
+      "scenario": "Research then rejected forged agent",
+      "expected_status": "INVALID_PLAN",
+      "actual": {
+        "decision": null,
+        "status": "INVALID_PLAN",
+        "success": false,
+        "steps": [],
+        "error": "Plan failed contract or agent permission validation",
+        "warnings": [],
+        "latency_seconds": 7.119996007531881e-05
+      },
+      "score": {
+        "status_correct": true,
+        "execution_correct": true,
+        "postcondition": true,
+        "passed": true,
+        "actual_status": "INVALID_PLAN"
+      },
+      "elapsed_seconds": 0.0003761000116355717,
+      "planner": "mocked",
+      "external_agents": "fixture mocks where used",
+      "filesystem": "real temporary directory",
+      "ttft": null,
+      "tokens_per_second": null,
+      "vram_mb": null
+    }
+  ]
+}

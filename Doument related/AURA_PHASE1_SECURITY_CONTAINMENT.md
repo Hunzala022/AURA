@@ -1,3 +1,5 @@
+> HISTORICAL AUDIT / HANDOVER — findings describe the pre-remediation state. See FYP1_STATUS.md and PHASE1_CLOSURE.md for current evidence.
+
 # AURA Phase 1 — security containment
 
 Date: 10 October 2026 (Asia/Karachi). Scope: exposed encryption key and private runtime memory only.

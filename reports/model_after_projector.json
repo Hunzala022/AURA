@@ -1,0 +1,25 @@
+{
+  "name": "aura-qwen:latest",
+  "model": "aura-qwen:latest",
+  "modified_at": "2026-10-11T00:57:20.8921095+05:00",
+  "size": 5294554771,
+  "digest": "6992631ea5c6e3bec0a3c68aee984674efe563d742be9297ef0f89dab3934bac",
+  "details": {
+    "parent_model": "Qwen_Qwen3.5-4B-Q8_0.gguf",
+    "format": "gguf",
+    "family": "qwen35",
+    "families": [
+      "qwen35"
+    ],
+    "parameter_size": "4.3B",
+    "quantization_level": "Q8_0",
+    "context_length": 262144,
+    "embedding_length": 2560
+  },
+  "capabilities": [
+    "tools",
+    "thinking",
+    "completion",
+    "vision"
+  ]
+}

@@ -1,3 +1,5 @@
+# HISTORICAL HARNESS: retained for provenance, not current validation.
+# Current live inference evidence: validate_model.py. Do not use old scoring for sign-off.
 import time
 import json
 from llama_cpp import Llama

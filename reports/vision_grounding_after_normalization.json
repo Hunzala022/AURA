@@ -1,0 +1,18 @@
+{
+  "expected_bounds": [
+    100,
+    25,
+    180,
+    75
+  ],
+  "result": {
+    "backend": "model",
+    "found": true,
+    "x": 133,
+    "y": 41,
+    "coordinate_space": "image_pixels",
+    "action_executed": false
+  },
+  "passed": true,
+  "elapsed_seconds": 6.309355000033975
+}

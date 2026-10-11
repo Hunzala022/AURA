@@ -1,7 +1,11 @@
-pywinauto
-pyautogui
-chromadb
-cryptography
-pydantic
-requests
-llama-cpp-python
+# Active FYP-1 runtime (legacy llama_cpp benchmark is not the active runtime)
+pydantic>=2,<3
+requests>=2,<3
+cryptography>=43
+chromadb>=1
+beautifulsoup4>=4
+uiautomation>=2; sys_platform == "win32"
+playwright>=1
+mss>=10
+Pillow>=10
+psutil>=6

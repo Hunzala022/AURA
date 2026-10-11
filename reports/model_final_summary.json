@@ -1,0 +1,42 @@
+{
+  "count": 25,
+  "dimensions": {
+    "schema": 18,
+    "decision": 17,
+    "tools": 16,
+    "parameters": 16,
+    "risk": 17,
+    "model_risk": 2,
+    "order": 15,
+    "passed": 2,
+    "excluding_model_hint": 14
+  },
+  "observed_metrics": {
+    "elapsed_seconds": {
+      "median": 32.65653800003929,
+      "max": 62.12070929998299
+    },
+    "ttft_seconds": {
+      "median": 0.750698400021065,
+      "max": 6.51850689999992
+    },
+    "tokens_per_second": {
+      "median": 6.072963173846118,
+      "max": 6.269008405587881
+    },
+    "system_ram_peak_mb": {
+      "median": 14280.734375,
+      "max": 14936.26171875
+    },
+    "system_cpu_peak_percent": {
+      "median": 70.8,
+      "max": 87.7
+    },
+    "gpu_total_used_peak_mb": {
+      "median": 5154.0,
+      "max": 5245.0
+    }
+  },
+  "mode": "single-pass live planning only; final prompt/generic generation schema; no tool execution; no concurrent inference benchmark",
+  "limits": "single machine, one sample per case, system resource totals; strict plan shape/order and model-risk convention, not end-to-end task accuracy"
+}

@@ -1,0 +1,14 @@
+{
+  "candidate_files_scanned": 106,
+  "candidate_key_matches": 0,
+  "reachable_objects_scanned": 99,
+  "reachable_key_matches": 0,
+  "reachable_forbidden_paths": 0,
+  "private_paths_ignored": true,
+  "private_paths_tracked": false,
+  "staged_files": 117,
+  "staged_objects": 114,
+  "staged_key_matches": 0,
+  "staged_forbidden_paths": 0,
+  "source_and_model_report_fingerprints_match": true
+}

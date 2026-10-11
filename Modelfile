@@ -1,1 +1,2 @@
+# HISTORICAL text-only import. Current projector recipe: configure_projector.py / MODEL_RUNTIME.md.
 FROM ./models/Qwen_Qwen3.5-4B-Q8_0.gguf
