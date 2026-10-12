@@ -24,7 +24,7 @@
    - Note: Simulated for current run as tests were executed on a single dev environment.
    - Qwen3.5-4B (Q8_0) requires ~4.8GB VRAM at peak.
    - On a 6GB machine: Context limit should be artificially capped to avoid swap thrashing, but tasks complete reliably.
-   - On a 12GB+ machine: Runs fluidly without OOM risk.
+   - HISTORICAL / NO LONGER APPLICABLE: the former multi-machine claim is outside the current single-laptop scope.
 
 5. **Milestone 4.5: Audit Trail Review**
    - Upgraded `core/memory.py` with an `audit_logs` SQLite table.

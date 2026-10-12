@@ -1,0 +1,53 @@
+{
+  "mode": "Real native adapter, persistent quota and encrypted audit; planner/approval fixtures",
+  "self_chat_precondition": true,
+  "denied_result": {
+    "decision": "EXECUTE",
+    "status": "BLOCKED",
+    "success": false,
+    "steps": [
+      {
+        "step": 1,
+        "tool": "send_message",
+        "agent": "comm_agent",
+        "risk": "HIGH",
+        "executed": false,
+        "verified": false,
+        "status": "BLOCKED"
+      }
+    ],
+    "error": null,
+    "warnings": [],
+    "latency_seconds": 0.013923699967563152
+  },
+  "denied_composer_empty": true,
+  "result": {
+    "decision": "EXECUTE",
+    "status": "COMPLETED",
+    "success": true,
+    "steps": [
+      {
+        "step": 1,
+        "tool": "send_message",
+        "agent": "comm_agent",
+        "risk": "HIGH",
+        "executed": true,
+        "verified": true,
+        "status": "VERIFIED",
+        "result": "New message observed in verified recipient UI; server delivery not independently confirmed"
+      }
+    ],
+    "error": null,
+    "warnings": [],
+    "latency_seconds": 21.505391200014856
+  },
+  "audit_statuses": [
+    "ATTEMPTED",
+    "DENIED_BY_HITL",
+    "ATTEMPTED",
+    "APPROVED_BY_HITL",
+    "VERIFIED"
+  ],
+  "persistent_reservations": 4,
+  "passed": true
+}

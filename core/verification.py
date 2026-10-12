@@ -11,6 +11,14 @@ def digest(path):
     return None
 def before_action(tool,params):
     if tool in ('copy_file','move_file'): return digest(params['source'])
+    if tool=='type_in_window':
+        import uiautomation as auto
+        window=auto.WindowControl(searchDepth=1,Name=params['window_title'])
+        if not window.Exists(3,1):raise ValueError('Exact window absent')
+        target=window.DocumentControl()
+        if not target.Exists(1):target=window.EditControl()
+        if not target.Exists(1):raise ValueError('Editable control absent')
+        return target
     return None
 def verify_action(tool,params,result,before=None):
     if tool=='write_file': return Path(params['path']).read_text(encoding='utf-8')==params['content']
@@ -25,10 +33,11 @@ def verify_action(tool,params,result,before=None):
     if tool=='capture_screenshot':
         p=Path(params['output_path'])
         return p.is_file() and p.read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
-    if tool in ('open_application','type_in_window'):
+    if tool=='type_in_window':
+        return before is not None and before.GetValuePattern().Value==params['text']
+    if tool=='open_application':
         from agents.os_agent import verify_window
         check={'window_title':params['window_title']}
-        if tool=='type_in_window':check['expected_text']=params['text']
         return verify_window(check)[0] is True
     # Remaining tools must perform their own read-back/observation before returning True.
     return result is not None

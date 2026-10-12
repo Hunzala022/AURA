@@ -44,7 +44,12 @@ for name, tool in TOOLS.items():
 AGENT_REGISTRY['security_agent'] = {}
 def validate_parameters(name, values):
     if name not in TOOLS: raise ValueError('Unknown tool')
-    return TOOLS[name].parameters.model_validate(values).model_dump(exclude_none=True)
+    parsed=TOOLS[name].parameters.model_validate(values).model_dump(exclude_none=True)
+    if name=='send_message':
+        contact=parsed['contact']
+        if parsed['recipient_control_name'] not in (contact,contact+' (You)',contact+' (You) Message yourself'):
+            raise ValueError('Recipient header must match contact exactly, optionally with a self-chat label')
+    return parsed
 def tool_catalog():
     rows=[]
     for name,tool in TOOLS.items():

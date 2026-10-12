@@ -176,7 +176,9 @@ def type_in_window(parameters: Dict[str, Any]) -> Tuple[bool, str]:
             # Fallback: just type into the window itself
             return False, 'No exact editable target found'
         
-        return verify_window({'window_title': window_title, 'expected_text': text})
+        # Modern Notepad changes its title after entry. Read the same control,
+        # rather than looking up the obsolete title or accepting a substring.
+        return (target.GetValuePattern().Value == text, 'Literal text read back from the same editable control')
     except Exception as e:
         return False, f"Failed to type into '{window_title}': {e}"
 

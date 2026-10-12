@@ -1,0 +1,161 @@
+{
+  "metadata": {
+    "mode": "experimental route then parameters; no tools executed; no advisory risk estimate",
+    "routing_prompt_sha256": "c87f1dc34f6790c2fba30811379d19da3cfafc79ae806a65aa3a9edc26ccb60d",
+    "parameter_prompt_sha256": "d76bca9fd796d0c6117fdcb1ccba11601bcd5f848520135112e7c3f848ac930f",
+    "source_sha256": "2a1a7f95e47940f427c812f4d84f0c98e6d629aa7ca83385a8f6c900aee889c5"
+  },
+  "results": [
+    {
+      "id": 8,
+      "scenario": "delete",
+      "expected": {
+        "name": "delete",
+        "prompt": "Delete my test file D:/AURA_validation_fixture/alpha.txt; request approval before executing.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "delete_file"
+        ],
+        "expected_tool_order": [
+          "delete_file"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "D:/AURA_validation_fixture/alpha.txt"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": null,
+      "score": {
+        "schema": false,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "invalid schema/contract"
+        ]
+      },
+      "trace": {
+        "generations": [
+          {
+            "eval_count": 768,
+            "eval_duration": 129846288000,
+            "prompt_eval_count": 529,
+            "prompt_eval_duration": 3180399000,
+            "total_duration": 148978696400,
+            "load_duration": 15904826000
+          }
+        ]
+      },
+      "elapsed_seconds": 149.04649330000393,
+      "system_ram_peak_mb": 15930.29296875,
+      "system_cpu_peak_percent": 95.9,
+      "gpu_total_used_peak_mb": 5399.0
+    },
+    {
+      "id": 12,
+      "scenario": "browser fill",
+      "expected": {
+        "name": "browser fill",
+        "prompt": "At https://example.com fill the unique #query input with alpha.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "browser_fill"
+        ],
+        "expected_tool_order": [
+          "browser_fill"
+        ],
+        "expected_parameters": {
+          "0": {
+            "url": "https://example.com",
+            "selector": "#query",
+            "text": "alpha"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "CLARIFY",
+        "plan": [],
+        "overall_reasoning": "Required task information is missing.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this planner; authoritative Python policy evaluates every action.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "all_including_advisory": false,
+        "reasons": [
+          "decision mismatch",
+          "tools mismatch",
+          "parameters mismatch",
+          "risk mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "CLARIFY",
+        "actual_risk": "NONE",
+        "actual_model_risk": "LOW"
+      },
+      "trace": {
+        "generations": [
+          {
+            "eval_count": 76,
+            "eval_duration": 12869621000,
+            "prompt_eval_count": 524,
+            "prompt_eval_duration": 756677000,
+            "total_duration": 13782687800,
+            "load_duration": 7761000
+          },
+          {
+            "eval_count": 97,
+            "eval_duration": 16264845000,
+            "prompt_eval_count": 219,
+            "prompt_eval_duration": 1962336000,
+            "total_duration": 18380537000,
+            "load_duration": 5029000
+          }
+        ],
+        "route": {
+          "decision": "EXECUTE",
+          "tools": [
+            "browser_click",
+            "browser_fill"
+          ],
+          "reason": "The user provided a specific URL and a clear instruction to fill a unique input element with the text 'alpha'. The browser_agent tools are available to navigate and interact with the page."
+        },
+        "parameters": {
+          "missing": true,
+          "parameters": {
+            "step_1": {
+              "expected_selector": "#query",
+              "selector": "#query",
+              "url": "https://example.com"
+            },
+            "step_2": {
+              "selector": "#query",
+              "text": "alpha",
+              "url": "https://example.com"
+            }
+          }
+        }
+      },
+      "elapsed_seconds": 32.21326739998767,
+      "system_ram_peak_mb": 15100.02734375,
+      "system_cpu_peak_percent": 73.7,
+      "gpu_total_used_peak_mb": 5340.0
+    }
+  ]
+}

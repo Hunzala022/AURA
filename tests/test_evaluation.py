@@ -18,7 +18,15 @@ class Scoring(unittest.TestCase):
         self.assertTrue(score_plan(p,self.scenario())['passed'])
     def test_forged_model_risk_is_reported_separately(self):
         result=score_plan(plan(('read_file',{'path':'C:/expected.txt'})),self.scenario())
-        self.assertTrue(result['risk']);self.assertFalse(result['model_risk']);self.assertFalse(result['passed'])
+        self.assertTrue(result['risk']);self.assertFalse(result['model_risk']);self.assertTrue(result['passed'])
+        self.assertFalse(result['all_including_advisory'])
+    def test_audited_optional_verifier_must_target_expected_window(self):
+        from validate_model import cases
+        case=next(c for c in cases() if c['name']=='open app')
+        good=plan(('open_application',{'app_name':'notepad.exe','window_title':'Untitled - Notepad'}),('verify_window',{'window_title':'Untitled - Notepad'}))
+        self.assertTrue(score_plan(good,case)['passed'])
+        good['plan'][1]['parameters']['window_title']='Wrong window'
+        self.assertFalse(score_plan(good,case)['passed'])
     def test_noop_not_success(self):
         self.assertFalse(score_execution(None,'COMPLETED',lambda:True)['passed'])
     def test_printed_success_not_success(self):

@@ -1,95 +1,65 @@
-# FYP-1 remediation checkpoint â€” 11 October 2026
+# AURA remediation checkpoint — 13 October 2026
 
-FYP-1 is **not signed off**. This checkpoint contains verified repairs, passing deterministic tests and explicit evidence of remaining live-planning failures. It is not a completed FYP-1 baseline.
+**FYP-1 NOT YET READY.** This report supersedes checkpoint 8980a05; the earlier report remains historical evidence in Git.
 
-## 1. What works
+## Scope and verified changes
 
-The canonical 22-tool contract, complete-plan preflight, caller agent boundaries, deterministic risk policy, approval denial, exception handling, observable file/browser postconditions and encrypted session/audit persistence are tested. The same Qwen3.5-4B Q8_0 weights now accept images with the approved matching projector. A guarded live write-and-verify task completed; a separate live deletion plan was denied and its fixture remained intact.
+The user's single Windows laptop with approximately 6 GB VRAM is the complete development, benchmark, validation and demonstration target. SCOPE_DECISIONS.md supersedes historical comparison language. Python policy is authoritative; model risk hints are advisory. Historical GitHub exposure is a separate repository-security residual.
 
-## 2. Original ten findings
+Qwen3.5-4B Q8_0, Ollama and the approved projector remain unchanged. Production now includes explicit tool semantics and one bounded contract repair; semantically wrong valid plans are not silently corrected. Canonical 22-tool validation, agent scope, approval, audit, failure handling and postconditions remain mandatory.
 
-| # | Finding and root cause | Resolution / evidence | Remaining limit |
-|---|---|---|---|
-| 1 | Public key and runtime files tracked | Rotated/migrated current data; cleaned reachable history; ignored stores; key/object scans and containment tests | Known old GitHub commit still resolves; private recovery copies intentionally retained |
-| 2 | Prompt advertised 14 unimplemented names | core/tools.py catalog generates prompt and routing contracts; all 22 resolve, all 14 old names reject | Unsupported requests still need clarification |
-| 3 | Stage 4.1 mismatches counted as passes | core/evaluation.py scores decision, tools, parameters, order and risk independently; runner exits nonzero on failure | Planning-only results do not establish execution success |
-| 4 | Stage 4.2 ignored actual task outcome | 20 isolated cases compare expected status, execution semantics and observable postconditions | External agents/planner are mocked in this suite |
-| 5 | Red team lacked assertions/failure exit | Standalone unittest runner; 18/18 assertions-based tests pass, process status recorded | Not exhaustive adversarial assurance |
-| 6 | Air-gap claim contradicted network tools | Current README/status describe local inference plus online browser/communication capabilities | Air-gapped operation is not claimed |
-| 7 | Tool exceptions escaped the execution loop | Structured failure boundary halts later steps and preserves prior effects/audits | General rollback is not implemented |
-| 8 | Vision capability incorrectly dismissed | Missing-projector error reproduced; exact-weight-compatible F16 projector added with backup and approval | Synthetic image probes do not prove arbitrary desktop grounding |
-| 9 | Fernet mislabeled AES-256 | Current docs accurately describe AES-128-CBC plus HMAC-SHA256 and plaintext metadata/vectors | Roadmap all-data AES-256 requirement remains unmet |
-| 10 | Stale dependency list | Active runtime requirements plus validated direct versions and environment report | Python 3.11 and second hardware configuration are unverified |
+Validated prior-step text bindings, isolated stateful browser sessions and durable atomic hourly/daily communication reservations are implemented. Notepad typing follows its editable control through title changes. Messaging uses typed controls at Chromium's actual accessibility depth, preserves drafts, verifies literal input and recipient identity, and requires a new matching message. An already verified conversation is retained instead of unnecessarily searching again. Literal Unicode fallback does not interpret text as shortcuts; focus changes, control characters, unsupported supplementary codepoints and incomplete readback stop before send.
 
-Additional verified repairs cover independent copy/move endpoint policy, path normalization and Windows alternate data streams, executable-source protection, vision found:false/error handling, exact messaging recipient/text checks, empty-content verification and missing-file false-success handling. Detailed problem/change/test/limit mapping is in FYP1_STATUS.md.
+## Results
 
-## 3. Test evidence
-
-- **61/61 regression tests** pass, including four real loopback Chromium checks, real temporary file operations, SQLite/Chroma persistence and four key-management tests.
-- **18/18 red-team tests** pass; these overlap the regression suite.
-- **20/20 deterministic system expectations** pass, including expected denial and failure cases. This does not mean 20 successful live-model tasks.
-- **2/2 isolated live execution checks** pass with the shipped generic generation schema and strict Python validation. The test guard permits only exact synthetic operations; approvals are fixtures.
-- Two synthetic color probes and one normalized-coordinate grounding probe passed after projector repair. Earlier failing probes are retained.
-
-reports/regression.json records the tested source hashes. reports/live_execution*.json retain the failed schema experiments and corrected independent test setup.
-
-## 4. Final live planning evidence
-
-The final 25-case single-pass run uses the shipped prompt/schema, unchanged Q8_0 language weights and shared generation settings. It executes no tools.
-
-| Dimension | Passing / 25 |
+| Check | Result |
 |---|---:|
-| Full Python plan/parameter contract | 18 |
-| Decision | 17 |
-| Tool selection | 16 |
-| Parameters | 16 |
-| Deterministic policy risk | 17 |
-| Model risk hint agreement | 2 |
-| Strict expected tool order | 15 |
-| All checks excluding advisory model hint | 14 |
-| All strict checks | 2 |
+| Regression, including six real Chromium cases | 80/80 |
+| Deterministic system outcomes | 20/20 |
+| Standalone red team, overlapping regression | 18/18 |
+| Isolated live-model execution | 2/2 |
+| Native Notepad, denied/approved paths | PASS |
+| Native Business WhatsApp self-chat, denied/approved paths | PASS |
+| Known-key/history/private-state containment | PASS |
+| Live planning contracts | 22/25 |
+| All required planning checks | 19/25 |
 
-These are separate planning dimensions, not a task-success rate. Expected ordering is strict, and model hints use the benchmark's risk convention. Python policy always remains authoritative.
+Equivalent corrected-gold planning is **16/25 old versus 19/25 current**. The old 2/25 combined score included advisory hints; excluding them originally gave 14/25, and gold corrections raised the comparable baseline to 16/25. Hint agreement remains 2/25 and is not a gate. Current median planning latency is 38.36 s; VALIDATION_REPORT.md defines metrics and limitations.
 
-Observed median latency: **32.66 s**; median TTFT: **0.75 s**; median generation: **6.07 tokens/s**. Maximum sampled GPU total usage: **5,245 MiB**; system RAM: **14,936 MiB**. One 6 GB machine, one sample per case and system-wide resource sampling do not establish a hardware-comparison result. See VALIDATION_REPORT.md and reports/model_final_summary.json.
+All 25 cases are decomposed in PLANNING_FORENSICS.md and reports/planning_forensics.json. Six failures remain: deletion decision, browser-fill contract, browser-click contract, screenshot decision/tool, launch-verification parameters and UI-tree-read contract. The two-stage planning experiment failed its two completed cases and was not promoted.
 
-A tested tool-specific generation constraint improved syntax in three targeted cases but repeatedly confused write and verification. It was reverted after the generic schema passed both live execution checks. Strict per-tool Python validation was never removed. No broad model-accuracy improvement is claimed.
+Native acceptance uses planner/approval fixtures with real policy, audit and UI effects. Separate isolated live checks use the actual model. These do not establish unguarded model-to-messaging reliability. One external-control self-send preceded one successful native self-send. Failed native attempts stopped before sending; synthetic partial drafts were explicitly cleared after inspection. Only synthetic acceptance text went to the authorized Business WhatsApp self-chat.
 
-## 5. Security posture
+## Original ten findings
 
-Internal containment is closed for the known exposed key and paths. Current private runtime stores remain local and ignored. No old or new key values are included in terminal output, documentation or this checkpoint.
+| Finding | Current disposition |
+|---|---|
+| Exposed key/runtime files | Current key rotated and retained data migrated previously; normal reachable history/candidates scan clean; external historical copies remain a separate risk |
+| Ghost tools | Canonical catalog owns prompt/schema/dispatch; old unimplemented names reject |
+| Planning mismatches passed | Independent required dimensions, corrected gold, advisory separation and nonzero failure exit |
+| Outcomes not evaluated | Explicit expected statuses and observable postconditions in 20 deterministic scenarios |
+| Red team always succeeded | Assertions/nonzero failure exit; 18 pass |
+| Air-gap claim | Corrected: local inference plus potentially online tools |
+| Unhandled exceptions | Structured failure halts later steps and records prior effects; no general rollback |
+| Missing vision capability | Approved compatible projector works on unchanged weights; desktop grounding acceptance open |
+| Fernet mislabeled AES-256 | Accurate AES-128-CBC/HMAC description; full-at-rest gap scoped, not waived |
+| Stale dependencies | Tested direct versions documented; Python 3.14.3 satisfies roadmap Python 3.11+ |
 
-Remaining HIGH findings concern live task reliability, incomplete at-rest coverage relative to the roadmap and retained historical GitHub exposure. The old commit API still returned HTTP 200 on 11 October. The owner cleanup draft and exact rewrite evidence are retained privately; no Support contact or destructive remote action occurred.
+## Corrected remaining software blockers
 
-The application is not an OS sandbox. Same-user malware, path races, operator-approved exfiltration, incomplete prompt-injection filtering, GUI ambiguity, restart-reset communication limits and non-tamper-evident logging remain threat-model limits. No absolute security guarantee is made.
+1. Resolve six live-planning failures and validate representative model-driven workflows.
+2. Complete desktop-vision acceptance, general recipient-navigation acceptance, remaining roadmap communication interaction behavior and representative live multi-agent scenarios. Controlled native desktop/self-chat acceptance is closed within its documented scope.
+3. Implement and verify full-record/vector/quota at-rest encryption. ENCRYPTION_SCOPE.md defines the protected set and non-destructive migration gates. Formal scope is not a waiver or retained-data cutover approval.
+4. Complete the live-system twelve-metric evaluation and reproducible demonstration/sign-off.
 
-## 6. Architecture
+Result binding, browser state and persistent quotas are no longer missing primitives. They do not imply arbitrary PDF summarization or successful general multi-agent reasoning.
 
-Local model plan -> full Python contract/agent validation -> deterministic policy -> explicit approval when HIGH -> audited execution -> observable verification -> final encrypted session record. A failed or invalid plan never becomes a successful task merely because inference returned JSON or Python did not throw.
+## Security and publication
 
-## 7. Documentation
+Real old/current encryption key values are never printed, committed or documented. Private keys, databases, recovery copies and screenshots remain ignored. Retained ciphertext decrypts with the current key and rejects the old key. Known historical GitHub objects/external copies remain a repository-security residual tracked in PHASE1_CLOSURE.md, not an automatic software-core blocker.
 
-Authoritative: README.md, FYP1_STATUS.md, MODEL_RUNTIME.md, TOOL_MAP.md, PHASE1_CLOSURE.md, VALIDATION_REPORT.md and REQUIREMENT_TRACEABILITY.md. Historical stage summaries are explicitly labeled. Original handovers/reference documents and the owner cleanup draft remain in ignored private storage.
+Authoritative checkout: D:\Project AURA\.aura-private\post-clean-check, cleaned master descending from 8980a05. This is an ordinary checkpoint, not a completion/release tag. No new rewrite, force push, branch/backup deletion, model switch, Support contact or FYP-2 implementation occurred. Publication identity is recorded after the ordinary push.
 
-The official roadmap's AS608 and WebSocket direction supersedes legacy R307/HTTP/serial suggestions. This reconciliation is not a FYP-2 implementation plan.
+Final milestone evidence is in REQUIREMENT_TRACEABILITY.md and FYP1_EXIT_AUDIT.md. Current contracts and limitations are in FYP1_STATUS.md, VALIDATION_REPORT.md, PLANNING_FORENSICS.md, DESKTOP_MESSAGING_ACCEPTANCE.md, ENCRYPTION_SCOPE.md, WORKFLOW_CONTRACTS.md, MODEL_RUNTIME.md and TOOL_MAP.md.
 
-## 8. Git checkpoint
-
-Authoritative checkout: D:\Project AURA\.aura-private\post-clean-check, master, descending from cleaned commit c4d1a5111835d265e0683accff6f8c0abceaeea2. main remains the cleaned historical branch at 999bd8be304f46022fa4fc4bcf5b33f63f7f44cc. The commit containing this report is an ordinary remediation checkpoint, not a release/completion tag. Publication identity is recorded privately after pushing and in the user-facing completion message.
-
-No old Git directory or contaminated refs were transferred. No further rewrite, force push, branch deletion or backup deletion was performed.
-
-## 9. Remaining blockers
-
-1. Live planner contract/task reliability must improve and pass representative acceptance checks.
-2. The user confirmed that no 12 GB GPU machine is available yet; its required comparison is pending, not waived.
-3. Real desktop and messaging acceptance remains incomplete; no external message was sent in these tests.
-4. Full at-rest encryption requires an approved design/scope decision before migration of retained user data.
-5. Dynamic tool-result binding, stateful browser workflows and persistent per-platform daily communication limits remain incomplete.
-6. Residual GitHub sensitive-object cleanup requires repository-owner review/action; external copies cannot be revoked.
-
-## 10. FYP-2 readiness
-
-FYP-2 cannot be signed off to begin on this evidence. No hardware implementation or formal FYP-2 milestone plan was started.
-
-**FYP-1 NOT YET READY â€” REMAINING BLOCKERS: live planning reliability, unavailable second hardware, desktop/messaging acceptance, encryption and workflow gaps, and residual GitHub exposure.**
+**FYP-1 NOT YET READY — REMAINING BLOCKERS: planning reliability, remaining live workflow/vision acceptance, full at-rest encryption, system metrics and final demonstration.**

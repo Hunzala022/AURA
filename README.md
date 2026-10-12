@@ -12,7 +12,7 @@ Start the console with `python run_aura.py`. Desktop tools need an interactive W
 
 ## Authoritative documentation
 
-Start with `REMEDIATION_REPORT.md` for the checkpoint, evidence and remaining gates.
+Start with `REMEDIATION_REPORT.md` for the checkpoint, evidence and remaining gates. `SCOPE_DECISIONS.md` defines the single-laptop scope and authoritative Python-policy criterion.
 
 - `PHASE1_CLOSURE.md`: clean-history and private-state verification; residual GitHub exposure.
 - `MODEL_RUNTIME.md`: exact inference artifact, approved projector repair, limits.
@@ -20,6 +20,11 @@ Start with `REMEDIATION_REPORT.md` for the checkpoint, evidence and remaining ga
 - `FYP1_STATUS.md`: current architecture, security boundaries, remaining requirements.
 - `REQUIREMENT_TRACEABILITY.md`: roadmap milestone evidence and sign-off status.
 - `VALIDATION_REPORT.md`: live versus fixture evidence, scoring dimensions and measurement limits.
+- `PLANNING_FORENSICS.md`: all 25 checkpoint cases, audited gold corrections and comparable required-check results.
+- `WORKFLOW_CONTRACTS.md`: explicit output bindings, browser state lifetime and persistent communication quotas.
+- `ENCRYPTION_SCOPE.md`: exact at-rest gap and migration acceptance design; no waiver.
+- `DESKTOP_MESSAGING_ACCEPTANCE.md`: passing native desktop/self-chat acceptance and remaining live workflow boundaries.
+- `FYP1_EXIT_AUDIT.md`: final exit decision and remaining gates.
 - `reports/`: corrected machine-readable evidence with mocked/live modes explicit.
 
 Original stage summaries, office documents, forensic handovers and benchmark reports are historical evidence, not current completion claims. Original reference documents are retained privately in `.aura-private/reference-documents/`; annotated forensic handovers and the owner cleanup draft are in `.aura-private/retained-handovers/`.

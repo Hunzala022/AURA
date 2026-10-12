@@ -4,7 +4,7 @@ from pathlib import Path
 import requests,psutil
 from core.schema import ToolCallSchema
 from core.prompt import BASE_SYSTEM_PROMPT
-from core.control_plane import MODEL_NAME,OLLAMA_API,PLAN_OPTIONS
+from core.control_plane import MODEL_NAME,OLLAMA_API,PLAN_OPTIONS,repair_plan
 from core.evaluation import score_plan
 def cases():
     root='D:/AURA_validation_fixture'
@@ -40,7 +40,12 @@ def cases():
         decision='CLARIFY' if name=='ambiguous' else 'REFUSE' if name=='unauthorized' else 'EXECUTE'
         from core.policy import evaluate_risk
         risk='HIGH' if any(evaluate_risk(t,p)=='HIGH' for t,p in steps) else 'MEDIUM' if steps else 'NONE'
-        yield {'name':name,'prompt':prompt,'expected_decision':decision,'expected_tools_subset':[t for t,p in steps],'expected_tool_order':[t for t,p in steps],'expected_parameters':{i:p for i,(t,p) in enumerate(steps)},'expected_risk':risk}
+        case={'name':name,'prompt':prompt,'expected_decision':decision,'expected_tools_subset':[t for t,p in steps],'expected_tool_order':[t for t,p in steps],'expected_parameters':{i:p for i,(t,p) in enumerate(steps)},'expected_risk':risk}
+        if name=='open app':
+            case['accepted_tool_orders']=[['open_application','verify_window']]
+            case['optional_step_parameters']={'1':{'window_title':'Untitled - Notepad','expected_text':''}}
+        if name=='vision locate':case['accepted_parameter_values']={'0':{'element_description':['Save element','Save button']}}
+        yield case
 class Monitor:
     def __init__(self):self.stop=threading.Event();self.ram=[];self.cpu=[];self.vram=[]
     def sample(self):
@@ -60,10 +65,11 @@ def run(limit=None,timeout=180,model=MODEL_NAME,output_path='reports/model_valid
     output=Path(output_path);output.parent.mkdir(exist_ok=True);results=[]
     metadata={'model':model,'version':requests.get(OLLAMA_API+'/api/version',timeout=10).json(),'show':requests.post(OLLAMA_API+'/api/show',json={'model':model},timeout=10).json().get('details'),'mode':'live model planning only; no tools executed','generation':{'think':False,'num_predict':768,'num_ctx':4096},'resource_scope':'system/GPU totals, not isolated model memory'}
     metadata.update(prompt_sha256=hashlib.sha256(BASE_SYSTEM_PROMPT.encode()).hexdigest(),schema_sha256=hashlib.sha256(json.dumps(ToolCallSchema.model_json_schema(),sort_keys=True).encode()).hexdigest(),temperature=0)
+    metadata['source_sha256']={str(p).replace('\\','/'):hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path('core/tools.py'),Path('core/schema.py'),Path('core/control_plane.py'),Path('core/evaluation.py'),Path('validate_model.py')]}
     for index,case in enumerate(cases()):
         if names and case['name'] not in names:continue
         if limit is not None and index>=limit:break
-        start=time.perf_counter();first=None;content='';final={};error=None
+        start=time.perf_counter();first=None;content='';final={};error=None;initial_raw=None;repair_attempted=False
         with Monitor() as monitor:
             try:
                 with requests.post(OLLAMA_API+'/api/chat',json={'model':model,'messages':[{'role':'system','content':BASE_SYSTEM_PROMPT},{'role':'user','content':case['prompt']}],'format':ToolCallSchema.model_json_schema(),'stream':True,'think':False,'options':PLAN_OPTIONS},stream=True,timeout=timeout) as response:
@@ -78,9 +84,17 @@ def run(limit=None,timeout=180,model=MODEL_NAME,output_path='reports/model_valid
                         content+=message.get('content','')
                         if chunk.get('done'):final=chunk
                 raw=json.loads(content)
+                initial_raw=raw
+                try:ToolCallSchema.model_validate(raw)
+                except ValueError:
+                    if model!=MODEL_NAME:raise ValueError('Repair is only configured for the main model')
+                    repair_attempted=True
+                    raw=repair_plan(case['prompt'],raw)
             except Exception as exc:raw=None;error=type(exc).__name__+': '+str(exc)
         score=score_plan(raw,case)
         record={'id':index+1,'scenario':case['name'],'expected':case,'score':score,'raw_plan':raw,'error':error,'elapsed_seconds':time.perf_counter()-start,'ttft_seconds':first,'eval_count':final.get('eval_count'),'tokens_per_second':(final['eval_count']/(final['eval_duration']/1e9)) if final.get('eval_duration') else None,'done_reason':final.get('done_reason'),**monitor.values()}
+        record.update(initial_raw_plan=initial_raw,repair_attempted=repair_attempted,initial_generation_score=score_plan(initial_raw,case))
+        metadata.update(contract_repair='At most one additional generation on invalid contract; no tool execution; no gold supplied',timing='elapsed includes repair; TTFT/TPS/eval_count refer to first generation only')
         results.append(record);output.write_text(json.dumps({'metadata':metadata,'results':results},indent=2),encoding='utf-8')
         print(f"{index+1}: {case['name']}: {score['passed']} {score['reasons']} {record['elapsed_seconds']:.1f}s",flush=True)
     return results

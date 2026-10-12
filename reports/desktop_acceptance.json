@@ -1,0 +1,53 @@
+{
+  "mode": "Real native UIA adapter and audit; deterministic planner and approval fixtures",
+  "denied_result": {
+    "decision": "EXECUTE",
+    "status": "BLOCKED",
+    "success": false,
+    "steps": [
+      {
+        "step": 1,
+        "tool": "type_in_window",
+        "agent": "os_agent",
+        "risk": "HIGH",
+        "executed": false,
+        "verified": false,
+        "status": "BLOCKED"
+      }
+    ],
+    "error": null,
+    "warnings": [],
+    "latency_seconds": 0.021811000013258308
+  },
+  "denied_preserved_fixture": true,
+  "result": {
+    "decision": "EXECUTE",
+    "status": "COMPLETED",
+    "success": true,
+    "steps": [
+      {
+        "step": 1,
+        "tool": "type_in_window",
+        "agent": "os_agent",
+        "risk": "HIGH",
+        "executed": true,
+        "verified": true,
+        "status": "VERIFIED",
+        "result": "Literal text read back from the same editable control"
+      }
+    ],
+    "error": null,
+    "warnings": [],
+    "latency_seconds": 3.0208657000330277
+  },
+  "exact_readback": true,
+  "audit_statuses": [
+    "ATTEMPTED",
+    "DENIED_BY_HITL",
+    "ATTEMPTED",
+    "APPROVED_BY_HITL",
+    "VERIFIED"
+  ],
+  "title_changed": true,
+  "passed": true
+}

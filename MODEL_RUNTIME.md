@@ -34,4 +34,4 @@ These synthetic cases establish functioning image input and a basic location cas
 
 ## Planner limits
 
-Current control-plane and benchmark generation options are temperature 0, context 4096 and maximum 768 generated tokens, with thinking disabled. The control-plane request timeout is 180 seconds; invalid/truncated output fails closed. Earlier benchmark reports identify their run configuration and are not overwritten by later prompt changes.
+Current control-plane and benchmark generation options are temperature 0, context 4096 and maximum 768 generated tokens, with thinking disabled. Each request has a 180-second timeout. A parsed invalid contract permits one additional request containing validation errors; the replacement must pass the complete Python contract. Malformed JSON, unavailable inference and unsuccessful repair fail closed. No effect is retried. Benchmark elapsed time includes repair; TTFT/TPS refer to the initial generation. Earlier reports retain their original configurations.

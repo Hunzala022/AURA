@@ -1,6 +1,10 @@
 import time
 import random
 import datetime
+import sqlite3
+import hashlib
+from pathlib import Path
+from contextlib import closing
 
 # Milestone 3.3: Human-like interaction and Rate limits
 
@@ -9,7 +13,7 @@ class RateLimiter:
         self.max_actions = max_actions_per_hour
         self.action_timestamps = []
 
-    def check_limit(self) -> bool:
+    def check_limit(self, platform='default') -> bool:
         """Returns True if action is allowed, False if rate limited."""
         now = datetime.datetime.now()
         # Remove timestamps older than 1 hour
@@ -25,7 +29,37 @@ class RateLimiter:
         return True
 
 # Global rate limiter for communication tasks
-COMM_RATE_LIMITER = RateLimiter(max_actions_per_hour=30)
+class PersistentRateLimiter:
+    """Atomic reservation, rolling 24h per exact application and global hour cap.
+
+    Attempts consume quota even on uncertain delivery; never retry a send blindly.
+    A storage failure denies sending. No recipients or message bodies are stored.
+    """
+    def __init__(self,path=None,hourly=30,daily=100,clock=time.time,global_daily=100):
+        self.path=Path(path or Path(__file__).resolve().parent.parent/'.aura-private/communication_limits.db')
+        self.hourly=hourly;self.daily=daily;self.clock=clock;self.global_daily=global_daily
+
+    def check_limit(self,platform='default'):
+        try:
+            self.path.parent.mkdir(parents=True,exist_ok=True)
+            with closing(sqlite3.connect(self.path,timeout=10)) as db, db:
+                db.execute('CREATE TABLE IF NOT EXISTS attempts (platform TEXT, timestamp REAL)')
+                db.execute('BEGIN IMMEDIATE')
+                now=self.clock()
+                # Backward clock changes fail closed until time catches up.
+                last=db.execute('SELECT MAX(timestamp) FROM attempts').fetchone()[0]
+                if last is not None and now<last:return False
+                name=hashlib.sha256(platform.strip().casefold().encode()).hexdigest()
+                hour=db.execute('SELECT COUNT(*) FROM attempts WHERE timestamp>?',(now-3600,)).fetchone()[0]
+                day=db.execute('SELECT COUNT(*) FROM attempts WHERE platform=? AND timestamp>?',(name,now-86400)).fetchone()[0]
+                total=db.execute('SELECT COUNT(*) FROM attempts WHERE timestamp>?',(now-86400,)).fetchone()[0]
+                if hour>=self.hourly or day>=self.daily or total>=self.global_daily:return False
+                db.execute('DELETE FROM attempts WHERE timestamp<=?',(now-86400,))
+                db.execute('INSERT INTO attempts VALUES (?,?)',(name,now))
+                return True
+        except (OSError,sqlite3.Error):return False
+
+COMM_RATE_LIMITER = PersistentRateLimiter()
 
 def human_typing(target_control, text: str):
     """

@@ -26,3 +26,5 @@ Generated from core/tools.py. Prompt name, schema identifier and dispatcher key 
 | search_files_by_content | agents.research_agent.search_files_by_content | research_agent | directory, query, extension (optional) |
 | vision_locate_element | agents.vision_agent.vision_locate_element | vision_agent | window_title, element_description |
 | capture_screenshot | agents.vision_agent.capture_screenshot | vision_agent | output_path |
+
+Text data parameters content/text/expected_content/query also accept an explicit earlier-step reference at the plan layer, resolved and revalidated before dispatch. See WORKFLOW_CONTRACTS.md. Recipient headers must equal contact, contact plus ` (You)`, or contact plus ` (You) Message yourself`; arbitrary unrelated controls are rejected. Browser state is scoped to one pipeline task. Tool count remains 22.

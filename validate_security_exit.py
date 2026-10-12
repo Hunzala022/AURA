@@ -1,0 +1,55 @@
+"""Exact secret scans emit counts only. Never print object bodies or key values."""
+import json,subprocess,sqlite3
+from contextlib import closing
+from pathlib import Path
+
+def git(*args):return subprocess.check_output(['git',*args])
+
+def run():
+    root=Path(__file__).resolve().parent
+    old=root.parents[1]/'.aura-private/containment-20261010/.keys/aura_aes.key'
+    current=root/'.keys/aura_aes.key'
+    keys=[old.read_bytes().strip(),current.read_bytes().strip()]
+    if any(not k for k in keys):raise RuntimeError('Empty scan material')
+    names=set(git('ls-files','-co','--exclude-standard','-z').decode().split('\0'))-{''}
+    matches=0
+    for name in names:
+        path=root/name
+        if path.is_file():matches+=sum(k in path.read_bytes() for k in keys)
+    entries=git('rev-list','--objects','--all').decode().splitlines()
+    forbidden=lambda p:p.startswith(('.keys/','aura_chroma/','.aura-private/')) or p.startswith('aura_memory.db')
+    forbidden_history=sum(forbidden(line.split(' ',1)[1]) for line in entries if ' ' in line)
+    ids=[line.split(' ',1)[0] for line in entries]
+    batch=subprocess.run(['git','cat-file','--batch'],input=('\n'.join(ids)+'\n').encode(),capture_output=True,check=True).stdout
+    position=0;history_matches=0
+    for _ in ids:
+        end=batch.index(b'\n',position);header=batch[position:end].split();size=int(header[-1]);position=end+1
+        payload=batch[position:position+size];position+=size+1
+        history_matches+=sum(k in payload for k in keys)
+    tracked=git('ls-files','-z').decode().split('\0')
+    report={'candidate_files':len(names),'candidate_key_matches':matches,'reachable_objects':len(ids),'reachable_key_matches':history_matches,'forbidden_reachable_paths':forbidden_history,'forbidden_tracked_paths':sum(forbidden(p) for p in tracked),'current_key_ignored':subprocess.run(['git','check-ignore','-q','.keys/aura_aes.key']).returncode==0,'private_limits_ignored':subprocess.run(['git','check-ignore','-q','.aura-private/communication_limits.db']).returncode==0,'private_acceptance_ignored':subprocess.run(['git','check-ignore','-q','.aura-private/acceptance/whatsapp-self-message.png']).returncode==0,'scope':'normal locally reachable refs and candidate files; no GitHub cache-erasure claim'}
+    report['passed']=all(report[k]==0 for k in ('candidate_key_matches','reachable_key_matches','forbidden_reachable_paths','forbidden_tracked_paths')) and all(report[k] for k in ('current_key_ignored','private_limits_ignored','private_acceptance_ignored'))
+    from cryptography.fernet import Fernet,InvalidToken
+    old_cipher,current_cipher=map(Fernet,keys)
+    retained={'sqlite_fields':0,'chroma_documents':0,'current_decryption_failures':0,'old_key_acceptances':0}
+    def check(token,kind):
+        retained[kind]+=1
+        try:current_cipher.decrypt(token.encode())
+        except (InvalidToken,ValueError):retained['current_decryption_failures']+=1
+        try:old_cipher.decrypt(token.encode());retained['old_key_acceptances']+=1
+        except (InvalidToken,ValueError):pass
+    with closing(sqlite3.connect('file:'+(root/'aura_memory.db').as_posix()+'?mode=ro',uri=True)) as db:
+        for columns,table in [('encrypted_task,encrypted_result','session_logs'),('encrypted_params','audit_logs')]:
+            for row in db.execute('SELECT '+columns+' FROM '+table):
+                for token in row:
+                    if token:check(token,'sqlite_fields')
+    from core.memory import MemoryManager
+    memory=MemoryManager()
+    for meta in memory.collection.get(include=['metadatas'])['metadatas']:
+        if meta and meta.get('cipher'):check(meta['cipher'],'chroma_documents')
+    report['retained_rotation']=retained
+    report['passed']=report['passed'] and retained['sqlite_fields']>0 and retained['chroma_documents']>0 and retained['current_decryption_failures']==0 and retained['old_key_acceptances']==0
+    Path('reports/security_exit.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
+    print(json.dumps(report));return report['passed']
+
+if __name__=='__main__':raise SystemExit(0 if run() else 1)

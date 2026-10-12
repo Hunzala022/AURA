@@ -1,28 +1,79 @@
 """Exact accessibility targets; sending requires control-plane HITL."""
 from core.human_layer import COMM_RATE_LIMITER, human_delay
+
+# Chromium's window/browser/page wrappers place observed chat controls below
+# depth 10. Keep traversal bounded while including the native page subtree.
+UI_DEPTH = 30
+
+def composer_value(box, parameters):
+    value = box.GetValuePattern().Value
+    # Observed Chromium WhatsApp contenteditable ValuePattern includes a final
+    # line-feed even when the DOM composer is empty. Remove only this adapter
+    # terminator, never strip spaces or arbitrary whitespace from a draft.
+    if 'WhatsApp Business - Google Chrome' in parameters['app_name'] and parameters.get('message_box_name','').startswith('Type a message to ') and value.endswith('\n'):
+        return value[:-1]
+    return value
+
+def enter_literal_message(auto, box, parameters, window=None):
+    text=parameters['text']
+    box.GetValuePattern().SetValue(text)
+    human_delay()
+    actual=composer_value(box,parameters)
+    if actual==text:return True
+    if actual or 'WhatsApp Business - Google Chrome' not in parameters['app_name']:
+        return False
+    # Chromium may expose ValuePattern but ignore SetValue on contenteditable.
+    # Fallback only from a verified empty composer. Never parse user text as
+    # hotkeys; control characters and unsupported supplementary codepoints deny.
+    if any(ord(char)<32 or ord(char)>0xFFFF for char in text):return False
+    box.Click();box.SetFocus()
+    for char in text:
+        current = window.EditControl(searchDepth=UI_DEPTH,Name=parameters['message_box_name']) if window is not None else box
+        if not auto.ControlsAreSame(auto.GetFocusedControl(),current):return False
+        # Installed uiautomation sends down/up separately and returns the last
+        # event count (1), despite documenting a combined count. Exact final
+        # readback remains authoritative, not the injection return count.
+        if auto.SendUnicodeChar(char)<1:return False
+    human_delay()
+    current = window.EditControl(searchDepth=UI_DEPTH,Name=parameters['message_box_name']) if window is not None else box
+    return composer_value(current,parameters)==text
 def send_message(parameters):
     required=('app_name','contact','text','recipient_control_name')
     if not all(parameters.get(k) for k in required):return False,'Missing explicit recipient parameters'
-    if not COMM_RATE_LIMITER.check_limit():return False,'Communication rate limit exceeded'
+    from core.tools import validate_parameters
+    try:parameters=validate_parameters('send_message',parameters)
+    except ValueError:return False,'Recipient contract rejected'
+    if not COMM_RATE_LIMITER.check_limit(parameters['app_name']):return False,'Communication rate limit exceeded or storage unavailable'
     try:
         import uiautomation as auto
         win=auto.WindowControl(searchDepth=1,Name=parameters['app_name'])
         if not win.Exists(3,1):return False,'Exact application window not found'
-        search=win.Control(searchDepth=10,Name=parameters.get('search_bar_name','Search'))
-        if not search.Exists(2,1):return False,'Exact search control not found'
-        search.GetValuePattern().SetValue(parameters['contact'])
-        search.SendKeys('{Enter}')
-        human_delay()
-        recipient=win.Control(searchDepth=10,Name=parameters['recipient_control_name'])
-        if not recipient.Exists(2,1) or recipient.Name!=parameters['contact']:
+        recipient=win.Control(searchDepth=UI_DEPTH,Name=parameters['recipient_control_name'])
+        # Do not navigate away from an already verified conversation. Search
+        # widgets can change their labels and selection when text is replaced.
+        if not recipient.Exists(1,1):
+            search=win.EditControl(searchDepth=UI_DEPTH,Name=parameters.get('search_bar_name','Search'))
+            if not search.Exists(2,1):return False,'Exact search control not found'
+            search.GetValuePattern().SetValue(parameters['contact'])
+            if search.GetValuePattern().Value!=parameters['contact']:return False,'Recipient search text readback failed'
+            search.SendKeys('{Enter}')
+            human_delay()
+            recipient=win.Control(searchDepth=UI_DEPTH,Name=parameters['recipient_control_name'])
+        if not recipient.Exists(2,1) or recipient.Name!=parameters['recipient_control_name']:
             return False,'Recipient identity not verified; message not sent'
-        box=win.Control(searchDepth=10,Name=parameters.get('message_box_name','Type a message'))
+        box=win.EditControl(searchDepth=UI_DEPTH,Name=parameters.get('message_box_name','Type a message'))
         if not box.Exists(2,1):return False,'Exact message input not found'
         def messages():
-            return [c.Name for c,d in auto.WalkControl(win,maxDepth=10) if c.ControlTypeName=='TextControl' and c.Name==parameters['text']]
+            return [c.Name for c,d in auto.WalkControl(win,maxDepth=UI_DEPTH) if c.ControlTypeName=='TextControl' and c.Name==parameters['text']]
         before=len(messages())
-        box.GetValuePattern().SetValue(parameters['text'])
-        if box.GetValuePattern().Value!=parameters['text']:return False,'Message text readback failed'
+        if composer_value(box,parameters):
+            return False,'Existing message draft preserved; composer must be empty'
+        if not enter_literal_message(auto,box,parameters,win):return False,'Message text readback failed; any partial draft preserved'
+        recipient=win.Control(searchDepth=UI_DEPTH,Name=parameters['recipient_control_name'])
+        if not recipient.Exists(0,0) or recipient.Name!=parameters['recipient_control_name']:
+            return False,'Recipient changed before send; draft preserved'
+        box=win.EditControl(searchDepth=UI_DEPTH,Name=parameters.get('message_box_name','Type a message'))
+        if composer_value(box,parameters)!=parameters['text']:return False,'Draft changed before send; preserved'
         box.SendKeys('{Enter}')
         human_delay()
         if len(messages())<=before:return False,'Send attempted but new message was not observed; do not retry automatically'
