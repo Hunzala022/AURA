@@ -1,0 +1,15 @@
+{
+  "mode": "Real model and real native search/send; observation wrappers preserve adapter behavior; no retry",
+  "navigation_required_before": true,
+  "status": "PLAN_ERROR",
+  "error": "Planner unavailable or invalid response",
+  "verified_self_chat_and_empty_composer_after": false,
+  "new_message_observed": false,
+  "message_counts_during_adapter": [],
+  "quota_before": 1,
+  "quota_after": 1,
+  "successful_curved_pointer_moves": 0,
+  "typing_pause_count": 0,
+  "typing_pause_seconds": [],
+  "passed": false
+}

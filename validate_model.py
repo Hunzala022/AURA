@@ -3,8 +3,10 @@ import argparse,json,threading,time,subprocess,hashlib
 from pathlib import Path
 import requests,psutil
 from core.schema import ToolCallSchema
+from core.planning_proposal import Proposal,compile_proposal
 from core.prompt import BASE_SYSTEM_PROMPT
-from core.control_plane import MODEL_NAME,OLLAMA_API,PLAN_OPTIONS,repair_plan
+from core.control_plane import MODEL_NAME,OLLAMA_API,PLAN_OPTIONS,generate_plan
+from core.planning_trace import collect_planning_trace
 from core.evaluation import score_plan
 def cases():
     root='D:/AURA_validation_fixture'
@@ -62,39 +64,31 @@ class Monitor:
     def values(self):
         return {'system_ram_peak_mb':max(self.ram,default=None),'system_cpu_peak_percent':max(self.cpu,default=None),'gpu_total_used_peak_mb':max(self.vram,default=None)}
 def run(limit=None,timeout=180,model=MODEL_NAME,output_path='reports/model_validation.json',names=None):
+    if model!=MODEL_NAME or timeout!=180:
+        raise ValueError('Production benchmark uses the unchanged production model and 180-second inference deadline')
     output=Path(output_path);output.parent.mkdir(exist_ok=True);results=[]
-    metadata={'model':model,'version':requests.get(OLLAMA_API+'/api/version',timeout=10).json(),'show':requests.post(OLLAMA_API+'/api/show',json={'model':model},timeout=10).json().get('details'),'mode':'live model planning only; no tools executed','generation':{'think':False,'num_predict':768,'num_ctx':4096},'resource_scope':'system/GPU totals, not isolated model memory'}
-    metadata.update(prompt_sha256=hashlib.sha256(BASE_SYSTEM_PROMPT.encode()).hexdigest(),schema_sha256=hashlib.sha256(json.dumps(ToolCallSchema.model_json_schema(),sort_keys=True).encode()).hexdigest(),temperature=0)
-    metadata['source_sha256']={str(p).replace('\\','/'):hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path('core/tools.py'),Path('core/schema.py'),Path('core/control_plane.py'),Path('core/evaluation.py'),Path('validate_model.py')]}
+    metadata={'model':model,'version':requests.get(OLLAMA_API+'/api/version',timeout=10).json(),'show':requests.post(OLLAMA_API+'/api/show',json={'model':model},timeout=10).json().get('details'),'mode':'live model planning only; no tools executed','generation':{'think':False,'num_predict':768,'num_ctx':4096},'resource_scope':'system/GPU totals, not isolated model memory','risk_hint_scope':'No model risk estimate; canonical low/confidence=0 are compatibility placeholders. Python policy is independently scored and authoritative.'}
+    metadata.update(prompt_sha256=hashlib.sha256(BASE_SYSTEM_PROMPT.encode()).hexdigest(),schema_sha256=hashlib.sha256(json.dumps(Proposal.model_json_schema(),sort_keys=True).encode()).hexdigest(),temperature=0)
+    from datetime import datetime,timezone
+    metadata.update(started_utc=datetime.now(timezone.utc).isoformat(),system_prompt=BASE_SYSTEM_PROMPT,
+                    inference_schema=Proposal.model_json_schema(),
+                    cases_sha256=hashlib.sha256(json.dumps(list(cases()),sort_keys=True).encode()).hexdigest())
+    metadata['source_sha256']={str(p).replace('\\','/'):hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path('core/tools.py'),Path('core/schema.py'),Path('core/control_plane.py'),Path('core/evaluation.py'),Path('core/planning_proposal.py'),Path('core/planning_trace.py'),Path('validate_model.py')]}
     for index,case in enumerate(cases()):
         if names and case['name'] not in names:continue
         if limit is not None and index>=limit:break
-        start=time.perf_counter();first=None;content='';final={};error=None;initial_raw=None;repair_attempted=False
-        with Monitor() as monitor:
-            try:
-                with requests.post(OLLAMA_API+'/api/chat',json={'model':model,'messages':[{'role':'system','content':BASE_SYSTEM_PROMPT},{'role':'user','content':case['prompt']}],'format':ToolCallSchema.model_json_schema(),'stream':True,'think':False,'options':PLAN_OPTIONS},stream=True,timeout=timeout) as response:
-                    response.raise_for_status()
-                    for line in response.iter_lines():
-                        if time.perf_counter()-start>timeout:raise TimeoutError('total generation deadline exceeded')
-                        if not line:continue
-                        chunk=json.loads(line)
-                        if chunk.get('error'):raise ValueError(chunk['error'])
-                        message=chunk.get('message',{})
-                        if first is None and (message.get('content') or message.get('thinking')):first=time.perf_counter()-start
-                        content+=message.get('content','')
-                        if chunk.get('done'):final=chunk
-                raw=json.loads(content)
-                initial_raw=raw
-                try:ToolCallSchema.model_validate(raw)
-                except ValueError:
-                    if model!=MODEL_NAME:raise ValueError('Repair is only configured for the main model')
-                    repair_attempted=True
-                    raw=repair_plan(case['prompt'],raw)
-            except Exception as exc:raw=None;error=type(exc).__name__+': '+str(exc)
+        start=time.perf_counter()
+        with Monitor() as monitor,collect_planning_trace() as inference:
+            raw=generate_plan(case['prompt'])
+        first=inference[0] if inference else {}
+        initial_raw=first.get('raw_plan');repair_attempted=len(inference)>1
+        try:initial_compiled=compile_proposal(initial_raw)
+        except (ValueError,TypeError):initial_compiled=None
+        error=next((x['error'] for x in inference if x.get('error')),None)
         score=score_plan(raw,case)
-        record={'id':index+1,'scenario':case['name'],'expected':case,'score':score,'raw_plan':raw,'error':error,'elapsed_seconds':time.perf_counter()-start,'ttft_seconds':first,'eval_count':final.get('eval_count'),'tokens_per_second':(final['eval_count']/(final['eval_duration']/1e9)) if final.get('eval_duration') else None,'done_reason':final.get('done_reason'),**monitor.values()}
-        record.update(initial_raw_plan=initial_raw,repair_attempted=repair_attempted,initial_generation_score=score_plan(initial_raw,case))
-        metadata.update(contract_repair='At most one additional generation on invalid contract; no tool execution; no gold supplied',timing='elapsed includes repair; TTFT/TPS/eval_count refer to first generation only')
+        record={'id':index+1,'scenario':case['name'],'expected':case,'score':score,'raw_plan':raw,'error':error,'elapsed_seconds':time.perf_counter()-start,'ttft_seconds':first.get('ttft_seconds'),'eval_count':first.get('eval_count'),'tokens_per_second':first.get('tokens_per_second'),'done_reason':first.get('done_reason'),**monitor.values(),'inference':inference}
+        record.update(initial_raw_plan=initial_raw,repair_attempted=repair_attempted,initial_generation_score=score_plan(initial_compiled,case))
+        metadata.update(contract_repair='At most one additional generation on invalid contract; no tool execution; no gold supplied',timing='elapsed includes repair; TTFT/TPS/eval_count refer to first generation only',implementation='Calls production generate_plan directly; no alternate benchmark inference path')
         results.append(record);output.write_text(json.dumps({'metadata':metadata,'results':results},indent=2),encoding='utf-8')
         print(f"{index+1}: {case['name']}: {score['passed']} {score['reasons']} {record['elapsed_seconds']:.1f}s",flush=True)
     return results

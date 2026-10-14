@@ -1,0 +1,33 @@
+{
+  "mode": "Real production model, native adapter, persistent quota, real audit; explicit bounded operator approval; recipient labels remain private",
+  "results": [
+    {
+      "approved": false,
+      "status": "BLOCKED",
+      "success": false,
+      "error": null,
+      "exact_scope_accepted": true,
+      "self_chat_verified_and_composer_empty": true,
+      "synthetic_message_count_before": 3,
+      "synthetic_message_count_after": 3,
+      "quota_before": 0,
+      "quota_after": 0,
+      "raw_plan_sha256": "88d6f1d5abbcb732f80a8373027e668671784a178c191c9b899210cfa03cbbde",
+      "passed": true
+    },
+    {
+      "approved": true,
+      "status": "COMPLETED",
+      "success": true,
+      "error": null,
+      "exact_scope_accepted": true,
+      "self_chat_verified_and_composer_empty": true,
+      "synthetic_message_count_before": 3,
+      "synthetic_message_count_after": 4,
+      "quota_before": 0,
+      "quota_after": 1,
+      "raw_plan_sha256": "88d6f1d5abbcb732f80a8373027e668671784a178c191c9b899210cfa03cbbde",
+      "passed": true
+    }
+  ]
+}

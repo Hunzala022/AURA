@@ -1,0 +1,177 @@
+[
+  {
+    "root": "D:\\Project AURA\\.aura-private\\post-clean-check",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 4
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 0
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA\\.aura-private\\containment-20261010",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 0
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA\\.aura-private\\post-rotation-backup-20261010",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 0
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-cutover-20261014\\legacy-backup",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 4
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-cutover-20261014\\legacy-read-copy",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 4
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-preparation-20261014\\legacy-backup",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 1
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-preparation-20261014\\legacy-read-copy",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 1
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-preparation-20261014-final\\legacy-backup",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 4
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-preparation-20261014-final\\legacy-read-copy",
+    "counts": {
+      "sessions": 3,
+      "audits": 4,
+      "documents": 1,
+      "vectors": 1,
+      "quota": 4
+    },
+    "not_in_pre_cutover": {
+      "sessions": 0,
+      "audits": 0,
+      "documents": 0,
+      "vectors": 0,
+      "quota": 0
+    }
+  },
+  {
+    "root": "D:\\Project AURA\\.aura-private\\containment-20261010\\staged\\aura_chroma",
+    "counts": {},
+    "not_in_pre_cutover": {}
+  }
+]

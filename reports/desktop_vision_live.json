@@ -1,0 +1,151 @@
+{
+  "mode": "Real model planning, real desktop screenshot and local model vision; independent canvas pixel ground truth; no click",
+  "results": [
+    {
+      "target": "ORANGE TARGET",
+      "expected_found": true,
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "vision_locate_element",
+            "parameters": {
+              "window_title": "AURA Vision Fixture - Google Chrome for Testing",
+              "element_description": "ORANGE TARGET"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "vision_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "result": {
+        "decision": "EXECUTE",
+        "status": "FAILED",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "vision_locate_element",
+            "agent": "vision_agent",
+            "risk": "MEDIUM",
+            "executed": true,
+            "verified": false,
+            "status": "FAILED"
+          }
+        ],
+        "error": "Element not found",
+        "warnings": [],
+        "latency_seconds": 23.818087000050582
+      },
+      "real_screenshot_count": 1,
+      "screenshot_sha256": "0dc6fb766f8af8f902aa19697b4cabcbda1d4a2659d9ba9e8e84c059e72bb143",
+      "independent_target_bbox": null,
+      "observation": null,
+      "guard_rejections": [],
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 7.333683799952269,
+          "ttft_seconds": 0.9943317999131978,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "vision_locate_element",
+                "arguments": {
+                  "window_title": "AURA Vision Fixture - Google Chrome for Testing",
+                  "element_description": "ORANGE TARGET"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 39,
+          "tokens_per_second": 6.152204595192036,
+          "done_reason": "stop",
+          "prompt_eval_count": 1692
+        }
+      ],
+      "passed": false
+    },
+    {
+      "target": "PURPLE TRIANGLE",
+      "expected_found": false,
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "vision_locate_element",
+            "parameters": {
+              "window_title": "AURA Vision Fixture - Google Chrome for Testing",
+              "element_description": "PURPLE TRIANGLE"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "vision_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "result": {
+        "decision": "EXECUTE",
+        "status": "FAILED",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "vision_locate_element",
+            "agent": "vision_agent",
+            "risk": "MEDIUM",
+            "executed": true,
+            "verified": false,
+            "status": "FAILED"
+          }
+        ],
+        "error": "Element not found",
+        "warnings": [],
+        "latency_seconds": 23.395800600061193
+      },
+      "real_screenshot_count": 1,
+      "screenshot_sha256": "19474c6896f2a8c1f8e98f22b52abd5f6aea61df4d5a51d6ff3b3c7ab66b7d37",
+      "independent_target_bbox": null,
+      "observation": null,
+      "guard_rejections": [],
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 7.471346200094558,
+          "ttft_seconds": 1.089655700023286,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "vision_locate_element",
+                "arguments": {
+                  "window_title": "AURA Vision Fixture - Google Chrome for Testing",
+                  "element_description": "PURPLE TRIANGLE"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 40,
+          "tokens_per_second": 6.267482358604031,
+          "done_reason": "stop",
+          "prompt_eval_count": 1693
+        }
+      ],
+      "passed": false
+    }
+  ]
+}

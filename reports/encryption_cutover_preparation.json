@@ -1,0 +1,20 @@
+{
+  "active_backend_changed": false,
+  "backup_matches_source": true,
+  "complete_records_equal_after_restart": true,
+  "retained_vector_retrieval": true,
+  "counts": {
+    "session_logs": 3,
+    "audit_logs": 4,
+    "memories": 1
+  },
+  "quota_records": 4,
+  "record_digest_before": "8ad8d9d7844e5fc79ded4f6dae1f32e2f0ec71076868d4f8c3544bea18bacdd0",
+  "record_digest_after": "8ad8d9d7844e5fc79ded4f6dae1f32e2f0ec71076868d4f8c3544bea18bacdd0",
+  "quota_digest_before": "10cceb81ea996b240872788677d25b0931b51c3a007e77494e6d8a54fea749f2",
+  "quota_digest_after": "10cceb81ea996b240872788677d25b0931b51c3a007e77494e6d8a54fea749f2",
+  "target": ".aura-private/encryption-cutover-20261014",
+  "source_file_count": 8,
+  "key_protection": "Windows current-user DPAPI; dedicated AES-256 key",
+  "passed": true
+}

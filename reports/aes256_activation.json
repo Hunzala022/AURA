@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-14",
+  "owner_approval": "Production AES-256-GCM cutover and validation; no legacy disposal",
+  "initial_target": ".aura-private/encryption-preparation-20261014-final",
+  "initial_preflight": "rejected changed Chroma index files; backup unchanged",
+  "refreshed_target": ".aura-private/encryption-cutover-20261014",
+  "refreshed_record_digest_identical": true,
+  "refreshed_quota_digest_identical": true,
+  "dry_review_passed": true,
+  "writer_quiescence_check_passed": true,
+  "activation_passed": true,
+  "legacy_disposal_performed": false,
+  "history_or_remote_changes": false
+}

@@ -1,0 +1,147 @@
+{
+  "mode": "Real production model, native UIA, real audit; bounded synthetic operator approval",
+  "results": [
+    {
+      "scenario": "denied entry",
+      "prompt": "Read C:/Users/SBT/AppData/Local/Temp/aura_desktop_85zk0y4h/input.txt, then set the text in the exact window titled *AURA native adapter verified {Enter - Notepad to that exact returned file text.",
+      "expected_plan": {
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "read_file",
+          "type_in_window"
+        ],
+        "expected_tool_order": [
+          "read_file",
+          "type_in_window"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_85zk0y4h/input.txt"
+          },
+          "1": {
+            "window_title": "*AURA native adapter verified {Enter - Notepad",
+            "text": {
+              "from_step": 1
+            }
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "read_file",
+            "parameters": {
+              "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_85zk0y4h/input.txt"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 2,
+            "tool": "open_application",
+            "parameters": {
+              "app_name": "Notepad",
+              "window_title": "*AURA native adapter verified"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 3,
+            "tool": "type_in_window",
+            "parameters": {
+              "window_title": "*AURA native adapter verified",
+              "text": {
+                "from_step": 1
+              }
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": false,
+        "parameters": false,
+        "risk": true,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "all_including_advisory": false,
+        "reasons": [
+          "tools mismatch",
+          "parameters mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "result": {
+        "decision": null,
+        "status": "PLAN_ERROR",
+        "success": false,
+        "steps": [],
+        "error": "Planner unavailable or invalid response",
+        "warnings": [],
+        "latency_seconds": 16.901068900013342
+      },
+      "postcondition": true,
+      "approvals": [],
+      "guard_rejections": [
+        "Plan or fixture outside authorized bounds"
+      ],
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 16.89605079998728,
+          "ttft_seconds": 1.1037420000648126,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "read_file",
+                "arguments": {
+                  "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_85zk0y4h/input.txt"
+                }
+              },
+              {
+                "action": "open_application",
+                "arguments": {
+                  "app_name": "Notepad",
+                  "window_title": "*AURA native adapter verified"
+                }
+              },
+              {
+                "action": "type_in_window",
+                "arguments": {
+                  "window_title": "*AURA native adapter verified",
+                  "text": {
+                    "from_step": 1
+                  }
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 96,
+          "tokens_per_second": 6.078884929874364,
+          "done_reason": "stop",
+          "prompt_eval_count": 1687
+        }
+      ],
+      "passed": false
+    }
+  ]
+}

@@ -1,45 +1,41 @@
-# FYP-1 validation evidence
+# Final validation evidence — 14 October 2026
 
-Consolidated 13 October 2026. The user's single Windows laptop is the complete target under SCOPE_DECISIONS.md.
+**FYP-1 VERIFIED — READY FOR FYP-2**
 
-| Check | Result | Evidence / boundary |
+| Check | Result | Evidence |
 |---|---|---|
-| Regression | 80/80 PASS | reports/regression.json; tested source hashes; six real loopback Chromium cases, files, SQLite/Chroma, policy and mocked agents |
-| Deterministic system scenarios | 20/20 PASS | reports/stage4_system.json; expected failures and denials count as correct outcomes; fixture planner |
-| Standalone red team | 18/18 PASS | test_red_team_4_3.py; overlaps regression |
-| Isolated live execution | 2/2 PASS | reports/live_execution.json; real model, temporary files/audit, exact-action guard and approval fixtures |
-| Native desktop | PASS | reports/desktop_acceptance.json; Notepad exact literal readback, title change, denied and approved audit paths |
-| Native messaging | PASS, bounded | reports/messaging_acceptance.json; preselected Business WhatsApp self-chat, native input, durable quota, new visible message, denied/approved audit paths |
-| Containment and rotation | PASS | reports/security_exit.json; known-key/path scans and retained-data decryption |
-| Live planning | 19/25 required PASS | reports/model_exit_validation.json; no tools executed |
+| Production planning | 25/25 required; checkpoint 96ddb5e was 19/25 | reports/model_fyp1_production25_final_v3.json |
+| Regression | 110/110, browser enabled | reports/regression.json |
+| Deterministic outcomes | 20/20 | reports/stage4_system.json |
+| Red team | 18/18, overlaps regression | test_red_team_4_3.py and regression evidence |
+| Pre-cutover live workflows | 20/20 | reports/live_workflows_gate_v7.json |
+| Initial AES live workflows | 19/20, retrieval defect found | reports/live_workflows_aes256.json |
+| Repaired affected live cases | 2/2, no retrieval warnings | reports/live_workflows_aes256_memory_recheck.json |
+| Native model-driven desktop | 4/4 | reports/live_desktop_v2.json |
+| Real desktop vision | 2/2 | reports/desktop_vision_live_v3.json |
+| Authorized self-chat | Denial/send 2/2; search/send PASS | reports/live_messaging.json; reports/live_message_navigation_v6.json |
+| Final selected-production demo | 4/4, no retrieval warnings | reports/fyp1_demo_aes256_final.json |
+| Production AES restart/recovery | PASS | reports/aes256_cutover_validation.json |
+| Option A archive extraction/recovery | 14 file hashes and both recovery paths PASS | reports/legacy_disposition.json |
+| Final targeted disposition validation | PASS; 12 sessions, 39 audits, 1 memory, 5 quota unchanged | reports/legacy_disposition_validation.json |
 
-Native desktop and messaging use deterministic planner/approval fixtures with real adapters, policy and audit. They do not establish live model-to-messaging reliability. Browser observation additionally showed the new self-message marked Read and an empty composer. Four durable reservations include failed attempts. Only synthetic text was sent to the authorized self-chat; no Slack or unrelated WhatsApp session was used.
+The NumPy query-adapter defect is fixed and covered by regression. All 20 live
+cases have passing evidence; the initial full AES run and targeted rechecks are
+separate runs, not a claimed single post-fix 20/20 run.
 
-## Comparable planning results
+No production/core/agent/test source changed after the 110-test run. Disposition
+added recovery utilities and documentation only. No unrelated model, planner,
+desktop, WhatsApp, vision or benchmark suite was repeated.
 
-The same corrected gold applies to both runs: optional exact-window verification after launch and an equivalent Save-target description are accepted. Wrong verification parameters still fail. Python policy is authoritative; advisory hints are diagnostic.
+Prior Stage 4 metrics remain in their original reports. The full initial AES run
+measured 6.25 tok/s mean generation, 2.24 s pipeline TTFT, 5,181 MB total GPU peak,
+14,353 MB system RAM and 84.3% CPU. Its 19/20 outcome is preserved. The two affected
+rechecks measured 6.14 tok/s and 1.97 s pipeline TTFT. System totals include other
+processes; these are not a combined performance estimate.
 
-| Dimension | Checkpoint | Current |
-|---|---:|---:|
-| Schema/parameter contract | 18/25 | 22/25 |
-| Decision, contract-gated | 17/25 | 20/25 |
-| Tools | 16/25 | 20/25 |
-| Parameters | 17/25 | 19/25 |
-| Order | 16/25 | 20/25 |
-| Deterministic policy expectation | 17/25 | 20/25 |
-| Advisory hint agreement | 2/25 | 2/25 |
-| All required checks | 16/25 | 19/25 |
-
-The old 2/25 combined score included advisory hints. Removing hints gave 14/25 before gold correction; gold corrections gave 16/25. Only 16 to 19 is the comparable observed planning improvement. One sample per case is not a stable reliability estimate.
-
-Six failures remain: deletion incorrectly clarifies; browser fill, browser click and UI-tree read remain invalid after bounded repair; screenshot repair clarifies instead of capturing; application launch verifies the title as document body text. PLANNING_FORENSICS.md and reports/planning_forensics.json separate all 25 cases into schema, decision, tools, parameters, ordering, policy, gold and advisory-hint findings. Schema gating is not eight independent failures.
-
-Five cases attempted bounded contract repair without benchmark gold. A separate two-stage experiment completed two failing cases and was interrupted before four others completed; it is not used by production. Its malformed raw response was not captured, limiting diagnosis.
-
-## Model, performance and acceptance limits
-
-Qwen3.5-4B Q8_0, Ollama and the approved projector remain unchanged. Shared options: temperature 0, context 4096, generation limit 768. Current median total planning latency 38.36 s; first-generation TTFT 0.85 s; first-generation generation rate 5.35 tokens/s. Maximum sampled total GPU usage 4,344 MiB; system RAM 15,682.84 MiB; CPU 93.3%. Repair time is included in elapsed latency but not first-generation token metrics. System totals include other processes and are not isolated model allocations.
-
-Earlier vision evidence remains scoped to two synthetic color probes and one normalized-coordinate grounding probe. Real desktop grounding remains open. Historical failed experiments are preserved.
-
-Representative live multi-agent workflows, general recipient navigation, remaining communication interaction behavior, full at-rest AES-256 coverage, the live-system twelve-metric evaluation and final demo/sign-off remain open. See REQUIREMENT_TRACEABILITY.md and FYP1_EXIT_AUDIT.md.
+Twenty verified redundant runtime/test targets were retired after authenticated
+archive extraction. No known unsealed runtime store remains in the intended
+project/recovery locations. Active and recovery stores are ignored and untracked.
+Historical Git repositories/bundles remain separately retained under instruction;
+remote exposure and SSD remnants are not claimed erased. See
+FINAL_FYP1_EXIT_AUDIT_20261014.md and LEGACY_MATERIALS_RETAINED.md.

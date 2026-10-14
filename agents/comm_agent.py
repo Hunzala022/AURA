@@ -1,5 +1,5 @@
 """Exact accessibility targets; sending requires control-plane HITL."""
-from core.human_layer import COMM_RATE_LIMITER, human_delay
+from core.human_layer import COMM_RATE_LIMITER, human_delay, move_pointer_to, typing_pause
 
 # Chromium's window/browser/page wrappers place observed chat controls below
 # depth 10. Keep traversal bounded while including the native page subtree.
@@ -26,6 +26,7 @@ def enter_literal_message(auto, box, parameters, window=None):
     # Fallback only from a verified empty composer. Never parse user text as
     # hotkeys; control characters and unsupported supplementary codepoints deny.
     if any(ord(char)<32 or ord(char)>0xFFFF for char in text):return False
+    if not move_pointer_to(auto,box):return False
     box.Click();box.SetFocus()
     for char in text:
         current = window.EditControl(searchDepth=UI_DEPTH,Name=parameters['message_box_name']) if window is not None else box
@@ -34,9 +35,35 @@ def enter_literal_message(auto, box, parameters, window=None):
         # event count (1), despite documenting a combined count. Exact final
         # readback remains authoritative, not the injection return count.
         if auto.SendUnicodeChar(char)<1:return False
+        typing_pause()
     human_delay()
     current = window.EditControl(searchDepth=UI_DEPTH,Name=parameters['message_box_name']) if window is not None else box
     return composer_value(current,parameters)==text
+
+def select_business_self_result(auto,window,parameters):
+    """Select one observed self-chat row, never the first fuzzy search result."""
+    if 'WhatsApp Business - Google Chrome' not in parameters['app_name'] or parameters['recipient_control_name']!=parameters['contact']+' (You) Message yourself':
+        return False
+    label=parameters['contact']+' (You)'
+    rows=[(c,d) for c,d in auto.WalkControl(window,maxDepth=UI_DEPTH)
+          if c.ControlTypeName=='DataItemControl' and (c.Name==label or c.Name.startswith(label+' '))]
+    if not rows:return False
+    depth=min(d for c,d in rows);outer=[c for c,d in rows if d==depth]
+    if len(outer)!=1:return False
+    target=outer[0]
+    # Chromium exposes nested selectable DataItems for one visual row. Accept
+    # those only when every match belongs to the same observed ancestor row.
+    for control,_ in rows:
+        current=control
+        for _ in range(UI_DEPTH):
+            if current is None:break
+            if auto.ControlsAreSame(current,target):break
+            current=current.GetParentControl()
+        else:return False
+        if current is None or not auto.ControlsAreSame(current,target):return False
+    if not move_pointer_to(auto,target):return False
+    target.Click();human_delay()
+    return True
 def send_message(parameters):
     required=('app_name','contact','text','recipient_control_name')
     if not all(parameters.get(k) for k in required):return False,'Missing explicit recipient parameters'
@@ -56,8 +83,12 @@ def send_message(parameters):
             if not search.Exists(2,1):return False,'Exact search control not found'
             search.GetValuePattern().SetValue(parameters['contact'])
             if search.GetValuePattern().Value!=parameters['contact']:return False,'Recipient search text readback failed'
-            search.SendKeys('{Enter}')
-            human_delay()
+            if 'WhatsApp Business - Google Chrome' in parameters['app_name'] and parameters['recipient_control_name']==parameters['contact']+' (You) Message yourself':
+                human_delay()
+                if not select_business_self_result(auto,win,parameters):return False,'Unique self-chat search result not verified; message not sent'
+            else:
+                search.SendKeys('{Enter}')
+                human_delay()
             recipient=win.Control(searchDepth=UI_DEPTH,Name=parameters['recipient_control_name'])
         if not recipient.Exists(2,1) or recipient.Name!=parameters['recipient_control_name']:
             return False,'Recipient identity not verified; message not sent'
@@ -84,7 +115,7 @@ def read_latest_message(parameters):
         import uiautomation as auto
         win=auto.WindowControl(searchDepth=1,Name=parameters['app_name'])
         if not win.Exists(3,1):return False,'Exact application not found'
-        texts=[c.Name for c,d in auto.WalkControl(win,maxDepth=10) if c.ControlTypeName=='TextControl' and c.Name]
+        texts=[c.Name for c,d in auto.WalkControl(win,maxDepth=UI_DEPTH) if c.ControlTypeName=='TextControl' and c.Name]
         return (True,'Recent visible text (not a guaranteed message API):\n'+'\n'.join(texts[-5:])) if texts else (False,'No readable text found')
     except Exception as error:return False,'Communication read failed: '+type(error).__name__
 TOOL_REGISTRY={'send_message':send_message,'read_latest_message':read_latest_message}

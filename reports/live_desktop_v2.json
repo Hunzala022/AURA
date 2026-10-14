@@ -1,0 +1,541 @@
+{
+  "mode": "Real production model, native UIA, real audit; bounded synthetic operator approval",
+  "results": [
+    {
+      "scenario": "denied entry",
+      "prompt": "Read C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/input.txt, then set the text in the existing window with exact title \"*AURA native adapter verified {Enter - Notepad\" to that exact returned file text.",
+      "expected_plan": {
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "read_file",
+          "type_in_window"
+        ],
+        "expected_tool_order": [
+          "read_file",
+          "type_in_window"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/input.txt"
+          },
+          "1": {
+            "window_title": "*AURA native adapter verified {Enter - Notepad",
+            "text": {
+              "from_step": 1
+            }
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "read_file",
+            "parameters": {
+              "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/input.txt"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 2,
+            "tool": "type_in_window",
+            "parameters": {
+              "window_title": "*AURA native adapter verified {Enter - Notepad",
+              "text": {
+                "from_step": 1
+              }
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "result": {
+        "decision": "EXECUTE",
+        "status": "BLOCKED",
+        "success": false,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "read_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": false,
+            "verified": false,
+            "status": "BLOCKED"
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 19.973339100019075
+      },
+      "postcondition": true,
+      "approvals": [
+        {
+          "tool": "read_file",
+          "approved": false
+        }
+      ],
+      "guard_rejections": [],
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 19.94011149997823,
+          "ttft_seconds": 7.282530999975279,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "read_file",
+                "arguments": {
+                  "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/input.txt"
+                }
+              },
+              {
+                "action": "type_in_window",
+                "arguments": {
+                  "window_title": "*AURA native adapter verified {Enter - Notepad",
+                  "text": {
+                    "from_step": 1
+                  }
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 74,
+          "tokens_per_second": 5.846173584586073,
+          "done_reason": "stop",
+          "prompt_eval_count": 1714
+        }
+      ],
+      "passed": true
+    },
+    {
+      "scenario": "bound literal entry",
+      "prompt": "Read C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/input.txt, then set the text in the existing window with exact title \"*AURA native adapter verified {Enter - Notepad\" to that exact returned file text.",
+      "expected_plan": {
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "read_file",
+          "type_in_window"
+        ],
+        "expected_tool_order": [
+          "read_file",
+          "type_in_window"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/input.txt"
+          },
+          "1": {
+            "window_title": "*AURA native adapter verified {Enter - Notepad",
+            "text": {
+              "from_step": 1
+            }
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "read_file",
+            "parameters": {
+              "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/input.txt"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 2,
+            "tool": "type_in_window",
+            "parameters": {
+              "window_title": "*AURA native adapter verified {Enter - Notepad",
+              "text": {
+                "from_step": 1
+              }
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "result": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "read_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "AURA live desktop verified {Enter}"
+          },
+          {
+            "step": 2,
+            "tool": "type_in_window",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Literal text read back from the same editable control"
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 15.670054999995045
+      },
+      "postcondition": true,
+      "approvals": [
+        {
+          "tool": "read_file",
+          "approved": true
+        },
+        {
+          "tool": "type_in_window",
+          "approved": true
+        }
+      ],
+      "guard_rejections": [],
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 12.56646969995927,
+          "ttft_seconds": 0.28312149993143976,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "read_file",
+                "arguments": {
+                  "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/input.txt"
+                }
+              },
+              {
+                "action": "type_in_window",
+                "arguments": {
+                  "window_title": "*AURA native adapter verified {Enter - Notepad",
+                  "text": {
+                    "from_step": 1
+                  }
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 74,
+          "tokens_per_second": 6.02598551532233,
+          "done_reason": "stop",
+          "prompt_eval_count": 1714
+        }
+      ],
+      "passed": true
+    },
+    {
+      "scenario": "accessibility archive",
+      "prompt": "Read the accessibility tree of the existing window with exact title \"*AURA live desktop verified {Enter} - Notepad\", then save its exact returned text to C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/tree.txt.",
+      "expected_plan": {
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "read_ui_tree",
+          "write_file"
+        ],
+        "expected_tool_order": [
+          "read_ui_tree",
+          "write_file"
+        ],
+        "expected_parameters": {
+          "0": {
+            "window_title": "*AURA live desktop verified {Enter} - Notepad"
+          },
+          "1": {
+            "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/tree.txt",
+            "content": {
+              "from_step": 1
+            }
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "read_ui_tree",
+            "parameters": {
+              "window_title": "*AURA live desktop verified {Enter} - Notepad"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 2,
+            "tool": "write_file",
+            "parameters": {
+              "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/tree.txt",
+              "content": {
+                "from_step": 1
+              }
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "result": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "read_ui_tree",
+            "agent": "os_agent",
+            "risk": "MEDIUM",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "UI Tree for '*AURA live desktop verified {Enter} - Notepad':\n  [PaneControl] ''\n    [DocumentControl] 'Text editor'\n  [PaneControl] ''\n    [PaneControl] ''\n  [PaneControl] ''\n    [PaneControl] ''\n  [PaneControl] ''\n    [PaneControl] ''\n  [TitleBarControl] ''\n    [MenuBarControl] 'System'\n    [ButtonControl] 'Minimize'\n    [ButtonControl] 'Maximize'\n    [ButtonControl] 'Close'"
+          },
+          {
+            "step": 2,
+            "tool": "write_file",
+            "agent": "os_agent",
+            "risk": "HIGH",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Successfully wrote to C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/tree.txt"
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 13.694960199994966
+      },
+      "postcondition": true,
+      "approvals": [
+        {
+          "tool": "write_file",
+          "approved": true
+        }
+      ],
+      "guard_rejections": [],
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 13.576570499921218,
+          "ttft_seconds": 1.2418931999709457,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "read_ui_tree",
+                "arguments": {
+                  "window_title": "*AURA live desktop verified {Enter} - Notepad"
+                }
+              },
+              {
+                "action": "write_file",
+                "arguments": {
+                  "path": "C:/Users/SBT/AppData/Local/Temp/aura_desktop_atnwqr2o/tree.txt",
+                  "content": {
+                    "from_step": 1
+                  }
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 75,
+          "tokens_per_second": 6.080551251426092,
+          "done_reason": "stop",
+          "prompt_eval_count": 1714
+        }
+      ],
+      "passed": true
+    },
+    {
+      "scenario": "verify body",
+      "prompt": "Verify the existing window with exact title \"*AURA live desktop verified {Enter} - Notepad\" contains exactly \"AURA live desktop verified {Enter}\".",
+      "expected_plan": {
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "verify_window"
+        ],
+        "expected_tool_order": [
+          "verify_window"
+        ],
+        "expected_parameters": {
+          "0": {
+            "window_title": "*AURA live desktop verified {Enter} - Notepad",
+            "expected_text": "AURA live desktop verified {Enter}"
+          }
+        },
+        "expected_risk": "MEDIUM"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "verify_window",
+            "parameters": {
+              "window_title": "*AURA live desktop verified {Enter} - Notepad",
+              "expected_text": "AURA live desktop verified {Enter}"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "MEDIUM",
+        "actual_model_risk": "LOW"
+      },
+      "result": {
+        "decision": "EXECUTE",
+        "status": "COMPLETED",
+        "success": true,
+        "steps": [
+          {
+            "step": 1,
+            "tool": "verify_window",
+            "agent": "os_agent",
+            "risk": "MEDIUM",
+            "executed": true,
+            "verified": true,
+            "status": "VERIFIED",
+            "result": "Verification PASSED: '*AURA live desktop verified {Enter} - Notepad' contains 'AURA live desktop verified {Enter}'"
+          }
+        ],
+        "error": null,
+        "warnings": [],
+        "latency_seconds": 8.263212299905717
+      },
+      "postcondition": true,
+      "approvals": [],
+      "guard_rejections": [],
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 8.201708999928087,
+          "ttft_seconds": 0.9497860999545082,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "verify_window",
+                "arguments": {
+                  "window_title": "*AURA live desktop verified {Enter} - Notepad",
+                  "expected_text": "AURA live desktop verified {Enter}"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 45,
+          "tokens_per_second": 6.205267775920334,
+          "done_reason": "stop",
+          "prompt_eval_count": 1691
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

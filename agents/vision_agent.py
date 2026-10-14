@@ -13,12 +13,12 @@ class VisionResult(BaseModel):
     found: StrictBool
     x: StrictInt | None=None
     y: StrictInt | None=None
-def _take_screenshot():
+def _take_screenshot(region=None):
     try:
         import mss
         import mss.tools
         with mss.mss() as sct:
-            shot=sct.grab(sct.monitors[1])
+            shot=sct.grab(region if region is not None else sct.monitors[1])
             return base64.b64encode(mss.tools.to_png(shot.rgb,shot.size)).decode()
     except Exception:return None
 def test_model_vision(screenshot_b64,element_description):
@@ -44,20 +44,45 @@ def test_model_vision(screenshot_b64,element_description):
     except (ValueError,KeyError,TypeError,OSError,ValidationError):return False,'Invalid vision response or image'
 def _find_by_color_heuristic(screenshot_b64,element_hint):
     return False,'Template matching is not implemented; no location claimed'
+
+def _is_foreground(handle):
+    import ctypes
+    from ctypes import wintypes
+    user32=ctypes.WinDLL('user32',use_last_error=True)
+    user32.GetForegroundWindow.restype=wintypes.HWND
+    return user32.GetForegroundWindow()==handle
+
+def _foreground_rectangle(window):
+    window.SetActive()
+    if not _is_foreground(window.NativeWindowHandle):return None
+    rectangle=window.BoundingRectangle
+    region={'left':rectangle.left,'top':rectangle.top,'width':rectangle.right-rectangle.left,'height':rectangle.bottom-rectangle.top}
+    if not all(type(value) is int for value in region.values()) or region['width']<=0 or region['height']<=0:return None
+    return region
 def vision_locate_element(parameters):
     title=parameters.get('window_title','');description=parameters.get('element_description','')
     if not title or not description:return False,'Missing window_title or element_description'
     try:
         import uiautomation as auto
         window=auto.WindowControl(searchDepth=1,Name=title)
-        if window.Exists(3,1):
-            target=window.Control(searchDepth=10,Name=description)
-            if target.Exists(2,1):
-                return True,json.dumps({'backend':'accessibility','found':True,'element':description,'action_executed':False})
-    except Exception:pass
-    screenshot=_take_screenshot()
-    if not screenshot:return False,'Screenshot unavailable'
-    return test_model_vision(screenshot,description)
+        if not window.Exists(3,1):return False,'Exact target window not found'
+        target=window.Control(searchDepth=10,Name=description)
+        try:accessible=target.Exists(2,1)
+        except Exception:accessible=False
+        if accessible:
+            return True,json.dumps({'backend':'accessibility','found':True,'element':description,'action_executed':False})
+        region=_foreground_rectangle(window)
+        if region is None:return False,'Target window could not be foregrounded'
+        screenshot=_take_screenshot(region)
+        if not screenshot:return False,'Screenshot unavailable'
+        if not _is_foreground(window.NativeWindowHandle):return False,'Target window changed during capture'
+    except Exception:return False,'Exact target window unavailable for safe capture'
+    success,output=test_model_vision(screenshot,description)
+    if success:
+        located=json.loads(output)
+        located.update(window_origin={'x':region['left'],'y':region['top']},screen_x=region['left']+located['x'],screen_y=region['top']+located['y'])
+        return True,json.dumps(located)
+    return False,output
 def capture_screenshot(parameters):
     try:
         shot=_take_screenshot()

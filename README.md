@@ -1,6 +1,6 @@
 # A.U.R.A. FYP-1 remediation baseline
 
-A local-inference Python planner and deterministic tool executor. **FYP-1 sign-off is pending**; see `FYP1_STATUS.md` and the requirement traceability report. No FYP-2 implementation is started.
+A local-inference Python planner and deterministic tool executor. **FYP-1 VERIFIED — READY FOR FYP-2**; see `FYP1_STATUS.md` and the requirement traceability report. No FYP-2 implementation is started.
 
 The development baseline is the cleaned master branch, not the historical contaminated checkout. The current local development directory is `D:\Project AURA\.aura-private\post-clean-check`.
 
@@ -25,6 +25,7 @@ Start with `REMEDIATION_REPORT.md` for the checkpoint, evidence and remaining ga
 - `ENCRYPTION_SCOPE.md`: exact at-rest gap and migration acceptance design; no waiver.
 - `DESKTOP_MESSAGING_ACCEPTANCE.md`: passing native desktop/self-chat acceptance and remaining live workflow boundaries.
 - `FYP1_EXIT_AUDIT.md`: final exit decision and remaining gates.
+- `FINAL_FYP1_EXIT_AUDIT_20261014.md`: current final gate evidence and exact remaining blocker.
 - `reports/`: corrected machine-readable evidence with mocked/live modes explicit.
 
 Original stage summaries, office documents, forensic handovers and benchmark reports are historical evidence, not current completion claims. Original reference documents are retained privately in `.aura-private/reference-documents/`; annotated forensic handovers and the owner cleanup draft are in `.aura-private/retained-handovers/`.
@@ -47,3 +48,8 @@ The regression suite includes containment tests, real temporary file/SQLite/Chro
 A model plan is untrusted. The whole plan is validated against canonical tool/parameter/agent contracts before any effect. Each execution step passes deterministic risk policy, explicit approval when HIGH, an audit attempt, execution, postcondition checking and outcome logging. Audit unavailability blocks execution. Earlier side effects are reported on failure; general rollback is not claimed.
 
 Keys and runtime databases remain local, ignored and untracked. Do not copy old Git directories, merge pre-rewrite history, or force-add runtime data. Local inference does not imply an air gap: browser/communication actions can use the network; embedding setup may need a one-time model download.
+# Current cutover evidence
+
+See [AES-256 post-cutover audit](AES256_POST_CUTOVER_AUDIT.md) and
+[retained legacy inventory](LEGACY_MATERIALS_RETAINED.md). Production encryption
+is active; Option A recovery sealing and verified legacy retirement are complete.

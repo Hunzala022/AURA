@@ -1,7 +1,7 @@
 {
-  "candidate_files": 141,
+  "candidate_files": 224,
   "candidate_key_matches": 0,
-  "reachable_objects": 182,
+  "reachable_objects": 236,
   "reachable_key_matches": 0,
   "forbidden_reachable_paths": 0,
   "forbidden_tracked_paths": 0,
@@ -10,6 +10,7 @@
   "private_acceptance_ignored": true,
   "scope": "normal locally reachable refs and candidate files; no GitHub cache-erasure claim",
   "passed": true,
+  "prepared_aes_keys_scanned": 3,
   "retained_rotation": {
     "sqlite_fields": 10,
     "chroma_documents": 1,

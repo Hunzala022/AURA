@@ -1,0 +1,468 @@
+{
+  "mode": "Diagnostic compact proposal; canonical plan validation; unchanged gold; no effects",
+  "prompt_sha256": "71fc4db1270a206e1a45bc6c87cbe5b27ebd330df78132c9cfe4398168f4b9a9",
+  "results": [
+    {
+      "id": 11,
+      "scenario": "browser read",
+      "expected": {
+        "name": "browser read",
+        "prompt": "Read https://example.com.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "navigate_and_read"
+        ],
+        "expected_tool_order": [
+          "navigate_and_read"
+        ],
+        "expected_parameters": {
+          "0": {
+            "url": "https://example.com"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "CLARIFY",
+        "plan": [],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "all_including_advisory": false,
+        "reasons": [
+          "decision mismatch",
+          "tools mismatch",
+          "parameters mismatch",
+          "risk mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "CLARIFY",
+        "actual_risk": "NONE",
+        "actual_model_risk": "LOW"
+      },
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 22.67902350006625,
+          "ttft_seconds": 17.833171500009485,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "browser_click",
+                "arguments": {
+                  "url": "https://example.com",
+                  "selector": "",
+                  "expected_selector": ""
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 30,
+          "tokens_per_second": 6.183263266655083,
+          "done_reason": "stop",
+          "prompt_eval_count": 1004
+        },
+        {
+          "purpose": "contract_repair",
+          "elapsed_seconds": 3.769106400082819,
+          "ttft_seconds": 1.6875669000437483,
+          "raw_plan": {
+            "decision": "CLARIFY",
+            "steps": []
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 14,
+          "tokens_per_second": 6.7246265430616265,
+          "done_reason": "stop",
+          "prompt_eval_count": 1140
+        }
+      ],
+      "elapsed_seconds": 26.466437500086613,
+      "system_ram_peak_mb": 15982.9453125,
+      "system_cpu_peak_percent": 79.7,
+      "gpu_total_used_peak_mb": 5154.0
+    },
+    {
+      "id": 16,
+      "scenario": "type",
+      "expected": {
+        "name": "type",
+        "prompt": "Set text to alpha in the window titled Untitled - Notepad.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "type_in_window"
+        ],
+        "expected_tool_order": [
+          "type_in_window"
+        ],
+        "expected_parameters": {
+          "0": {
+            "window_title": "Untitled - Notepad",
+            "text": "alpha"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "type_in_window",
+            "parameters": {
+              "window_title": "Untitled - Notepad",
+              "text": "alpha"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 5.745467500062659,
+          "ttft_seconds": 0.8200409000273794,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "type_in_window",
+                "arguments": {
+                  "window_title": "Untitled - Notepad",
+                  "text": "alpha"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 30,
+          "tokens_per_second": 6.09033056487207,
+          "done_reason": "stop",
+          "prompt_eval_count": 1012
+        }
+      ],
+      "elapsed_seconds": 5.751371099962853,
+      "system_ram_peak_mb": 15643.48828125,
+      "system_cpu_peak_percent": 66.0,
+      "gpu_total_used_peak_mb": 5139.0
+    },
+    {
+      "id": 18,
+      "scenario": "window verify",
+      "expected": {
+        "name": "window verify",
+        "prompt": "Verify window Untitled - Notepad contains alpha.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "verify_window"
+        ],
+        "expected_tool_order": [
+          "verify_window"
+        ],
+        "expected_parameters": {
+          "0": {
+            "window_title": "Untitled - Notepad",
+            "expected_text": "alpha"
+          }
+        },
+        "expected_risk": "MEDIUM"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "verify_window",
+            "parameters": {
+              "window_title": "Untitled - Notepad",
+              "expected_text": "alpha"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "MEDIUM",
+        "actual_model_risk": "LOW"
+      },
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 5.519630700000562,
+          "ttft_seconds": 0.6548643000423908,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "verify_window",
+                "arguments": {
+                  "window_title": "Untitled - Notepad",
+                  "expected_text": "alpha"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 30,
+          "tokens_per_second": 6.166861710798442,
+          "done_reason": "stop",
+          "prompt_eval_count": 1008
+        }
+      ],
+      "elapsed_seconds": 5.573683099937625,
+      "system_ram_peak_mb": 15600.46484375,
+      "system_cpu_peak_percent": 69.1,
+      "gpu_total_used_peak_mb": 5139.0
+    },
+    {
+      "id": 19,
+      "scenario": "vision locate",
+      "expected": {
+        "name": "vision locate",
+        "prompt": "Locate but do not click the Save element in window Untitled - Notepad.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "vision_locate_element"
+        ],
+        "expected_tool_order": [
+          "vision_locate_element"
+        ],
+        "expected_parameters": {
+          "0": {
+            "window_title": "Untitled - Notepad",
+            "element_description": "Save"
+          }
+        },
+        "expected_risk": "MEDIUM",
+        "accepted_parameter_values": {
+          "0": {
+            "element_description": [
+              "Save element",
+              "Save button"
+            ]
+          }
+        }
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "vision_locate_element",
+            "parameters": {
+              "window_title": "Untitled - Notepad",
+              "element_description": "Save element"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "vision_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "MEDIUM",
+        "actual_model_risk": "LOW"
+      },
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 6.095396299962886,
+          "ttft_seconds": 0.7196666999952868,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "vision_locate_element",
+                "arguments": {
+                  "window_title": "Untitled - Notepad",
+                  "element_description": "Save element"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 33,
+          "tokens_per_second": 6.138445381043067,
+          "done_reason": "stop",
+          "prompt_eval_count": 1015
+        }
+      ],
+      "elapsed_seconds": 6.11000480002258,
+      "system_ram_peak_mb": 15588.6015625,
+      "system_cpu_peak_percent": 62.3,
+      "gpu_total_used_peak_mb": 5139.0
+    },
+    {
+      "id": 21,
+      "scenario": "send",
+      "expected": {
+        "name": "send",
+        "prompt": "Using Slack, send alpha to Alice. The exact recipient header is Alice, search box is Search, and message input is Type a message.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "send_message"
+        ],
+        "expected_tool_order": [
+          "send_message"
+        ],
+        "expected_parameters": {
+          "0": {
+            "app_name": "Slack",
+            "contact": "Alice",
+            "recipient_control_name": "Alice",
+            "text": "alpha"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "send_message",
+            "parameters": {
+              "app_name": "Slack",
+              "contact": "Alice",
+              "text": "alpha",
+              "recipient_control_name": "Alice",
+              "search_bar_name": "Search",
+              "message_box_name": "Type a message"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "comm_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 9.272557600052096,
+          "ttft_seconds": 0.938099000020884,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "send_message",
+                "arguments": {
+                  "app_name": "Slack",
+                  "contact": "Alice",
+                  "text": "alpha",
+                  "recipient_control_name": "Alice",
+                  "search_bar_name": "Search",
+                  "message_box_name": "Type a message"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 51,
+          "tokens_per_second": 6.119440683855829,
+          "done_reason": "stop",
+          "prompt_eval_count": 1026
+        }
+      ],
+      "elapsed_seconds": 9.275749300024472,
+      "system_ram_peak_mb": 15549.9609375,
+      "system_cpu_peak_percent": 65.8,
+      "gpu_total_used_peak_mb": 5139.0
+    }
+  ]
+}

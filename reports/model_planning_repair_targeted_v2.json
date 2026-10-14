@@ -1,0 +1,866 @@
+{
+  "metadata": {
+    "model": "aura-qwen:latest",
+    "version": {
+      "version": "0.34.3"
+    },
+    "show": {
+      "parent_model": "Qwen_Qwen3.5-4B-Q8_0.gguf",
+      "format": "gguf",
+      "family": "qwen35",
+      "families": [
+        "qwen35"
+      ],
+      "parameter_size": "4.3B",
+      "quantization_level": "Q8_0"
+    },
+    "mode": "live model planning only; no tools executed",
+    "generation": {
+      "think": false,
+      "num_predict": 768,
+      "num_ctx": 4096
+    },
+    "resource_scope": "system/GPU totals, not isolated model memory",
+    "prompt_sha256": "79cb545518eafb356e325b392106332926b07f6919b272399f5ed5c18b4a55a4",
+    "schema_sha256": "4c182fcbada5dcedb344830792c07b5de9bdef0696284f5cf7ec897531b853ae",
+    "temperature": 0,
+    "source_sha256": {
+      "core/tools.py": "6d4194f68f922f5f4f0029b88b2f036153d12d70e2ac57ad8e7a7232c58e5b46",
+      "core/schema.py": "9e07f0812b5798cc406fcd9a5c4e4eb639bcef7ee903ea41ccadbd297d0a9ce8",
+      "core/control_plane.py": "0718b697b8f042f5dd096c3bb2862bedf31c9c985b1112aba7c2c98d38c7f654",
+      "core/evaluation.py": "958a9e7d35d632eea8163cb38eedfd7f909fbc387a203e195e4ffa68d10fa118",
+      "validate_model.py": "b0fec331ab775a028f30319bb185413248e8437eeadae6204d377e7c78393548"
+    },
+    "contract_repair": "At most one additional generation on invalid contract; no tool execution; no gold supplied",
+    "timing": "elapsed includes repair; TTFT/TPS/eval_count refer to first generation only",
+    "implementation": "Calls production generate_plan directly; no alternate benchmark inference path"
+  },
+  "results": [
+    {
+      "id": 8,
+      "scenario": "delete",
+      "expected": {
+        "name": "delete",
+        "prompt": "Delete my test file D:/AURA_validation_fixture/alpha.txt; request approval before executing.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "delete_file"
+        ],
+        "expected_tool_order": [
+          "delete_file"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "D:/AURA_validation_fixture/alpha.txt"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": true,
+        "passed": true,
+        "all_including_advisory": true,
+        "reasons": [],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "delete_file",
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/alpha.txt"
+            },
+            "reasoning": "Delete the specified test file as requested.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "The user explicitly requested deletion of a specific file path and asked for approval before execution, which aligns with the delete_file tool's behavior.",
+        "risk": "high",
+        "risk_justification": "File deletion is a destructive action requiring explicit user approval via the EXECUTE gate.",
+        "confidence": 0.9
+      },
+      "error": null,
+      "elapsed_seconds": 24.133383100037463,
+      "ttft_seconds": 6.387341100024059,
+      "eval_count": 107,
+      "tokens_per_second": 6.031045228048193,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15157.66015625,
+      "system_cpu_peak_percent": 63.3,
+      "gpu_total_used_peak_mb": 5592.0,
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 24.13026790006552,
+          "ttft_seconds": 6.387341100024059,
+          "raw_plan": {
+            "confidence": 0.9,
+            "decision": "EXECUTE",
+            "overall_reasoning": "The user explicitly requested deletion of a specific file path and asked for approval before execution, which aligns with the delete_file tool's behavior.",
+            "risk": "high",
+            "risk_justification": "File deletion is a destructive action requiring explicit user approval via the EXECUTE gate.",
+            "plan": [
+              {
+                "parameters": {
+                  "path": "D:/AURA_validation_fixture/alpha.txt"
+                },
+                "reasoning": "Delete the specified test file as requested.",
+                "step": 1,
+                "tool": "delete_file"
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 107,
+          "tokens_per_second": 6.031045228048193,
+          "done_reason": "stop",
+          "prompt_eval_count": 1446
+        }
+      ],
+      "initial_raw_plan": {
+        "confidence": 0.9,
+        "decision": "EXECUTE",
+        "overall_reasoning": "The user explicitly requested deletion of a specific file path and asked for approval before execution, which aligns with the delete_file tool's behavior.",
+        "risk": "high",
+        "risk_justification": "File deletion is a destructive action requiring explicit user approval via the EXECUTE gate.",
+        "plan": [
+          {
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/alpha.txt"
+            },
+            "reasoning": "Delete the specified test file as requested.",
+            "step": 1,
+            "tool": "delete_file"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": true,
+        "passed": true,
+        "all_including_advisory": true,
+        "reasons": [],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "HIGH"
+      }
+    },
+    {
+      "id": 12,
+      "scenario": "browser fill",
+      "expected": {
+        "name": "browser fill",
+        "prompt": "At https://example.com fill the unique #query input with alpha.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "browser_fill"
+        ],
+        "expected_tool_order": [
+          "browser_fill"
+        ],
+        "expected_parameters": {
+          "0": {
+            "url": "https://example.com",
+            "selector": "#query",
+            "text": "alpha"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "MEDIUM"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "browser_fill",
+            "parameters": {
+              "url": "https://example.com",
+              "selector": "#query",
+              "text": "alpha"
+            },
+            "reasoning": "Fill the unique #query input with the literal text alpha at the specified URL.",
+            "agent": "browser_agent"
+          }
+        ],
+        "overall_reasoning": "The request specifies a URL, a unique selector (#query), and literal text (alpha) to fill. All required parameters are present.",
+        "risk": "medium",
+        "risk_justification": "Browser interaction requires approval; no sensitive data is involved.",
+        "confidence": 0.9
+      },
+      "error": null,
+      "elapsed_seconds": 19.679390800069086,
+      "ttft_seconds": 0.7769623000640422,
+      "eval_count": 113,
+      "tokens_per_second": 5.979605418009344,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15256.07421875,
+      "system_cpu_peak_percent": 78.7,
+      "gpu_total_used_peak_mb": 5434.0,
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 19.67525900003966,
+          "ttft_seconds": 0.7769623000640422,
+          "raw_plan": {
+            "confidence": 0.9,
+            "decision": "EXECUTE",
+            "overall_reasoning": "The request specifies a URL, a unique selector (#query), and literal text (alpha) to fill. All required parameters are present.",
+            "risk": "medium",
+            "risk_justification": "Browser interaction requires approval; no sensitive data is involved.",
+            "plan": [
+              {
+                "parameters": {
+                  "selector": "#query",
+                  "text": "alpha",
+                  "url": "https://example.com"
+                },
+                "reasoning": "Fill the unique #query input with the literal text alpha at the specified URL.",
+                "step": 1,
+                "tool": "browser_fill"
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 113,
+          "tokens_per_second": 5.979605418009344,
+          "done_reason": "stop",
+          "prompt_eval_count": 1441
+        }
+      ],
+      "initial_raw_plan": {
+        "confidence": 0.9,
+        "decision": "EXECUTE",
+        "overall_reasoning": "The request specifies a URL, a unique selector (#query), and literal text (alpha) to fill. All required parameters are present.",
+        "risk": "medium",
+        "risk_justification": "Browser interaction requires approval; no sensitive data is involved.",
+        "plan": [
+          {
+            "parameters": {
+              "selector": "#query",
+              "text": "alpha",
+              "url": "https://example.com"
+            },
+            "reasoning": "Fill the unique #query input with the literal text alpha at the specified URL.",
+            "step": 1,
+            "tool": "browser_fill"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "MEDIUM"
+      }
+    },
+    {
+      "id": 13,
+      "scenario": "browser click",
+      "expected": {
+        "name": "browser click",
+        "prompt": "At https://example.com click unique #go and verify that #done becomes visible.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "browser_click"
+        ],
+        "expected_tool_order": [
+          "browser_click"
+        ],
+        "expected_parameters": {
+          "0": {
+            "url": "https://example.com",
+            "selector": "#go",
+            "expected_selector": "#done"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": true,
+        "passed": true,
+        "all_including_advisory": true,
+        "reasons": [],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "browser_click",
+            "parameters": {
+              "url": "https://example.com",
+              "selector": "#go",
+              "expected_selector": "#done"
+            },
+            "reasoning": "Click and verify the transition in one call.",
+            "agent": "browser_agent"
+          }
+        ],
+        "overall_reasoning": "Click the #go selector and verify the appearance of #done in a single browser action.",
+        "risk": "high",
+        "risk_justification": "Browser interaction requires human approval.",
+        "confidence": 0.9
+      },
+      "error": null,
+      "elapsed_seconds": 15.786192699917592,
+      "ttft_seconds": 0.7758638999657705,
+      "eval_count": 94,
+      "tokens_per_second": 6.264728359712172,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15227.46484375,
+      "system_cpu_peak_percent": 69.4,
+      "gpu_total_used_peak_mb": 5245.0,
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 15.781846099998802,
+          "ttft_seconds": 0.7758638999657705,
+          "raw_plan": {
+            "confidence": 0.9,
+            "decision": "EXECUTE",
+            "overall_reasoning": "Click the #go selector and verify the appearance of #done in a single browser action.",
+            "risk": "high",
+            "risk_justification": "Browser interaction requires human approval.",
+            "plan": [
+              {
+                "parameters": {
+                  "expected_selector": "#done",
+                  "selector": "#go",
+                  "url": "https://example.com"
+                },
+                "reasoning": "Click and verify the transition in one call.",
+                "step": 1,
+                "tool": "browser_click"
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 94,
+          "tokens_per_second": 6.264728359712172,
+          "done_reason": "stop",
+          "prompt_eval_count": 1444
+        }
+      ],
+      "initial_raw_plan": {
+        "confidence": 0.9,
+        "decision": "EXECUTE",
+        "overall_reasoning": "Click the #go selector and verify the appearance of #done in a single browser action.",
+        "risk": "high",
+        "risk_justification": "Browser interaction requires human approval.",
+        "plan": [
+          {
+            "parameters": {
+              "expected_selector": "#done",
+              "selector": "#go",
+              "url": "https://example.com"
+            },
+            "reasoning": "Click and verify the transition in one call.",
+            "step": 1,
+            "tool": "browser_click"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": true,
+        "passed": true,
+        "all_including_advisory": true,
+        "reasons": [],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "HIGH"
+      }
+    },
+    {
+      "id": 14,
+      "scenario": "screenshot",
+      "expected": {
+        "name": "screenshot",
+        "prompt": "Save a screenshot to D:/AURA_validation_fixture/screen.png.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "capture_screenshot"
+        ],
+        "expected_tool_order": [
+          "capture_screenshot"
+        ],
+        "expected_parameters": {
+          "0": {
+            "output_path": "D:/AURA_validation_fixture/screen.png"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "capture_screenshot",
+            "parameters": {
+              "output_path": "D:/AURA_validation_fixture/screen.png"
+            },
+            "reasoning": "Save the current display to the specified path.",
+            "agent": "vision_agent"
+          }
+        ],
+        "overall_reasoning": "The user requested a screenshot save with a specific output path provided.",
+        "risk": "low",
+        "risk_justification": "Standard file capture operation with no sensitive data access.",
+        "confidence": 0.9
+      },
+      "error": null,
+      "elapsed_seconds": 15.828866700059734,
+      "ttft_seconds": 0.7262158000376076,
+      "eval_count": 88,
+      "tokens_per_second": 5.828407059922979,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15557.1875,
+      "system_cpu_peak_percent": 78.2,
+      "gpu_total_used_peak_mb": 5590.0,
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 15.824160500080325,
+          "ttft_seconds": 0.7262158000376076,
+          "raw_plan": {
+            "confidence": 0.9,
+            "decision": "EXECUTE",
+            "overall_reasoning": "The user requested a screenshot save with a specific output path provided.",
+            "risk": "low",
+            "risk_justification": "Standard file capture operation with no sensitive data access.",
+            "plan": [
+              {
+                "parameters": {
+                  "output_path": "D:/AURA_validation_fixture/screen.png"
+                },
+                "reasoning": "Save the current display to the specified path.",
+                "step": 1,
+                "tool": "capture_screenshot"
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 88,
+          "tokens_per_second": 5.828407059922979,
+          "done_reason": "stop",
+          "prompt_eval_count": 1440
+        }
+      ],
+      "initial_raw_plan": {
+        "confidence": 0.9,
+        "decision": "EXECUTE",
+        "overall_reasoning": "The user requested a screenshot save with a specific output path provided.",
+        "risk": "low",
+        "risk_justification": "Standard file capture operation with no sensitive data access.",
+        "plan": [
+          {
+            "parameters": {
+              "output_path": "D:/AURA_validation_fixture/screen.png"
+            },
+            "reasoning": "Save the current display to the specified path.",
+            "step": 1,
+            "tool": "capture_screenshot"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 15,
+      "scenario": "open app",
+      "expected": {
+        "name": "open app",
+        "prompt": "Launch notepad.exe and verify exact window title Untitled - Notepad.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "open_application"
+        ],
+        "expected_tool_order": [
+          "open_application"
+        ],
+        "expected_parameters": {
+          "0": {
+            "app_name": "notepad.exe",
+            "window_title": "Untitled - Notepad"
+          }
+        },
+        "expected_risk": "HIGH",
+        "accepted_tool_orders": [
+          [
+            "open_application",
+            "verify_window"
+          ]
+        ],
+        "optional_step_parameters": {
+          "1": {
+            "window_title": "Untitled - Notepad",
+            "expected_text": ""
+          }
+        }
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": true,
+        "passed": true,
+        "all_including_advisory": true,
+        "reasons": [],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "open_application",
+            "parameters": {
+              "app_name": "notepad.exe",
+              "window_title": "Untitled - Notepad"
+            },
+            "reasoning": "Launch the application and verify the exact window title.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 2,
+            "tool": "verify_window",
+            "parameters": {
+              "window_title": "Untitled - Notepad",
+              "expected_text": ""
+            },
+            "reasoning": "Verify the window exists with the exact title.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Launch the Notepad application and verify the specific window title as requested.",
+        "risk": "high",
+        "risk_justification": "Desktop application launch and window verification require human approval.",
+        "confidence": 0.9
+      },
+      "error": null,
+      "elapsed_seconds": 20.246846400084905,
+      "ttft_seconds": 0.7722115999786183,
+      "eval_count": 123,
+      "tokens_per_second": 6.317206344406284,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15600.2890625,
+      "system_cpu_peak_percent": 73.9,
+      "gpu_total_used_peak_mb": 5260.0,
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 20.24319700000342,
+          "ttft_seconds": 0.7722115999786183,
+          "raw_plan": {
+            "confidence": 0.9,
+            "decision": "EXECUTE",
+            "overall_reasoning": "Launch the Notepad application and verify the specific window title as requested.",
+            "risk": "high",
+            "risk_justification": "Desktop application launch and window verification require human approval.",
+            "plan": [
+              {
+                "parameters": {
+                  "app_name": "notepad.exe",
+                  "window_title": "Untitled - Notepad"
+                },
+                "reasoning": "Launch the application and verify the exact window title.",
+                "step": 1,
+                "tool": "open_application"
+              },
+              {
+                "parameters": {
+                  "window_title": "Untitled - Notepad"
+                },
+                "reasoning": "Verify the window exists with the exact title.",
+                "step": 2,
+                "tool": "verify_window"
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 123,
+          "tokens_per_second": 6.317206344406284,
+          "done_reason": "stop",
+          "prompt_eval_count": 1442
+        }
+      ],
+      "initial_raw_plan": {
+        "confidence": 0.9,
+        "decision": "EXECUTE",
+        "overall_reasoning": "Launch the Notepad application and verify the specific window title as requested.",
+        "risk": "high",
+        "risk_justification": "Desktop application launch and window verification require human approval.",
+        "plan": [
+          {
+            "parameters": {
+              "app_name": "notepad.exe",
+              "window_title": "Untitled - Notepad"
+            },
+            "reasoning": "Launch the application and verify the exact window title.",
+            "step": 1,
+            "tool": "open_application"
+          },
+          {
+            "parameters": {
+              "window_title": "Untitled - Notepad"
+            },
+            "reasoning": "Verify the window exists with the exact title.",
+            "step": 2,
+            "tool": "verify_window"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": true,
+        "passed": true,
+        "all_including_advisory": true,
+        "reasons": [],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "HIGH"
+      }
+    },
+    {
+      "id": 17,
+      "scenario": "ui read",
+      "expected": {
+        "name": "ui read",
+        "prompt": "Read the accessibility tree of the window titled Untitled - Notepad.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "read_ui_tree"
+        ],
+        "expected_tool_order": [
+          "read_ui_tree"
+        ],
+        "expected_parameters": {
+          "0": {
+            "window_title": "Untitled - Notepad"
+          }
+        },
+        "expected_risk": "MEDIUM"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "MEDIUM",
+        "actual_model_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "read_ui_tree",
+            "parameters": {
+              "window_title": "Untitled - Notepad"
+            },
+            "reasoning": "Read the requested window's accessibility tree.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "The user requested a specific accessibility inspection on a known window title.",
+        "risk": "high",
+        "risk_justification": "Python will request approval for desktop access.",
+        "confidence": 0.9
+      },
+      "error": null,
+      "elapsed_seconds": 13.604065499966964,
+      "ttft_seconds": 0.8034659000113606,
+      "eval_count": 81,
+      "tokens_per_second": 6.329485344858101,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15327.421875,
+      "system_cpu_peak_percent": 60.7,
+      "gpu_total_used_peak_mb": 5247.0,
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 13.601033200044185,
+          "ttft_seconds": 0.8034659000113606,
+          "raw_plan": {
+            "confidence": 0.9,
+            "decision": "EXECUTE",
+            "overall_reasoning": "The user requested a specific accessibility inspection on a known window title.",
+            "risk": "high",
+            "risk_justification": "Python will request approval for desktop access.",
+            "plan": [
+              {
+                "parameters": {
+                  "window_title": "Untitled - Notepad"
+                },
+                "reasoning": "Read the requested window's accessibility tree.",
+                "step": 1,
+                "tool": "read_ui_tree"
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 81,
+          "tokens_per_second": 6.329485344858101,
+          "done_reason": "stop",
+          "prompt_eval_count": 1441
+        }
+      ],
+      "initial_raw_plan": {
+        "confidence": 0.9,
+        "decision": "EXECUTE",
+        "overall_reasoning": "The user requested a specific accessibility inspection on a known window title.",
+        "risk": "high",
+        "risk_justification": "Python will request approval for desktop access.",
+        "plan": [
+          {
+            "parameters": {
+              "window_title": "Untitled - Notepad"
+            },
+            "reasoning": "Read the requested window's accessibility tree.",
+            "step": 1,
+            "tool": "read_ui_tree"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "MEDIUM",
+        "actual_model_risk": "HIGH"
+      }
+    }
+  ]
+}

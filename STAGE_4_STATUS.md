@@ -1,8 +1,23 @@
 > HISTORICAL DOCUMENT — superseded by FYP1_STATUS.md, MODEL_RUNTIME.md and REQUIREMENT_TRACEABILITY.md. Completion/security claims below are retained as historical evidence, not current sign-off.
 
-# STAGE 4 FINAL STATUS REPORT
+> Post-cutover update, 14 October 2026: production AES-256-GCM is active. Current evidence and decision are in [AES256_POST_CUTOVER_AUDIT.md](AES256_POST_CUTOVER_AUDIT.md): 110/110 regression, 18/18 red-team, all 20 live cases covered by the initial 19/20 run plus 2/2 affected rechecks, and final selected-store demo 4/4. Option A subsequently sealed and verified recovery archives, then retired redundant unsealed runtime copies. FYP-1 is verified; see FINAL_FYP1_EXIT_AUDIT_20261014.md.
 
-## Status: 100% Complete ✅
+## Historical pre-cutover checkpoint (superseded where changed above)
+
+# STAGE 4 FINAL STATUS REPORT — CURRENT AUTHORITATIVE UPDATE 14 October 2026
+
+The older completion narrative below is historical. Current verified status is
+defined by this update, reports/live_workflows_gate_v7.json, reports/fyp1_demo.json
+and FYP1_EXIT_AUDIT.md. The single-laptop scope applies; former comparison language
+is HISTORICAL / NO LONGER APPLICABLE.
+
+Current gates: 20/20 real model-driven workflows, 12 metric families recorded,
+109/109 browser-enabled regression, 18/18 red-team, and 4/4 final demo pass.
+The only remaining FYP-1 blocker is production AES-256 at-rest cutover and the
+reviewed disposition of legacy stores/recovery material. The prepared backend is
+not active; partial Fernet coverage is not labelled complete encryption.
+
+## Historical status (superseded): 100% Complete ✅
 
 ### Completed Milestones
 
@@ -29,7 +44,7 @@
 5. **Milestone 4.5: Audit Trail Review**
    - Upgraded `core/memory.py` with an `audit_logs` SQLite table.
    - Upgraded `execute_pipeline` to log every HIGH and MEDIUM risk tool invocation *before* execution.
-   - The payload parameters are AES-256 encrypted at rest.
+   - Historical claim that payload parameters were AES-256 is superseded. Current active Fernet coverage is AES-128-CBC/HMAC field encryption; see ENCRYPTION_SCOPE.md and ENCRYPTION_CUTOVER_REVIEW.md.
    - Written `view_audit_log.py` for admins to review intercepted/blocked actions.
 
 6. **Milestone 4.6: Bug-Fixing Pass**

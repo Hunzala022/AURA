@@ -59,7 +59,14 @@ class PersistentRateLimiter:
                 return True
         except (OSError,sqlite3.Error):return False
 
-COMM_RATE_LIMITER = PersistentRateLimiter()
+def _production_limiter():
+    from core.storage_selection import encrypted_paths
+    paths=encrypted_paths()
+    if paths is None:return PersistentRateLimiter()
+    from core.encrypted_limits import EncryptedRateLimiter
+    return EncryptedRateLimiter(paths['quota'],paths['key'])
+
+COMM_RATE_LIMITER = _production_limiter()
 
 def human_typing(target_control, text: str):
     """
@@ -83,3 +90,29 @@ def human_typing(target_control, text: str):
 def human_delay():
     """Generic random delay between UI actions."""
     time.sleep(random.uniform(0.8, 2.5))
+
+def cursor_curve(start,end,steps=18,rng=random):
+    """Bounded quadratic path, including exact endpoints; no clicking."""
+    import math
+    if steps<2:raise ValueError('At least two cursor samples required')
+    dx=end[0]-start[0];dy=end[1]-start[1];length=math.hypot(dx,dy)
+    if not length:return [tuple(end)]
+    bend=min(40.,length*.15)*rng.choice((-1,1))
+    middle=((start[0]+end[0])/2-dy/length*bend,(start[1]+end[1])/2+dx/length*bend)
+    return [(round((1-t)**2*start[0]+2*(1-t)*t*middle[0]+t*t*end[0]),
+             round((1-t)**2*start[1]+2*(1-t)*t*middle[1]+t*t*end[1]))
+            for t in (i/(steps-1) for i in range(steps))]
+
+def move_pointer_to(auto,control):
+    """Move only to an observed, nonempty control rectangle; never click."""
+    try:
+        rect=control.BoundingRectangle
+        if not all(isinstance(v,(int,float)) for v in (rect.left,rect.top,rect.right,rect.bottom)) or rect.right<=rect.left or rect.bottom<=rect.top:return False
+        target=(round((rect.left+rect.right)/2),round((rect.top+rect.bottom)/2))
+        for point in cursor_curve(auto.GetCursorPos(),target):
+            auto.SetCursorPos(*point);time.sleep(random.uniform(.008,.025))
+        return auto.GetCursorPos()==target
+    except (AttributeError,TypeError,ValueError,OSError):return False
+
+def typing_pause():
+    time.sleep(random.uniform(.05,.15))

@@ -32,10 +32,23 @@ class Vision(unittest.TestCase):
         with patch('uiautomation.WindowControl',return_value=window),patch.object(vision,'test_model_vision') as backend:
             self.assertTrue(vision.vision_locate_element({'window_title':'test','element_description':'button'})[0])
             target.Click.assert_not_called();backend.assert_not_called()
-    def test_fallback_on_accessibility_failure(self):
+    def test_unlocatable_window_never_captures_an_unrelated_screen(self):
         with patch('uiautomation.WindowControl',side_effect=RuntimeError()),patch.object(vision,'_take_screenshot',return_value=self.image),patch.object(vision,'test_model_vision',return_value=(False,'not found')) as backend:
             self.assertFalse(vision.vision_locate_element({'window_title':'test','element_description':'button'})[0])
-            backend.assert_called_once()
+            backend.assert_not_called()
+    def test_element_lookup_failure_uses_bounded_real_window_capture(self):
+        window=Mock();window.Exists.return_value=True;window.Control.return_value.Exists.return_value=False
+        region={'left':100,'top':50,'width':32,'height':32}
+        output=json.dumps({'backend':'model','x':10,'y':12,'action_executed':False})
+        with patch('uiautomation.WindowControl',return_value=window),patch.object(vision,'_foreground_rectangle',return_value=region),patch.object(vision,'_is_foreground',return_value=True),patch.object(vision,'_take_screenshot',return_value=self.image) as capture,patch.object(vision,'test_model_vision',return_value=(True,output)):
+            ok,result=vision.vision_locate_element({'window_title':'fixture','element_description':'target'})
+        self.assertTrue(ok);capture.assert_called_once_with(region)
+        self.assertEqual(110,json.loads(result)['screen_x']);self.assertEqual(62,json.loads(result)['screen_y'])
+    def test_focus_change_during_capture_does_not_reach_model(self):
+        window=Mock();window.Exists.return_value=True;window.Control.return_value.Exists.return_value=False
+        with patch('uiautomation.WindowControl',return_value=window),patch.object(vision,'_foreground_rectangle',return_value={'left':0,'top':0,'width':32,'height':32}),patch.object(vision,'_is_foreground',return_value=False),patch.object(vision,'_take_screenshot',return_value=self.image),patch.object(vision,'test_model_vision') as backend:
+            self.assertFalse(vision.vision_locate_element({'window_title':'fixture','element_description':'target'})[0])
+            backend.assert_not_called()
     def test_click_verification_failure(self):
         from agents.os_agent import click_ui_element
         window=Mock();window.Exists.return_value=True

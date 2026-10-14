@@ -18,7 +18,7 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\1\\destination.txt"
+            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\1\\destination.txt"
           },
           {
             "step": 2,
@@ -28,12 +28,12 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\1\\destination.txt exists and contains expected content."
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\1\\destination.txt exists and contains expected content."
           }
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 0.0029433000017888844
+        "latency_seconds": 0.002091399976052344
       },
       "score": {
         "status_correct": true,
@@ -42,7 +42,7 @@
         "passed": true,
         "actual_status": "COMPLETED"
       },
-      "elapsed_seconds": 0.0038192999782040715,
+      "elapsed_seconds": 0.0025155000621452928,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -67,7 +67,7 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Found files:\nC:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\2\\source.txt"
+            "result": "Found files:\nC:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\2\\source.txt"
           },
           {
             "step": 2,
@@ -77,7 +77,7 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Successfully copied C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\2\\source.txt to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\2\\destination.txt"
+            "result": "Successfully copied C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\2\\source.txt to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\2\\destination.txt"
           },
           {
             "step": 3,
@@ -87,12 +87,12 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\2\\destination.txt exists and contains expected content."
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\2\\destination.txt exists and contains expected content."
           }
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 0.004246699973009527
+        "latency_seconds": 0.0038852000143378973
       },
       "score": {
         "status_correct": true,
@@ -101,7 +101,7 @@
         "passed": true,
         "actual_status": "COMPLETED"
       },
-      "elapsed_seconds": 0.004671700007747859,
+      "elapsed_seconds": 0.004307099967263639,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -126,7 +126,7 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Found string in files:\nC:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\3\\source.txt"
+            "result": "Found string in files:\nC:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\3\\source.txt"
           },
           {
             "step": 2,
@@ -141,7 +141,7 @@
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 0.00165940000442788
+        "latency_seconds": 0.0015971000539138913
       },
       "score": {
         "status_correct": true,
@@ -150,7 +150,7 @@
         "passed": true,
         "actual_status": "COMPLETED"
       },
-      "elapsed_seconds": 0.00209789996733889,
+      "elapsed_seconds": 0.002009800053201616,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -175,7 +175,7 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Successfully moved C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\4\\source.txt to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\4\\destination.txt"
+            "result": "Successfully moved C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\4\\source.txt to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\4\\destination.txt"
           },
           {
             "step": 2,
@@ -185,12 +185,12 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\4\\destination.txt exists and contains expected content."
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\4\\destination.txt exists and contains expected content."
           }
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 0.002021100022830069
+        "latency_seconds": 0.0031257999362424016
       },
       "score": {
         "status_correct": true,
@@ -199,7 +199,7 @@
         "passed": true,
         "actual_status": "COMPLETED"
       },
-      "elapsed_seconds": 0.0023873999598436058,
+      "elapsed_seconds": 0.003532600007019937,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -224,7 +224,7 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Successfully created folder C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\5\\nested"
+            "result": "Successfully created folder C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\5\\nested"
           },
           {
             "step": 2,
@@ -234,7 +234,7 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\5\\destination.txt"
+            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\5\\destination.txt"
           },
           {
             "step": 3,
@@ -244,12 +244,12 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\5\\destination.txt exists and contains expected content."
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\5\\destination.txt exists and contains expected content."
           }
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 0.0030666000093333423
+        "latency_seconds": 0.0026712999679148197
       },
       "score": {
         "status_correct": true,
@@ -258,7 +258,7 @@
         "passed": true,
         "actual_status": "COMPLETED"
       },
-      "elapsed_seconds": 0.003521599981468171,
+      "elapsed_seconds": 0.0030750000150874257,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -283,12 +283,12 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Successfully deleted C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\6\\source.txt"
+            "result": "Successfully deleted C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\6\\source.txt"
           }
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 0.00029960001120343804
+        "latency_seconds": 0.0003306999569758773
       },
       "score": {
         "status_correct": true,
@@ -297,7 +297,7 @@
         "passed": true,
         "actual_status": "COMPLETED"
       },
-      "elapsed_seconds": 0.0006207000114955008,
+      "elapsed_seconds": 0.0008925000438466668,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -326,7 +326,7 @@
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 8.38999985717237e-05
+        "latency_seconds": 8.9899986051023e-05
       },
       "score": {
         "status_correct": true,
@@ -335,7 +335,7 @@
         "passed": true,
         "actual_status": "BLOCKED"
       },
-      "elapsed_seconds": 0.00046010001096874475,
+      "elapsed_seconds": 0.00041229999624192715,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -362,9 +362,9 @@
             "status": "FAILED"
           }
         ],
-        "error": "File does not exist: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\8\\missing",
+        "error": "File does not exist: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\8\\missing",
         "warnings": [],
-        "latency_seconds": 0.0004075000179000199
+        "latency_seconds": 0.0004461000207811594
       },
       "score": {
         "status_correct": true,
@@ -373,7 +373,7 @@
         "passed": true,
         "actual_status": "FAILED"
       },
-      "elapsed_seconds": 0.0007012999849393964,
+      "elapsed_seconds": 0.0008041999535635114,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -392,7 +392,7 @@
         "steps": [],
         "error": null,
         "warnings": [],
-        "latency_seconds": 3.760005347430706e-05
+        "latency_seconds": 3.670004662126303e-05
       },
       "score": {
         "status_correct": true,
@@ -401,7 +401,7 @@
         "passed": true,
         "actual_status": "CLARIFY"
       },
-      "elapsed_seconds": 0.00045190000673756003,
+      "elapsed_seconds": 0.0003466999623924494,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -420,7 +420,7 @@
         "steps": [],
         "error": null,
         "warnings": [],
-        "latency_seconds": 3.479997394606471e-05
+        "latency_seconds": 3.760005347430706e-05
       },
       "score": {
         "status_correct": true,
@@ -429,7 +429,7 @@
         "passed": true,
         "actual_status": "REFUSE"
       },
-      "elapsed_seconds": 0.0003124999930150807,
+      "elapsed_seconds": 0.0003491999814286828,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -448,7 +448,7 @@
         "steps": [],
         "error": "Plan failed contract or agent permission validation",
         "warnings": [],
-        "latency_seconds": 5.949998740106821e-05
+        "latency_seconds": 6.280001252889633e-05
       },
       "score": {
         "status_correct": true,
@@ -457,7 +457,7 @@
         "passed": true,
         "actual_status": "INVALID_PLAN"
       },
-      "elapsed_seconds": 0.0003595000016503036,
+      "elapsed_seconds": 0.0003370000049471855,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -476,7 +476,7 @@
         "steps": [],
         "error": "Plan failed contract or agent permission validation",
         "warnings": [],
-        "latency_seconds": 5.520001286640763e-05
+        "latency_seconds": 5.8699981309473515e-05
       },
       "score": {
         "status_correct": true,
@@ -485,7 +485,7 @@
         "passed": true,
         "actual_status": "INVALID_PLAN"
       },
-      "elapsed_seconds": 0.00031620002118870616,
+      "elapsed_seconds": 0.000363800092600286,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -514,7 +514,7 @@
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 0.00035639997804537416
+        "latency_seconds": 0.0003687000134959817
       },
       "score": {
         "status_correct": true,
@@ -523,7 +523,7 @@
         "passed": true,
         "actual_status": "BLOCKED"
       },
-      "elapsed_seconds": 0.0006532999686896801,
+      "elapsed_seconds": 0.0006697999779134989,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -558,7 +558,7 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\14\\destination.txt"
+            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\14\\destination.txt"
           },
           {
             "step": 3,
@@ -568,12 +568,12 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\14\\destination.txt exists and contains expected content."
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\14\\destination.txt exists and contains expected content."
           }
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 0.003509200003463775
+        "latency_seconds": 0.0026307000080123544
       },
       "score": {
         "status_correct": true,
@@ -582,7 +582,7 @@
         "passed": true,
         "actual_status": "COMPLETED"
       },
-      "elapsed_seconds": 0.003971000027377158,
+      "elapsed_seconds": 0.003046699916012585,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -617,7 +617,7 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\15\\destination.txt"
+            "result": "Successfully wrote to C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\15\\destination.txt"
           },
           {
             "step": 3,
@@ -627,12 +627,12 @@
             "executed": true,
             "verified": true,
             "status": "VERIFIED",
-            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmpwaw5n2bm\\15\\destination.txt exists and contains expected content."
+            "result": "Verification PASSED: C:\\Users\\SBT\\AppData\\Local\\Temp\\tmp87w__hb4\\15\\destination.txt exists and contains expected content."
           }
         ],
         "error": null,
         "warnings": [],
-        "latency_seconds": 0.002596000034827739
+        "latency_seconds": 0.0023161000572144985
       },
       "score": {
         "status_correct": true,
@@ -641,7 +641,7 @@
         "passed": true,
         "actual_status": "COMPLETED"
       },
-      "elapsed_seconds": 0.0030781999812461436,
+      "elapsed_seconds": 0.0028269001049920917,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -670,7 +670,7 @@
         ],
         "error": "not found",
         "warnings": [],
-        "latency_seconds": 8.630001684650779e-05
+        "latency_seconds": 9.290000889450312e-05
       },
       "score": {
         "status_correct": true,
@@ -679,7 +679,7 @@
         "passed": true,
         "actual_status": "FAILED"
       },
-      "elapsed_seconds": 0.00045039999531582,
+      "elapsed_seconds": 0.0004964000545442104,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -708,7 +708,7 @@
         ],
         "error": "RuntimeError: execution or audit failed; inspect completed steps",
         "warnings": [],
-        "latency_seconds": 0.00036780000664293766
+        "latency_seconds": 0.0003608999541029334
       },
       "score": {
         "status_correct": true,
@@ -717,7 +717,7 @@
         "passed": true,
         "actual_status": "ERROR"
       },
-      "elapsed_seconds": 0.0006723999977111816,
+      "elapsed_seconds": 0.0007087000412866473,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -746,7 +746,7 @@
         ],
         "error": "FileNotFoundError: execution or audit failed; inspect completed steps",
         "warnings": [],
-        "latency_seconds": 0.000438000017311424
+        "latency_seconds": 0.00042539997957646847
       },
       "score": {
         "status_correct": true,
@@ -755,7 +755,7 @@
         "passed": true,
         "actual_status": "ERROR"
       },
-      "elapsed_seconds": 0.0007800000021234155,
+      "elapsed_seconds": 0.0008154000388458371,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -784,7 +784,7 @@
         ],
         "error": "OSError: execution or audit failed; inspect completed steps",
         "warnings": [],
-        "latency_seconds": 0.0004130000015720725
+        "latency_seconds": 0.0003736000508069992
       },
       "score": {
         "status_correct": true,
@@ -793,7 +793,7 @@
         "passed": true,
         "actual_status": "ERROR"
       },
-      "elapsed_seconds": 0.0007647000020369887,
+      "elapsed_seconds": 0.0006846999749541283,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",
@@ -812,7 +812,7 @@
         "steps": [],
         "error": "Plan failed contract or agent permission validation",
         "warnings": [],
-        "latency_seconds": 6.410002242773771e-05
+        "latency_seconds": 6.0699996538460255e-05
       },
       "score": {
         "status_correct": true,
@@ -821,7 +821,7 @@
         "passed": true,
         "actual_status": "INVALID_PLAN"
       },
-      "elapsed_seconds": 0.000375000003259629,
+      "elapsed_seconds": 0.0003880999283865094,
       "planner": "mocked",
       "external_agents": "fixture mocks where used",
       "filesystem": "real temporary directory",

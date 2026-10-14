@@ -1,0 +1,649 @@
+{
+  "metadata": {
+    "model": "aura-qwen:latest",
+    "version": {
+      "version": "0.34.3"
+    },
+    "show": {
+      "parent_model": "Qwen_Qwen3.5-4B-Q8_0.gguf",
+      "format": "gguf",
+      "family": "qwen35",
+      "families": [
+        "qwen35"
+      ],
+      "parameter_size": "4.3B",
+      "quantization_level": "Q8_0"
+    },
+    "mode": "live model planning only; no tools executed",
+    "generation": {
+      "think": false,
+      "num_predict": 768,
+      "num_ctx": 4096
+    },
+    "resource_scope": "system/GPU totals, not isolated model memory",
+    "prompt_sha256": "003609a4f3dfcc979ad58d07c468b442fedc5fdd575657f96a21893daa845d73",
+    "schema_sha256": "4c182fcbada5dcedb344830792c07b5de9bdef0696284f5cf7ec897531b853ae",
+    "temperature": 0,
+    "source_sha256": {
+      "core/tools.py": "6d4194f68f922f5f4f0029b88b2f036153d12d70e2ac57ad8e7a7232c58e5b46",
+      "core/schema.py": "9e07f0812b5798cc406fcd9a5c4e4eb639bcef7ee903ea41ccadbd297d0a9ce8",
+      "core/control_plane.py": "28022c6bd284439d754ff8db03b59efe689daca6ed8054a491b3b94905a56ac5",
+      "core/evaluation.py": "958a9e7d35d632eea8163cb38eedfd7f909fbc387a203e195e4ffa68d10fa118",
+      "validate_model.py": "13aec5f0c5bf7ee5734c1f4dc666e7506d92c56e5fe05e94ec809934c68ce9e7"
+    },
+    "contract_repair": "At most one additional generation on invalid contract; no tool execution; no gold supplied",
+    "timing": "elapsed includes repair; TTFT/TPS/eval_count refer to first generation only"
+  },
+  "results": [
+    {
+      "id": 8,
+      "scenario": "delete",
+      "expected": {
+        "name": "delete",
+        "prompt": "Delete my test file D:/AURA_validation_fixture/alpha.txt; request approval before executing.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "delete_file"
+        ],
+        "expected_tool_order": [
+          "delete_file"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "D:/AURA_validation_fixture/alpha.txt"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "User explicitly requested deletion of a specific file path. The tool delete_file is selected to propose this action to the Python executor for approval.",
+        "risk": "low",
+        "risk_justification": "File deletion is a standard administrative task. The path is within a validation fixture directory, reducing risk of system-wide impact.",
+        "plan": [
+          {
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/alpha.txt"
+            },
+            "reasoning": "Propose deletion of the specified file to the executor for approval.",
+            "step": 1,
+            "tool": "delete_file"
+          }
+        ]
+      },
+      "error": null,
+      "elapsed_seconds": 51.496532000019215,
+      "ttft_seconds": 21.38008999999147,
+      "eval_count": 181,
+      "tokens_per_second": 6.011512744373805,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15831.9375,
+      "system_cpu_peak_percent": 77.5,
+      "gpu_total_used_peak_mb": 5275.0,
+      "initial_raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "User explicitly requested deletion of a specific file path. The tool delete_file is selected to propose this action to the Python executor for approval.",
+        "risk": "low",
+        "risk_justification": "File deletion is a standard administrative task. The path is within a validation fixture directory, reducing risk of system-wide impact.",
+        "plan": [
+          {
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/alpha.txt"
+            },
+            "reasoning": "Propose deletion of the specified file to the executor for approval.",
+            "step": 1,
+            "tool": "delete_file"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 12,
+      "scenario": "browser fill",
+      "expected": {
+        "name": "browser fill",
+        "prompt": "At https://example.com fill the unique #query input with alpha.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "browser_fill"
+        ],
+        "expected_tool_order": [
+          "browser_fill"
+        ],
+        "expected_parameters": {
+          "0": {
+            "url": "https://example.com",
+            "selector": "#query",
+            "text": "alpha"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "Browser fill action requested with clear URL, selector, and text value.",
+        "risk": "low",
+        "risk_justification": "Standard form filling operation with no sensitive data or authorization bypass.",
+        "plan": [
+          {
+            "parameters": {
+              "selector": "#query",
+              "text": "alpha",
+              "url": "https://example.com"
+            },
+            "reasoning": "Fill the #query input with 'alpha' at the specified URL.",
+            "step": 1,
+            "tool": "browser_fill"
+          }
+        ]
+      },
+      "error": null,
+      "elapsed_seconds": 28.23322960000951,
+      "ttft_seconds": 0.8886019999627024,
+      "eval_count": 166,
+      "tokens_per_second": 6.070714165397119,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 14833.8359375,
+      "system_cpu_peak_percent": 67.3,
+      "gpu_total_used_peak_mb": 5274.0,
+      "initial_raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "Browser fill action requested with clear URL, selector, and text value.",
+        "risk": "low",
+        "risk_justification": "Standard form filling operation with no sensitive data or authorization bypass.",
+        "plan": [
+          {
+            "parameters": {
+              "selector": "#query",
+              "text": "alpha",
+              "url": "https://example.com"
+            },
+            "reasoning": "Fill the #query input with 'alpha' at the specified URL.",
+            "step": 1,
+            "tool": "browser_fill"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 13,
+      "scenario": "browser click",
+      "expected": {
+        "name": "browser click",
+        "prompt": "At https://example.com click unique #go and verify that #done becomes visible.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "browser_click"
+        ],
+        "expected_tool_order": [
+          "browser_click"
+        ],
+        "expected_parameters": {
+          "0": {
+            "url": "https://example.com",
+            "selector": "#go",
+            "expected_selector": "#done"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": false,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "invalid schema/contract"
+        ]
+      },
+      "raw_plan": null,
+      "error": null,
+      "elapsed_seconds": 101.47017230000347,
+      "ttft_seconds": 0.7913675999734551,
+      "eval_count": 278,
+      "tokens_per_second": 6.1889712887833666,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 14997.9609375,
+      "system_cpu_peak_percent": 75.2,
+      "gpu_total_used_peak_mb": 5263.0,
+      "initial_raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "The request involves a browser interaction at a specific URL. The plan consists of two sequential steps: navigating to the URL and clicking the specified element, followed by verifying the visibility of the expected element.",
+        "risk": "low",
+        "risk_justification": "Standard browser navigation and UI interaction. No sensitive data handling or system-level changes involved.",
+        "plan": [
+          {
+            "parameters": {
+              "url": "https://example.com",
+              "selector": "#go",
+              "expected_selector": "#done"
+            },
+            "reasoning": "Navigate to the target URL and click the unique '#go' element, expecting '#done' to become visible.",
+            "step": 1,
+            "tool": "browser_click"
+          },
+          {
+            "parameters": {
+              "url": "https://example.com",
+              "expected_selector": "#done"
+            },
+            "reasoning": "Verify that the '#done' element is now visible on the page.",
+            "step": 2,
+            "tool": "browser_click"
+          }
+        ]
+      },
+      "repair_attempted": true,
+      "initial_generation_score": {
+        "schema": false,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "reasons": [
+          "invalid schema/contract"
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "scenario": "screenshot",
+      "expected": {
+        "name": "screenshot",
+        "prompt": "Save a screenshot to D:/AURA_validation_fixture/screen.png.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "capture_screenshot"
+        ],
+        "expected_tool_order": [
+          "capture_screenshot"
+        ],
+        "expected_parameters": {
+          "0": {
+            "output_path": "D:/AURA_validation_fixture/screen.png"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "User explicitly requested a screenshot save to a specific path. The capture_screenshot tool is the correct operation for this request.",
+        "risk": "low",
+        "risk_justification": "Saving a screenshot is a standard, low-risk operation. No sensitive data is being extracted or modified.",
+        "plan": [
+          {
+            "parameters": {
+              "output_path": "D:/AURA_validation_fixture/screen.png"
+            },
+            "reasoning": "Capture the current screen to the specified path.",
+            "step": 1,
+            "tool": "capture_screenshot"
+          }
+        ]
+      },
+      "error": null,
+      "elapsed_seconds": 28.982533299946226,
+      "ttft_seconds": 0.7742189000127837,
+      "eval_count": 174,
+      "tokens_per_second": 6.1686093650125695,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 14860.875,
+      "system_cpu_peak_percent": 62.0,
+      "gpu_total_used_peak_mb": 5252.0,
+      "initial_raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "User explicitly requested a screenshot save to a specific path. The capture_screenshot tool is the correct operation for this request.",
+        "risk": "low",
+        "risk_justification": "Saving a screenshot is a standard, low-risk operation. No sensitive data is being extracted or modified.",
+        "plan": [
+          {
+            "parameters": {
+              "output_path": "D:/AURA_validation_fixture/screen.png"
+            },
+            "reasoning": "Capture the current screen to the specified path.",
+            "step": 1,
+            "tool": "capture_screenshot"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 15,
+      "scenario": "open app",
+      "expected": {
+        "name": "open app",
+        "prompt": "Launch notepad.exe and verify exact window title Untitled - Notepad.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "open_application"
+        ],
+        "expected_tool_order": [
+          "open_application"
+        ],
+        "expected_parameters": {
+          "0": {
+            "app_name": "notepad.exe",
+            "window_title": "Untitled - Notepad"
+          }
+        },
+        "expected_risk": "HIGH",
+        "accepted_tool_orders": [
+          [
+            "open_application",
+            "verify_window"
+          ]
+        ],
+        "optional_step_parameters": {
+          "1": {
+            "window_title": "Untitled - Notepad",
+            "expected_text": ""
+          }
+        }
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "User explicitly requested to launch Notepad and verify its window title. This requires two sequential steps: launching the application and then verifying the resulting window state.",
+        "risk": "low",
+        "risk_justification": "Standard application launch and window verification. No sensitive data or destructive actions involved.",
+        "plan": [
+          {
+            "parameters": {
+              "app_name": "notepad.exe",
+              "window_title": "Untitled - Notepad"
+            },
+            "reasoning": "Launch the Notepad application as requested.",
+            "step": 1,
+            "tool": "open_application"
+          },
+          {
+            "parameters": {
+              "window_title": "Untitled - Notepad"
+            },
+            "reasoning": "Verify the window exists and matches the expected title.",
+            "step": 2,
+            "tool": "verify_window"
+          }
+        ]
+      },
+      "error": null,
+      "elapsed_seconds": 39.2582856999943,
+      "ttft_seconds": 0.7958685000194237,
+      "eval_count": 236,
+      "tokens_per_second": 6.144542339385569,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 14917.15234375,
+      "system_cpu_peak_percent": 73.2,
+      "gpu_total_used_peak_mb": 5259.0,
+      "initial_raw_plan": {
+        "confidence": 0.95,
+        "decision": "EXECUTE",
+        "overall_reasoning": "User explicitly requested to launch Notepad and verify its window title. This requires two sequential steps: launching the application and then verifying the resulting window state.",
+        "risk": "low",
+        "risk_justification": "Standard application launch and window verification. No sensitive data or destructive actions involved.",
+        "plan": [
+          {
+            "parameters": {
+              "app_name": "notepad.exe",
+              "window_title": "Untitled - Notepad"
+            },
+            "reasoning": "Launch the Notepad application as requested.",
+            "step": 1,
+            "tool": "open_application"
+          },
+          {
+            "parameters": {
+              "window_title": "Untitled - Notepad"
+            },
+            "reasoning": "Verify the window exists and matches the expected title.",
+            "step": 2,
+            "tool": "verify_window"
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 17,
+      "scenario": "ui read",
+      "expected": {
+        "name": "ui read",
+        "prompt": "Read the accessibility tree of the window titled Untitled - Notepad.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "read_ui_tree"
+        ],
+        "expected_tool_order": [
+          "read_ui_tree"
+        ],
+        "expected_parameters": {
+          "0": {
+            "window_title": "Untitled - Notepad"
+          }
+        },
+        "expected_risk": "MEDIUM"
+      },
+      "score": {
+        "schema": true,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "all_including_advisory": false,
+        "reasons": [
+          "decision mismatch",
+          "tools mismatch",
+          "parameters mismatch",
+          "risk mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "CLARIFY",
+        "actual_risk": "NONE",
+        "actual_model_risk": "LOW"
+      },
+      "raw_plan": {
+        "confidence": 0.95,
+        "decision": "CLARIFY",
+        "overall_reasoning": "The user requested to read the accessibility tree of a specific window. The tool 'read_ui_tree' requires a 'window_title' parameter. The user provided 'Untitled - Notepad', which is a valid string. However, the tool description for 'read_ui_tree' specifies it reads accessibility for a 'window_title'. The user's request is to 'Read the accessibility tree', which maps directly to the 'read_ui_tree' tool. The provided title 'Untitled - Notepad' is the exact window title. There is no ambiguity requiring clarification. The plan should proceed with the tool call.",
+        "risk": "low",
+        "risk_justification": "The request maps directly to a supported tool with the exact required parameter provided by the user. No sensitive data or unauthorized actions are involved."
+      },
+      "error": null,
+      "elapsed_seconds": 33.77359240001533,
+      "ttft_seconds": 0.7018306999234483,
+      "eval_count": 203,
+      "tokens_per_second": 6.138241854715988,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 15072.84375,
+      "system_cpu_peak_percent": 73.8,
+      "gpu_total_used_peak_mb": 5243.0,
+      "initial_raw_plan": {
+        "confidence": 0.95,
+        "decision": "CLARIFY",
+        "overall_reasoning": "The user requested to read the accessibility tree of a specific window. The tool 'read_ui_tree' requires a 'window_title' parameter. The user provided 'Untitled - Notepad', which is a valid string. However, the tool description for 'read_ui_tree' specifies it reads accessibility for a 'window_title'. The user's request is to 'Read the accessibility tree', which maps directly to the 'read_ui_tree' tool. The provided title 'Untitled - Notepad' is the exact window title. There is no ambiguity requiring clarification. The plan should proceed with the tool call.",
+        "risk": "low",
+        "risk_justification": "The request maps directly to a supported tool with the exact required parameter provided by the user. No sensitive data or unauthorized actions are involved."
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": false,
+        "tools": false,
+        "parameters": false,
+        "risk": false,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "all_including_advisory": false,
+        "reasons": [
+          "decision mismatch",
+          "tools mismatch",
+          "parameters mismatch",
+          "risk mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "CLARIFY",
+        "actual_risk": "NONE",
+        "actual_model_risk": "LOW"
+      }
+    }
+  ]
+}

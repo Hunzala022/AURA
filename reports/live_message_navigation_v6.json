@@ -1,0 +1,48 @@
+{
+  "mode": "Real model and real native search/send; observation wrappers preserve adapter behavior; no retry",
+  "navigation_required_before": true,
+  "status": "COMPLETED",
+  "error": null,
+  "guard_checks": [
+    {
+      "decision": true,
+      "one_step": true,
+      "tool": true,
+      "parameters": true,
+      "ui_precondition": true
+    }
+  ],
+  "verified_self_chat_and_empty_composer_after": true,
+  "new_message_observed": true,
+  "message_counts_during_adapter": [
+    4,
+    5
+  ],
+  "quota_before": 3,
+  "quota_after": 4,
+  "successful_curved_pointer_moves": 2,
+  "typing_pause_count": 20,
+  "typing_pause_seconds": [
+    0.09482240001671016,
+    0.1241549999685958,
+    0.05598679999820888,
+    0.13397839991375804,
+    0.0581246999790892,
+    0.13250219996552914,
+    0.13529319991357625,
+    0.09925159998238087,
+    0.11738319997675717,
+    0.10811589995864779,
+    0.14420320000499487,
+    0.13058180001098663,
+    0.12546479993034154,
+    0.11781069997232407,
+    0.14073719992302358,
+    0.07971270009875298,
+    0.13474050001241267,
+    0.0627597999991849,
+    0.12791809998452663,
+    0.05242819990962744
+  ],
+  "passed": true
+}

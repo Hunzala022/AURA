@@ -1,0 +1,136 @@
+{
+  "mode": "Diagnostic compact proposal; canonical plan validation; unchanged gold; no effects",
+  "prompt_sha256": "0e5f98c5c858c4075e91d561ae68a28239a04482c0b7ae12992d2be6e66be878",
+  "results": [
+    {
+      "id": 24,
+      "scenario": "multistep",
+      "expected": {
+        "name": "multistep",
+        "prompt": "Create D:/AURA_validation_fixture/new, write exactly alpha to D:/AURA_validation_fixture/alpha.txt, then verify its contents.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "create_folder",
+          "write_file",
+          "verify_file"
+        ],
+        "expected_tool_order": [
+          "create_folder",
+          "write_file",
+          "verify_file"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "D:/AURA_validation_fixture/new"
+          },
+          "1": {
+            "path": "D:/AURA_validation_fixture/alpha.txt",
+            "content": "alpha"
+          },
+          "2": {
+            "path": "D:/AURA_validation_fixture/alpha.txt",
+            "expected_content": "alpha"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "create_folder",
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/new"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 2,
+            "tool": "write_file",
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/alpha.txt",
+              "content": "alpha"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 3,
+            "tool": "verify_file",
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/alpha.txt",
+              "expected_content": "alpha"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 18.397420199937187,
+          "ttft_seconds": 5.461479799938388,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "create_folder",
+                "arguments": {
+                  "path": "D:/AURA_validation_fixture/new"
+                }
+              },
+              {
+                "action": "write_file",
+                "arguments": {
+                  "path": "D:/AURA_validation_fixture/alpha.txt",
+                  "content": "alpha"
+                }
+              },
+              {
+                "action": "verify_file",
+                "arguments": {
+                  "path": "D:/AURA_validation_fixture/alpha.txt",
+                  "expected_content": "alpha"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 76,
+          "tokens_per_second": 5.874826615314498,
+          "done_reason": "stop",
+          "prompt_eval_count": 1120
+        }
+      ],
+      "elapsed_seconds": 18.403437200002372,
+      "system_ram_peak_mb": 14096.140625,
+      "system_cpu_peak_percent": 58.6,
+      "gpu_total_used_peak_mb": 5152.0
+    }
+  ]
+}

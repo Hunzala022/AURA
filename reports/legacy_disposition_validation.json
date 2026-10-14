@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "production_aes_selected": true,
+    "records_unchanged": true,
+    "quota_unchanged": true,
+    "restart_retrieval": true,
+    "archives_verified": true,
+    "retired_targets_absent": true,
+    "verification_extraction_absent": true,
+    "git_recovery_present": true,
+    "no_known_unsealed_runtime_stores": true,
+    "private_storage_ignored": true,
+    "no_known_key_leak": true,
+    "no_private_tracked_or_reachable_paths": true
+  },
+  "passed": true,
+  "counts": {
+    "session_logs": 12,
+    "audit_logs": 39,
+    "memories": 1
+  },
+  "quota_records": 5,
+  "archives": [
+    {
+      "archive": ".aura-private/fyp1-sealed-recovery/pre-cutover.aes",
+      "authenticated": true,
+      "files_verified": 10
+    },
+    {
+      "archive": ".aura-private/fyp1-sealed-recovery/post-cutover.aes",
+      "authenticated": true,
+      "files_verified": 4
+    }
+  ],
+  "remaining_known_legacy_runtime_paths": [],
+  "candidate_files": 231,
+  "candidate_key_matches": 0,
+  "reachable_objects": 236,
+  "reachable_key_matches": 0,
+  "forbidden_reachable_paths": 0,
+  "retired_targets": 20,
+  "git_recovery_scope": "Original repository, mirror and bundles preserved separately; no history/cache-erasure claim",
+  "physical_erasure_claimed": false
+}

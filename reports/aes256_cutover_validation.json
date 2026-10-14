@@ -1,0 +1,51 @@
+{
+  "backend": "AES-256-GCM; Windows current-user DPAPI",
+  "initial_counts": {
+    "session_logs": 3,
+    "audit_logs": 4,
+    "memories": 1
+  },
+  "initial_quota_records": 4,
+  "expected_quota_after_reservation": 5,
+  "synthetic_session_additions": 1,
+  "synthetic_audit_additions": 1,
+  "checks": {
+    "selected_backend": true,
+    "legacy_source_unchanged": true,
+    "legacy_backup_unchanged": true,
+    "migration_records_exact": true,
+    "migration_quota_exact": true,
+    "quota_restart": true,
+    "canary_restart": true,
+    "retained_vector_retrieval": true,
+    "memory_tamper_rejected": true,
+    "quota_tamper_rejected": true,
+    "plaintext_canary_absent": true,
+    "all_migrated_records_preserved": true,
+    "real_text_embedding_retrieval": true
+  },
+  "current_counts": {
+    "session_logs": 12,
+    "audit_logs": 39,
+    "memories": 1
+  },
+  "current_quota_records": 5,
+  "legacy_paths": [
+    ".aura-private/communication_limits.db",
+    ".keys/aura_aes.key",
+    "aura_chroma/4b527f0c-6a26-4bd4-8a6e-c66c7608715a/data_level0.bin",
+    "aura_chroma/4b527f0c-6a26-4bd4-8a6e-c66c7608715a/header.bin",
+    "aura_chroma/4b527f0c-6a26-4bd4-8a6e-c66c7608715a/length.bin",
+    "aura_chroma/4b527f0c-6a26-4bd4-8a6e-c66c7608715a/link_lists.bin",
+    "aura_chroma/chroma.sqlite3",
+    "aura_memory.db"
+  ],
+  "selected_directory": ".aura-private/encryption-cutover-20261014",
+  "passed": true,
+  "legacy_disposal_performed": false,
+  "count_deltas": {
+    "session_logs": 9,
+    "audit_logs": 35,
+    "memories": 0
+  }
+}

@@ -1,0 +1,281 @@
+{
+  "phase": "retired",
+  "archives": [
+    {
+      "archive": ".aura-private/fyp1-sealed-recovery/pre-cutover.aes",
+      "sha256": "49201faa67ebf84862bb8d28ae69dc3afe361663836c27c76725fa7e01de9fb3",
+      "files": 10,
+      "bytes": 382902
+    },
+    {
+      "archive": ".aura-private/fyp1-sealed-recovery/post-cutover.aes",
+      "sha256": "abe17d0636500066333cd12853657e2fa66b56d7d5b87b20511d1b18ecad1aea",
+      "files": 4,
+      "bytes": 57831
+    }
+  ],
+  "recovery_directory": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\fyp1-sealed-recovery",
+  "active_directory": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-cutover-20261014",
+  "production_counts": {
+    "session_logs": 12,
+    "audit_logs": 39,
+    "memories": 1
+  },
+  "quota_records": 5,
+  "production_record_digest": "91b243f686abc510d24509a4f23b9dda5e4fd7165cbe352a74341d28836b64a3",
+  "production_quota_digest": "a6433de30119a9d722e8e4502a41d02efe9a15fade6d3db2abade8299d15c5e6",
+  "known_fernet_key_sha256": [
+    "041bf0e22315680d9d7fbd8c3615540c277412c6b2e725e1b39b81b7e80e5abc",
+    "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c"
+  ],
+  "retirement_candidates": [
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\aura_memory.db",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aura_memory.db": "0d1256e2893468e721e3d85ede7aa99be9cdc5470bfb1ff9ffc3fd4f7342ae9d"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\aura_chroma",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "cd11e9e7c9e1ccb5bfd8ef03ca6ff5f55952a9125f5ff791a61368747b9877ce",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "7a12e561363385e9dfeeab326368731c030ed4b374e7f5897ac819159d2884c5",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "chroma.sqlite3": "0dfb43d4c0b3593f20a457273e504f164adcc827c53a060d8dfb43807df03858"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\.keys",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aura_aes.key": "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\communication_limits.db",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "communication_limits.db": "e64c7a46f08b69d5ffadf9e033b05490473a33f79cd68c5ecf2f0be342de924b"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\aura_memory.db",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aura_memory.db": "0d1256e2893468e721e3d85ede7aa99be9cdc5470bfb1ff9ffc3fd4f7342ae9d"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\aura_chroma",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "65f6bac8ab6d9c93c20c1ba4f1d6babad81ab6a4f096316dc88c1384215af8ea",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "1695a834e75c0641352acb87e9a8b7ad0656406c209d0d4a34f4a771267f6437",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "chroma.sqlite3": "8ab2ccba6ebfeb77f8fb8c8dd1aa063ca8c9941c9d0b154f4a30f76c793b992f"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.keys",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aura_aes.key": "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\containment-20261010\\aura_memory.db",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aura_memory.db": "a8326b9ce1d884b2f1c9f949a6351dbd6a5a1c7efd9c256575aaf5800d1a2b97"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\containment-20261010\\aura_chroma",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "65f6bac8ab6d9c93c20c1ba4f1d6babad81ab6a4f096316dc88c1384215af8ea",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "1695a834e75c0641352acb87e9a8b7ad0656406c209d0d4a34f4a771267f6437",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "chroma.sqlite3": "c16441af393164ccd8d561073c84ec5740268a00678a510a6686910b126f26d7"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\containment-20261010\\.keys",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aura_aes.key": "041bf0e22315680d9d7fbd8c3615540c277412c6b2e725e1b39b81b7e80e5abc"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-rotation-backup-20261010\\aura_memory.db",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aura_memory.db": "0d1256e2893468e721e3d85ede7aa99be9cdc5470bfb1ff9ffc3fd4f7342ae9d"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-rotation-backup-20261010\\aura_chroma",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "65f6bac8ab6d9c93c20c1ba4f1d6babad81ab6a4f096316dc88c1384215af8ea",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "1695a834e75c0641352acb87e9a8b7ad0656406c209d0d4a34f4a771267f6437",
+        "4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "chroma.sqlite3": "8ab2ccba6ebfeb77f8fb8c8dd1aa063ca8c9941c9d0b154f4a30f76c793b992f"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-rotation-backup-20261010\\.keys",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aura_aes.key": "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-preparation-20261014",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aes256-key.dpapi": "3e7a7986d3c4b076c3481e7cfbbe7923d16d6a05c30f54acb667c00be49a4175",
+        "aes256-key.dpapi.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "legacy-backup\\.aura-private\\communication_limits.db": "16537a036c56260b1f58436e3357af6b280f3c13e1d5ecc4cfc8257a5964d797",
+        "legacy-backup\\.keys\\aura_aes.key": "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c",
+        "legacy-backup\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "72dd771cabb18389835253118c3d57fda0432a1373f5ccea2dc3ed882d8eb8c1",
+        "legacy-backup\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "legacy-backup\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "c6287b31f99e405b37c40c2279d90144dcef85eeb6adcb74e8bbfd60168b9183",
+        "legacy-backup\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "legacy-backup\\aura_chroma\\chroma.sqlite3": "19139692ba8848a4f9a4b7d128881b9cf68bcf620a68ad1bcb3dec97747712b5",
+        "legacy-backup\\aura_memory.db": "0d1256e2893468e721e3d85ede7aa99be9cdc5470bfb1ff9ffc3fd4f7342ae9d",
+        "legacy-read-copy\\.aura-private\\communication_limits.db": "16537a036c56260b1f58436e3357af6b280f3c13e1d5ecc4cfc8257a5964d797",
+        "legacy-read-copy\\.keys\\aura_aes.key": "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c",
+        "legacy-read-copy\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "13c968721cb22148d35188aa88e6681fc301ce23e3bd2a708ed786bc494c1b0b",
+        "legacy-read-copy\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "legacy-read-copy\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "ffd4b1198116d44817f5df0372ad9595fef4e460aa9292b655dac142dea9217d",
+        "legacy-read-copy\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "legacy-read-copy\\aura_chroma\\chroma.sqlite3": "2a0df74ce94d20ae0e7f8970257c1e219d2984907d4fb54821538e4fe39625c1",
+        "legacy-read-copy\\aura_memory.db": "0d1256e2893468e721e3d85ede7aa99be9cdc5470bfb1ff9ffc3fd4f7342ae9d",
+        "memory.aes": "8c65870f403abbc2784e1ff19ea99a133cbb35e63e9f39bde6c5b0cef6737dc6",
+        "memory.aes.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "preparation-report.json": "5f2cd28f088574b5ad3c3d7c58f8d5fd27cf640bf54d12b4ae774015767aea94",
+        "quota.aes": "e1b4161fedb436de34d9b7363e5a6ea691580f46ad593e517d245138d3d5f3da",
+        "quota.aes.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "source-manifest.json": "ffcf7d38eff0463c4fe5447a7949745f9031f982de719c8650b5eadd2f6d2a70"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-preparation-20261014-final",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aes256-key.dpapi": "e7e714e5723390fff66ca6e828df7596db21c91b95a919d94832ebf91d31a827",
+        "aes256-key.dpapi.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "legacy-backup\\.aura-private\\communication_limits.db": "e64c7a46f08b69d5ffadf9e033b05490473a33f79cd68c5ecf2f0be342de924b",
+        "legacy-backup\\.keys\\aura_aes.key": "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c",
+        "legacy-backup\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "44fe5a340ec1aed79e7d77cfca81ba671f26e3c635568c6745229204f000200c",
+        "legacy-backup\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "legacy-backup\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "a3b8ce5050c148d975d05b0e4fcbfb89d90bd73cd2cc691de0b8e3efad7058a1",
+        "legacy-backup\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "legacy-backup\\aura_chroma\\chroma.sqlite3": "541d81b64ab56765a90fded814524c7ed4324a7fd4e6b127ba3dfe9e5353424a",
+        "legacy-backup\\aura_memory.db": "0d1256e2893468e721e3d85ede7aa99be9cdc5470bfb1ff9ffc3fd4f7342ae9d",
+        "legacy-read-copy\\.aura-private\\communication_limits.db": "e64c7a46f08b69d5ffadf9e033b05490473a33f79cd68c5ecf2f0be342de924b",
+        "legacy-read-copy\\.keys\\aura_aes.key": "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c",
+        "legacy-read-copy\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "bd715ba410a05e8aa9af62ff0ccdaf8e729fc0bba9c0c76c83f81ca92f8d2b8b",
+        "legacy-read-copy\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "legacy-read-copy\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "593728454a8170781661a7e6bc4df7cca27fcb0ea3292491d3198d744b3fbff4",
+        "legacy-read-copy\\aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "legacy-read-copy\\aura_chroma\\chroma.sqlite3": "0dfb43d4c0b3593f20a457273e504f164adcc827c53a060d8dfb43807df03858",
+        "legacy-read-copy\\aura_memory.db": "0d1256e2893468e721e3d85ede7aa99be9cdc5470bfb1ff9ffc3fd4f7342ae9d",
+        "memory.aes": "0911b134fc74e413c4a7b5b3c762a551f01dadf94a5b8f62e5906d68d0730eed",
+        "memory.aes.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "preparation-report.json": "bbc7cfde654dddff55b84d4175f838d7f39cd352c09a4bbd03b33c44d7406dc0",
+        "quota.aes": "60ca955ab90b14aa19b52f53ecb4449d94528194c72c7dc554e3ea9f4de49442",
+        "quota.aes.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "source-manifest.json": "358d967e29166a0ce35aa78f71202cc6fec3b1c6ee5869c14f7a1fab3afcaf74"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-cutover-20261014\\legacy-backup",
+      "classification": "REQUIRED RECOVERY MATERIAL",
+      "files": {
+        ".aura-private\\communication_limits.db": "e64c7a46f08b69d5ffadf9e033b05490473a33f79cd68c5ecf2f0be342de924b",
+        ".keys\\aura_aes.key": "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c",
+        "aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "cd11e9e7c9e1ccb5bfd8ef03ca6ff5f55952a9125f5ff791a61368747b9877ce",
+        "aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "7a12e561363385e9dfeeab326368731c030ed4b374e7f5897ac819159d2884c5",
+        "aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "aura_chroma\\chroma.sqlite3": "0dfb43d4c0b3593f20a457273e504f164adcc827c53a060d8dfb43807df03858",
+        "aura_memory.db": "0d1256e2893468e721e3d85ede7aa99be9cdc5470bfb1ff9ffc3fd4f7342ae9d"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-cutover-20261014\\legacy-read-copy",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        ".aura-private\\communication_limits.db": "e64c7a46f08b69d5ffadf9e033b05490473a33f79cd68c5ecf2f0be342de924b",
+        ".keys\\aura_aes.key": "f9445cd7edc6ce3b66d85c68e890cdd5b2501a10d3144521b0be6c87d8cd704c",
+        "aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\data_level0.bin": "5e5bdaab89cae258577d131888a199ae438b7384a4c806b4d5ee23fcc1ffcb60",
+        "aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\header.bin": "a0e81c3b22454233bc12d0762f06dcca48261a75231cf87c79b75e69a6c00150",
+        "aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\length.bin": "ceb6e7675b765dc8b513feda234bf7ed0a55939d907eddfcc71b14bb0ceeb9f4",
+        "aura_chroma\\4b527f0c-6a26-4bd4-8a6e-c66c7608715a\\link_lists.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "aura_chroma\\chroma.sqlite3": "375328b006ec85eb5590f98a0869c2f032cfe3618ade13c5e91be73bbf435344",
+        "aura_memory.db": "0d1256e2893468e721e3d85ede7aa99be9cdc5470bfb1ff9ffc3fd4f7342ae9d"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-cutover-20261014\\postcutover-recovery",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {
+        "aes256-key.dpapi": "d5fc85024a80522363a20a4795da54a61aa8273121ca7abda567c89407d92220",
+        "aes256-key.dpapi.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "memory.aes": "9e4cc75e45547a73fda9c4bb90fae66e34820f66ed805d81a07a919feb8d116d",
+        "memory.aes.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "quota.aes": "785b5ae007a6116690a2dacae8fb481f9ff02294d2deaf62d03c7af319746da4",
+        "quota.aes.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\encryption-cutover-20261014\\tamper-probes",
+      "classification": "TAMPER/TEST ARTIFACT",
+      "files": {
+        "aes256-key.dpapi": "d5fc85024a80522363a20a4795da54a61aa8273121ca7abda567c89407d92220",
+        "aes256-key.dpapi.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "memory.aes": "f3617615a68ce8c26b1e2137fb79d769119410456d2a4b307cac8f74e48482ec",
+        "memory.aes.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "quota.aes": "a80060025327ca5ab2c352914e91b45019bba17e925f135c023b7eea2f27fe66",
+        "quota.aes.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+      }
+    },
+    {
+      "path": "D:\\Project AURA\\.aura-private\\containment-20261010\\staged",
+      "classification": "REDUNDANT LEGACY COPY",
+      "files": {}
+    }
+  ],
+  "git_recovery_retained": [
+    "D:\\Project AURA\\.git",
+    "D:\\Project AURA\\.aura-private\\history-clean.git",
+    "D:\\Project AURA\\.aura-private\\pre-rewrite.bundle",
+    "D:\\Project AURA\\.aura-private\\pre-rewrite-full.bundle"
+  ],
+  "unknown_retirement_candidates": 0,
+  "physical_erasure_claimed": false,
+  "archive_verification": [
+    {
+      "kind": "pre-cutover",
+      "files_hash_verified": 10,
+      "recovery_passed": true
+    },
+    {
+      "kind": "post-cutover",
+      "files_hash_verified": 4,
+      "recovery_passed": true
+    }
+  ],
+  "verified": true,
+  "verification_extraction": "D:\\Project AURA\\.aura-private\\post-clean-check\\.aura-private\\disposition-verification",
+  "retired_target_count": 20,
+  "verification_extraction_removed": true
+}

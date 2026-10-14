@@ -1,0 +1,7 @@
+{
+  "status": "HARNESS_ERROR",
+  "counted_as_evidence": false,
+  "error": "Metrics reporter local variable shadowed values() helper; TypeError before first report write",
+  "effects_scope": "Disposable isolated fixture; no external endpoints or messaging",
+  "repair": "Renamed expected_values; two metric tests pass; full rerun required"
+}

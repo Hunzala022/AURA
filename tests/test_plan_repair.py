@@ -1,11 +1,11 @@
 import json,unittest
 from unittest.mock import Mock,patch
 from core.control_plane import generate_plan
-from tests.helpers import plan
+from tests.helpers import proposal as plan
 
 class PlanRepair(unittest.TestCase):
     def response(self,raw):
-        r=Mock();r.json.return_value={'message':{'content':json.dumps(raw)}};return r
+        r=Mock();r.iter_lines.return_value=[json.dumps({'message':{'content':json.dumps(raw)},'done':True}).encode()];return r
     def test_one_contract_repair_with_no_effects(self):
         invalid=plan(('read_file',{}));valid=plan(('read_file',{'path':'fixture'}))
         with patch('core.control_plane.requests.post',side_effect=[self.response(invalid),self.response(valid)]) as call:

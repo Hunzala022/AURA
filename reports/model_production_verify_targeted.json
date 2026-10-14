@@ -1,0 +1,346 @@
+{
+  "metadata": {
+    "model": "aura-qwen:latest",
+    "version": {
+      "version": "0.34.3"
+    },
+    "show": {
+      "parent_model": "Qwen_Qwen3.5-4B-Q8_0.gguf",
+      "format": "gguf",
+      "family": "qwen35",
+      "families": [
+        "qwen35"
+      ],
+      "parameter_size": "4.3B",
+      "quantization_level": "Q8_0"
+    },
+    "mode": "live model planning only; no tools executed",
+    "generation": {
+      "think": false,
+      "num_predict": 768,
+      "num_ctx": 4096
+    },
+    "resource_scope": "system/GPU totals, not isolated model memory",
+    "risk_hint_scope": "No model risk estimate; canonical low/confidence=0 are compatibility placeholders. Python policy is independently scored and authoritative.",
+    "prompt_sha256": "8ae160c522e697c7294de3546a09202da25012800b736f4bff21a0464e0fa0fd",
+    "schema_sha256": "38073827b0d8e39b37be47a1b0b2ca6af5917a3efde75af07b7e77653db0ecfb",
+    "temperature": 0,
+    "source_sha256": {
+      "core/tools.py": "6d4194f68f922f5f4f0029b88b2f036153d12d70e2ac57ad8e7a7232c58e5b46",
+      "core/schema.py": "9e07f0812b5798cc406fcd9a5c4e4eb639bcef7ee903ea41ccadbd297d0a9ce8",
+      "core/control_plane.py": "d4e33252d887ad3c031cd2429b1a71cb38b3b58a2acff3c48019c9f9aaefae4e",
+      "core/evaluation.py": "958a9e7d35d632eea8163cb38eedfd7f909fbc387a203e195e4ffa68d10fa118",
+      "core/planning_proposal.py": "e1574635733d95b1070abf6d4f790ed2405a38c7cf7601e1c2169b262dc5a154",
+      "core/planning_trace.py": "5606d43a192422bf0bbdb664a68fcafef917e08868d665e5744757a75e14ba0e",
+      "validate_model.py": "682ebb4dfcbf8555c1466711ee1d92c4885c8f5dbd681546f9f623132bee32c2"
+    },
+    "contract_repair": "At most one additional generation on invalid contract; no tool execution; no gold supplied",
+    "timing": "elapsed includes repair; TTFT/TPS/eval_count refer to first generation only",
+    "implementation": "Calls production generate_plan directly; no alternate benchmark inference path"
+  },
+  "results": [
+    {
+      "id": 5,
+      "scenario": "verify",
+      "expected": {
+        "name": "verify",
+        "prompt": "Verify D:/AURA_validation_fixture/alpha.txt contains exactly alpha.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "verify_file"
+        ],
+        "expected_tool_order": [
+          "verify_file"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "D:/AURA_validation_fixture/alpha.txt",
+            "expected_content": "alpha"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "verify_file",
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/alpha.txt",
+              "expected_content": "alpha"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "error": null,
+      "elapsed_seconds": 10.786199199967086,
+      "ttft_seconds": 5.130614100024104,
+      "eval_count": 34,
+      "tokens_per_second": 6.083704618247535,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 14326.83984375,
+      "system_cpu_peak_percent": 62.0,
+      "gpu_total_used_peak_mb": 5181.0,
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 10.719173299963586,
+          "ttft_seconds": 5.130614100024104,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "verify_file",
+                "arguments": {
+                  "path": "D:/AURA_validation_fixture/alpha.txt",
+                  "expected_content": "alpha"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 34,
+          "tokens_per_second": 6.083704618247535,
+          "done_reason": "stop",
+          "prompt_eval_count": 1140
+        }
+      ],
+      "initial_raw_plan": {
+        "decision": "EXECUTE",
+        "steps": [
+          {
+            "action": "verify_file",
+            "arguments": {
+              "path": "D:/AURA_validation_fixture/alpha.txt",
+              "expected_content": "alpha"
+            }
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": true,
+        "parameters": true,
+        "risk": true,
+        "order": true,
+        "model_risk": false,
+        "passed": true,
+        "all_including_advisory": false,
+        "reasons": [
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    },
+    {
+      "id": 24,
+      "scenario": "multistep",
+      "expected": {
+        "name": "multistep",
+        "prompt": "Create D:/AURA_validation_fixture/new, write exactly alpha to D:/AURA_validation_fixture/alpha.txt, then verify its contents.",
+        "expected_decision": "EXECUTE",
+        "expected_tools_subset": [
+          "create_folder",
+          "write_file",
+          "verify_file"
+        ],
+        "expected_tool_order": [
+          "create_folder",
+          "write_file",
+          "verify_file"
+        ],
+        "expected_parameters": {
+          "0": {
+            "path": "D:/AURA_validation_fixture/new"
+          },
+          "1": {
+            "path": "D:/AURA_validation_fixture/alpha.txt",
+            "content": "alpha"
+          },
+          "2": {
+            "path": "D:/AURA_validation_fixture/alpha.txt",
+            "expected_content": "alpha"
+          }
+        },
+        "expected_risk": "HIGH"
+      },
+      "score": {
+        "schema": true,
+        "decision": true,
+        "tools": false,
+        "parameters": false,
+        "risk": true,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "all_including_advisory": false,
+        "reasons": [
+          "tools mismatch",
+          "parameters mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      },
+      "raw_plan": {
+        "decision": "EXECUTE",
+        "plan": [
+          {
+            "step": 1,
+            "tool": "create_folder",
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/new"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 2,
+            "tool": "write_file",
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/alpha.txt",
+              "content": "alpha"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          },
+          {
+            "step": 3,
+            "tool": "read_file",
+            "parameters": {
+              "path": "D:/AURA_validation_fixture/alpha.txt"
+            },
+            "reasoning": "Model-proposed requested operation.",
+            "agent": "os_agent"
+          }
+        ],
+        "overall_reasoning": "Model proposal; execution is governed by Python validation and policy.",
+        "risk": "low",
+        "risk_justification": "Not estimated by this representation; Python policy is authoritative.",
+        "confidence": 0.0
+      },
+      "error": null,
+      "elapsed_seconds": 12.641322299954481,
+      "ttft_seconds": 0.8953607000876218,
+      "eval_count": 71,
+      "tokens_per_second": 6.073426355984391,
+      "done_reason": "stop",
+      "system_ram_peak_mb": 14341.08203125,
+      "system_cpu_peak_percent": 71.0,
+      "gpu_total_used_peak_mb": 5123.0,
+      "inference": [
+        {
+          "purpose": "plan",
+          "elapsed_seconds": 12.585651600034907,
+          "ttft_seconds": 0.8953607000876218,
+          "raw_plan": {
+            "decision": "EXECUTE",
+            "steps": [
+              {
+                "action": "create_folder",
+                "arguments": {
+                  "path": "D:/AURA_validation_fixture/new"
+                }
+              },
+              {
+                "action": "write_file",
+                "arguments": {
+                  "path": "D:/AURA_validation_fixture/alpha.txt",
+                  "content": "alpha"
+                }
+              },
+              {
+                "action": "read_file",
+                "arguments": {
+                  "path": "D:/AURA_validation_fixture/alpha.txt"
+                }
+              }
+            ]
+          },
+          "raw_text": null,
+          "error": null,
+          "eval_count": 71,
+          "tokens_per_second": 6.073426355984391,
+          "done_reason": "stop",
+          "prompt_eval_count": 1154
+        }
+      ],
+      "initial_raw_plan": {
+        "decision": "EXECUTE",
+        "steps": [
+          {
+            "action": "create_folder",
+            "arguments": {
+              "path": "D:/AURA_validation_fixture/new"
+            }
+          },
+          {
+            "action": "write_file",
+            "arguments": {
+              "path": "D:/AURA_validation_fixture/alpha.txt",
+              "content": "alpha"
+            }
+          },
+          {
+            "action": "read_file",
+            "arguments": {
+              "path": "D:/AURA_validation_fixture/alpha.txt"
+            }
+          }
+        ]
+      },
+      "repair_attempted": false,
+      "initial_generation_score": {
+        "schema": true,
+        "decision": true,
+        "tools": false,
+        "parameters": false,
+        "risk": true,
+        "order": false,
+        "model_risk": false,
+        "passed": false,
+        "all_including_advisory": false,
+        "reasons": [
+          "tools mismatch",
+          "parameters mismatch",
+          "order mismatch",
+          "model_risk mismatch"
+        ],
+        "actual_decision": "EXECUTE",
+        "actual_risk": "HIGH",
+        "actual_model_risk": "LOW"
+      }
+    }
+  ]
+}

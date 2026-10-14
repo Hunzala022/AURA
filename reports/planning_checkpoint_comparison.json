@@ -1,0 +1,208 @@
+{
+  "baseline_commit": "96ddb5e",
+  "before_report": "reports/model_exit_validation.json",
+  "after_report": "reports/model_fyp1_production25_final_v3.json",
+  "before_passed": 19,
+  "after_passed": 25,
+  "cases": 25,
+  "case_gold_sha256": "f634a1df7bdd46fae719948d68060dea3f37929acff6d2a09e807ce21e13fc6a",
+  "model_changed": false,
+  "advisory_model_risk": "Not estimated in compact representation; compatibility fields are placeholders, never authorization. Required Python policy remains scored.",
+  "results": [
+    {
+      "case": "write",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "read",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "list",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "folder",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "verify",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "copy",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "move",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "delete",
+      "before_passed": false,
+      "after_passed": true,
+      "before_failures": [
+        "decision mismatch",
+        "tools mismatch",
+        "parameters mismatch",
+        "risk mismatch",
+        "order mismatch"
+      ],
+      "after_failures": []
+    },
+    {
+      "case": "name search",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "content search",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "browser read",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "browser fill",
+      "before_passed": false,
+      "after_passed": true,
+      "before_failures": [
+        "invalid schema/contract"
+      ],
+      "after_failures": []
+    },
+    {
+      "case": "browser click",
+      "before_passed": false,
+      "after_passed": true,
+      "before_failures": [
+        "invalid schema/contract"
+      ],
+      "after_failures": []
+    },
+    {
+      "case": "screenshot",
+      "before_passed": false,
+      "after_passed": true,
+      "before_failures": [
+        "decision mismatch",
+        "tools mismatch",
+        "parameters mismatch",
+        "risk mismatch",
+        "order mismatch"
+      ],
+      "after_failures": []
+    },
+    {
+      "case": "open app",
+      "before_passed": false,
+      "after_passed": true,
+      "before_failures": [
+        "parameters mismatch"
+      ],
+      "after_failures": []
+    },
+    {
+      "case": "type",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "ui read",
+      "before_passed": false,
+      "after_passed": true,
+      "before_failures": [
+        "invalid schema/contract"
+      ],
+      "after_failures": []
+    },
+    {
+      "case": "window verify",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "vision locate",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "comm read",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "send",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "ambiguous",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "unauthorized",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "multistep",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    },
+    {
+      "case": "long context",
+      "before_passed": true,
+      "after_passed": true,
+      "before_failures": [],
+      "after_failures": []
+    }
+  ]
+}

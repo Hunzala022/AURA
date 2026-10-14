@@ -1,0 +1,20 @@
+{
+  "active_backend_changed": false,
+  "backup_matches_source": true,
+  "complete_records_equal_after_restart": true,
+  "retained_vector_retrieval": true,
+  "counts": {
+    "session_logs": 3,
+    "audit_logs": 4,
+    "memories": 1
+  },
+  "quota_records": 1,
+  "record_digest_before": "8ad8d9d7844e5fc79ded4f6dae1f32e2f0ec71076868d4f8c3544bea18bacdd0",
+  "record_digest_after": "8ad8d9d7844e5fc79ded4f6dae1f32e2f0ec71076868d4f8c3544bea18bacdd0",
+  "quota_digest_before": "860f42901c9f2c8c961050cf692bf6ba2931cf17ddad8201358bddee9b6eab5d",
+  "quota_digest_after": "860f42901c9f2c8c961050cf692bf6ba2931cf17ddad8201358bddee9b6eab5d",
+  "target": ".aura-private/encryption-preparation-20261014",
+  "source_file_count": 8,
+  "key_protection": "Windows current-user DPAPI; dedicated AES-256 key",
+  "passed": true
+}
